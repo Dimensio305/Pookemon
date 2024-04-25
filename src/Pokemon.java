@@ -6,24 +6,30 @@ import java.util.Random;
 
 public class Pokemon
 {
-  private static ArrayList<Pokemon> pokedex = new ArrayList<>();
-  private static ArrayList<String> nomPokemon = new ArrayList<>(Arrays.asList("Bulbasaur","Ivysaur","Venusaur","Mega","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Mega","Blastoise","Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto","Pidgeot","Mega","Pidgeot","Rattata","Rattata","Raticate","Raticate","Spearow","Fearow","Ekans","Arbok","Pikachu","Raichu","Raichu","Sandshrew","Sandshrew","Sandslash","Sandslash","NidoranF","Nidorina","Nidoqueen","NidoranM","Nidorino","Nidoking","Clefairy","Clefable","Vulpix","Vulpix","Ninetales","Ninetales","Jigglypuff","Wigglytuff","Zubat","Golbat","Oddish","Gloom","Vileplume","Paras","Parasect","Venonat","Venomoth","Diglett","Diglett","Dugtrio","Dugtrio","Meowth","Meowth","Meowth","Persian","Persian","Psyduck","Golduck","Mankey","Primeape","Growlithe","Arcanine","Poliwag","Poliwhirl","Poliwrath","Abra","Kadabra","Alakazam","Machop","Machoke","Machamp","Bellsprout","Weepinbell","Victreebel","Tentacool","Tentacruel","Geodude","Geodude","Graveler","Graveler","Golem","Golem","Ponyta","Ponyta","Rapidash","Rapidash","Slowpoke","Slowpoke","Slowbro","Slowbro","Magnemite","Magneton","Farfetch'd","Farfetch'd","Doduo","Dodrio","Seel","Dewgong","Grimer","Grimer","Muk","Muk","Shellder","Cloyster","Gastly","Haunter","Gengar","Mega","Gengar","Onix","Drowzee","Hypno","Krabby","Kingler","Voltorb","Electrode","Exeggcute","Exeggutor","Exeggutor","Cubone","Marowak","Marowak","Hitmonlee","Hitmonchan","Lickitung","Koffing","Weezing","Weezing","Rhyhorn","Rhydon","Chansey","Tangela","Kangaskhan","Horsea","Seadra","Goldeen","Seaking","Staryu","Starmie","Mr.Mime","Mr.Mime","Scyther","Jynx","Electabuzz","Magmar","Pinsir","Tauros","Magikarp","Gyarados","Lapras","Ditto","Eevee","Vaporeon","Jolteon","Flareon","Porygon","Omanyte","Omastar","Kabuto","Kabutops","Aerodactyl","Snorlax","Articuno","Zapdos","Moltres","Dratini","Dragonair","Dragonite","Mewtwo","Mew"));
+  private static ArrayList<Pokemon> m_pokedex = new ArrayList<>();
+  private static ArrayList<String> m_nomPokemon = new ArrayList<>(Arrays.asList("Bulbizarre","Herbizarre","Florizarre","Salamèche","Reptincel","Dracaufeu","Carapuce","Carabaffe","Tortank","Chenipan","Chrysacier","Papilusion","Aspicot","Coconfort","Dardargnan","Roucool","Roucoups","Roucarnage","Rattata","Rattatac","Piafabec","Rapasdepic","Abo","Arbok","Pikachu","Raichu","Sabelette","Sablaireau","Nidoran♀","Nidorina","Nidoqueen","Nidoran♂","Nidorino","Nidoking","Mélofée","Mélodelfe","Goupix","Feunard","Rondoudou","Grodoudou","Nosferapti","Nosferalto","Mystherbe","Ortide","Rafflesia","Paras","Parasect","Mimitoss","Aéromite","Taupiqueur","Triopikeur","Miaouss","Persian","Psykokwak","Akwakwak","Férosinge","Colossinge","Caninos","Arcanin","Ptitard","Têtarte","Tartard","Abra","Kadabra","Alakazam","Machoc","Machopeur","Mackogneur","Chétiflor","Boustiflor","Empiflor","Tentacool","Tentacruel","Racaillou","Gravalanch","Grolem","Ponyta","Galopa","Ramoloss","Flagadoss","Magnéti","Magnéton","Canarticho","Doduo","Dodrio","Otaria","Lamantine","Tadmorv","Grotadmorv","Kokiyas","Crustabri","Fantominus","Spectrum","Ectoplasma","Onix","Soporifik","Hypnomade","Krabby","Krabboss","Voltorbe","Électrode","Noeunoeuf","Noadkoko","Osselait","Ossatueur","Kicklee","Tygnon","Excelangue","Smogo","Smogogo","Rhinocorne","Rhinoféros","Leveinard","Saquedeneu","Kangourex","Hypotrempe","Hypocéan","Poissirène","Poissoroy","Stari","Staross","M.Mime","Insécateur","Lippoutou","Élektek","Magmar","Scarabrute","Tauros","Magicarpe","Léviator","Lokhlass","Métamorph","Évoli","Aquali","Voltali","Pyroli","Porygon","Amonita","Amonistar","Kabuto","Kabutops","Ptéra","Ronflex","Artikodin","Électhor","Sulfura","Minidraco","Draco","Dracolosse","Mewtwo","Mew"));
   private String m_nom;
   private Type m_type;
+
+  private int m_pvMAX;
   private int m_pv;
   private int m_attaque;
 
-  public enum Type {FEU,EAU,PLANTE,ACIER,ROCHE,VOL,POISON,GLACE,INSECTE,PSY,TENEBRE,FEE,ELECTRIQUE,NORMAL,COMBAT,SPECTRE,SOL,DRAGON}
 
   public Pokemon(String nom){
-    m_attaque= new Random().nextInt();
+    m_attaque= new Random().nextInt(1,4)*10;
     m_nom=nom;
-    m_pv= new Random().nextInt();
-    m_type= Type.ACIER;
-    pokedex.add(this);
+    m_pvMAX= new Random().nextInt(10,20)*10;
+    m_pv =m_pvMAX;
+    m_type= Type.values()[new Random().nextInt(Type.values().length)];
+    m_pokedex.add(this);
   }
 
 
+  @Override
+  public String toString(){
+      return this.m_nom+": " + this.m_type + ", PV : " +this.m_pv+"/"+this.m_pvMAX+", DMG: "+this.m_attaque;
+  }
 
 
   /*
@@ -33,14 +39,14 @@ public class Pokemon
 */
 
   public static ArrayList<Pokemon> getPokedex(){
-    return pokedex;
+    return m_pokedex;
   }
 
   public static void main(String args[])
-  {
+{
 
     System.out.println("Lancement du jeu ...");
-    for (String nom: nomPokemon) {
+    for (String nom: m_nomPokemon) {
       new Pokemon(nom);
     }
     System.out.println("Choississez le type de votre deck (ou aléatoire pour un deck non-typé):");
@@ -55,13 +61,18 @@ public class Pokemon
       joueur= new Deck(2);
       IA= new Deck(1);
     }
+    /*
     System.out.println("Deck joueur :");
     for(Pokemon p : joueur.getPile()) {
       System.out.println(p.m_nom);
     }
     System.out.println("\nDeck IA:");
     for(Pokemon p : IA.getPile()) {
-      System.out.println(p.m_nom);
-    }
+      System.out.print(p.m_nom+" , ");
+      System.out.println(p.m_attaque+ " , "+p.m_pv);
+    }*/
+
+    Tour T1 = new Tour(new Main(joueur), new Main(IA), new Terrain());
+    T1.deroulementTour();
   }
 }
