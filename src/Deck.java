@@ -9,7 +9,11 @@ public class Deck {
 
 
     /**
+     * Constructeur de la classe Deck.
+     * Crée un deck de cartes Pokémon pour un joueur spécifié.
      *
+     * @param joueur Le nombre de joueurs pour lesquels le deck est créé.
+     *               Le nombre de cartes dans le deck sera de 19 + joueur.
      */
     public Deck(int joueur){
         m_doublon.add(-1);
@@ -23,15 +27,30 @@ public class Deck {
         }
     }
 
+    /**
+     * Retourne la pile de cartes Pokémon du deck.
+     *
+     * @return La pile de cartes Pokémon du deck.
+     */
     public ArrayList<Pokemon> getPile()
     {
         return this.m_pile;
     }
 
+    /**
+     * Retire une carte Pokémon de la pile à l'index spécifié.
+     *
+     * @param index L'index de la carte à retirer de la pile.
+     */
     public void estTire(int index){
         this.m_pile.remove(index);
     }
 
+    /**
+     * Vérifie si la pile de cartes Pokémon est vide.
+     *
+     * @return true si la pile est vide, sinon false.
+     */
     public boolean estVide()
     {
         return this.m_pile.size()>0;
