@@ -1,0 +1,58 @@
+@startuml
+'https://plantuml.com/class-diagram
+'skinparam classAttributeIconSize 0
+skinparam classFontStyle Bold
+'skinparam style strictuml
+
+class Deck
+{
+    -m_pile : ArrayList<Pokemon>
+    -{static} m_doublon : ArrayList<Integer>
+    +<<create>> Deck(joueur : integer)
+    +getPile() : ArrayList<Pokemon>
+    +estVide () : boolean
+}
+
+class Pokemon
+{
+    -{static} m_pokedex : ArrayList<Pokemon>
+    -{static} m_nomPokemon : ArrayList<String>
+    -m_nom : String
+    -m_type : Type
+    -m_pv : Integer
+    -m_attaque : Integer
+
+    +<<create>> Pokemon(nom : String)
+    + {static} getPokedex() : ArrayList<Pokemon>
+}
+
+enum Type {
+    FEU
+    EAU
+    PLANTE
+    ACIER
+    ROCHE
+    VOL
+    POISON
+    GLACE
+    INSECTE
+    PSY
+    TENEBRE
+    FEE
+    ELECTRIQUE
+    NORMAL
+    COMBAT
+    SPECTRE
+    SOL
+    DRAGON
+}
+
+class Main
+{
+    - m_pokemonMain: ArrayList<Pokemon>
+    + <<create>> Main(deck: Deck)
+    + toString(): Strings
+}
+
+
+@enduml
