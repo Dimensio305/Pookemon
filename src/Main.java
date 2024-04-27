@@ -36,7 +36,7 @@ public class Main {
      */
     public int getIndex(String nom){
         for (int i = 0; i <this.m_pokemonMain.size() ; i++) {
-            if(this.m_pokemonMain.get(i).getNom().equals(nom)){
+            if(this.m_pokemonMain.get(i).getNom().equalsIgnoreCase(nom)){
                 return i;
             }
         }
@@ -51,7 +51,7 @@ public class Main {
      */
     public boolean contient(String nom){
         for (Pokemon p: this.m_pokemonMain) {
-            if (p.getNom().equals(nom)){
+            if (p.getNom().equalsIgnoreCase(nom)){
                 return true;
             }
         }
@@ -77,9 +77,11 @@ public class Main {
      */
     @Override
     public String toString(){
+        int numMain=1;
         String enMain ="En main :";
         for (Pokemon p: this.m_pokemonMain) {
-            enMain+= "\n -" +p.toString();
+            enMain+= "\n"+numMain+": " +p.toString();
+            numMain++;
         }
         return enMain;
     }

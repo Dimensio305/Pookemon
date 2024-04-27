@@ -1,7 +1,8 @@
+import java.security.PublicKey;
 import java.util.Scanner;
 
 public class Tour {
-    private String joueurActif;
+    private static String joueurActif;
     private Main m_mainJoueur;
     private Deck m_deckJoueur;
     private Main m_mainIA;
@@ -28,20 +29,39 @@ public class Tour {
         m_terrain = terrain;
         joueurActif = actif;
     }
+    public static void changementJoueur(){
+        if(joueurActif.equals("IA")){
+            joueurActif="Joueur";
+        }else{joueurActif="IA";}
+    }
+
 
     /**
      * Fait jouer la première phase du tour de jeu.
      * Si c'est au tour du joueur, effectue ses actions, sinon, effectue les actions de l'IA.
      * Affiche l'état actuel du jeu deux fois.
      */
-    public void deroulementTour1(){
+    public void miseEnPlace(){
         if (joueurActif.equals("Joueur")) {
+            while(this.m_terrain.getPokemonJoueur().size()<3){
+                System.out.println(this.m_mainJoueur.toString());
+                this.demandeAjout(3-this.m_terrain.getPokemonJoueur().size());
+            }
+            affichage();
+            while(this.m_terrain.getPokemonIA().size()<3){
+                this.m_terrain.ajoutPokemonIA(this.m_mainIA);
+            }
 
         }else {
-
+            while(this.m_terrain.getPokemonIA().size()<3){
+                this.m_terrain.ajoutPokemonIA(this.m_mainIA);
+            }
+            affichage();
+            while(this.m_terrain.getPokemonJoueur().size()<3){
+                this.demandeAjout(3-this.m_terrain.getPokemonJoueur().size());
+            }
         }
-        this.affichage();
-        this.affichage();
+
     }
 
     /**
@@ -49,6 +69,15 @@ public class Tour {
      * Les joueurs piochent des cartes si nécessaire et l'état du jeu est affiché.
      */
     public void deroulementTour(){
+        for (Pokemon p: this.m_terrain.getPokemonJoueur()) {
+            p.setPossedeAttaque(true);
+        }
+        for (Pokemon p: this.m_terrain.getPokemonIA()) {
+            p.setPossedeAttaque(true);
+        }
+        while(joueurActif.equals("IA")&&this.m_terrain.getPokemonIA().size()<3&&this.m_mainIA.getMain().size()>0){
+            this.m_terrain.ajoutPokemonIA(this.m_mainIA);
+        }
         while(this.m_mainJoueur.getMain().size()<5&&!this.m_deckJoueur.estVide()){
             m_mainJoueur.pioche(m_deckJoueur);
         }
@@ -56,6 +85,9 @@ public class Tour {
             m_mainIA.pioche(m_deckIA);
         }
         this.affichage();
+        while(joueurActif.equals("Joueur")&&this.m_terrain.getPokemonJoueur().size()<3&&this.m_mainJoueur.getMain().size()>0){
+            this.demandeAjout(3-this.m_terrain.getPokemonJoueur().size());
+        }
     }
     /**
      * Demande au joueur d'ajouter un Pokémon sur le terrain.
@@ -67,8 +99,25 @@ public class Tour {
         System.out.println("Quel pokemon souhaitez vous Placer sur le terrain ? ("+nombre+" restants)");
         Scanner s = new Scanner(System.in);
         String choix = s.nextLine();
-        if(this.m_mainJoueur.contient(choix)){
+        if(this.m_mainJoueur.contient(choix)) {
             this.m_terrain.ajoutPokemonJoueur(this.m_mainJoueur, this.m_mainJoueur.getIndex(choix));
+        }
+        switch (choix){
+            case "1":
+                this.m_terrain.ajoutPokemonJoueur(this.m_mainJoueur,0);
+                break;
+            case "2":
+                if(this.m_mainJoueur.getMain().size()>1){this.m_terrain.ajoutPokemonJoueur(this.m_mainJoueur,1);}
+                break;
+            case "3":
+                if(this.m_mainJoueur.getMain().size()>2){this.m_terrain.ajoutPokemonJoueur(this.m_mainJoueur,2);}
+                break;
+            case "4":
+                if(this.m_mainJoueur.getMain().size()>3){this.m_terrain.ajoutPokemonJoueur(this.m_mainJoueur,3);}
+                break;
+            case "5":
+                if(this.m_mainJoueur.getMain().size()>4){this.m_terrain.ajoutPokemonJoueur(this.m_mainJoueur,4);}
+                break;
         }
     }
 
@@ -79,12 +128,6 @@ public class Tour {
      */
     public void affichage(){
         System.out.println(this.m_terrain.toString()+this.m_mainJoueur.toString());
-        while(joueurActif.equals("Joueur")&&this.m_terrain.getPokemonJoueur().size()<3){
-            this.demandeAjout(3-this.m_terrain.getPokemonJoueur().size());
-        }
-        while(joueurActif.equals("IA")&&this.m_terrain.getPokemonIA().size()<3){
-            this.m_terrain.ajoutPokemonIA(this.m_mainIA);
-        }
 
     }
 
