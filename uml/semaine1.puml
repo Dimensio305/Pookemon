@@ -6,11 +6,14 @@ skinparam classFontStyle Bold
 
 class Deck
 {
-    -m_pile : ArrayList<Pokemon>
-    -{static} m_doublon : ArrayList<Integer>
-    +<<create>> Deck(joueur : integer)
-    +getPile() : ArrayList<Pokemon>
-    +estVide () : boolean
+    - m_doublon: ArrayList<Integer>
+    - m_pile: ArrayList<Pokemon>
+    - m_defausse: ArrayList<Pokemon>
+
+    + Deck(joueur: Integer)
+    + getPile(): ArrayList<Pokemon>
+    + estTire(index: Integer): void
+    + estVide(): boolean
 }
 
 class Pokemon
@@ -21,9 +24,18 @@ class Pokemon
     -m_type : Type
     -m_pv : Integer
     -m_attaque : Integer
+    -m_possedeAttaque : boolean
 
     +<<create>> Pokemon(nom : String)
     + {static} getPokedex() : ArrayList<Pokemon>
+    + getNom() : String
+    + getType() : String
+    + getPv() : Integer
+    + getPvMAX() : Integer
+    + getAttaque() : Integer
+    + setPossedeAttaque(boolean bool) : Void
+    + toString() : String {redefine}
+    + {static} toStringCombat(ArrayList<Pokemon> combattants) : String
 }
 
 enum Type {
@@ -50,9 +62,41 @@ enum Type {
 class Main
 {
     - m_pokemonMain: ArrayList<Pokemon>
+
     + <<create>> Main(deck: Deck)
-    + toString(): Strings
+    + getMain(): ArrayList<Pokemon>
+    + getIndex(nom: String): Integer
+    + contient(nom: String): Boolean
+    + pioche(deck: Deck): void
+    + toString(): String {redefine}
 }
 
+class Tour{
+    - {static} joueurActif : String
+    - m_mainJoueur : Main
+    - m_deckJoueur : Deck
+    - m_mainIA : Main
+    - m_deckIA : Deck
+    - m_terrain : Terrain
+
+    + <<create>> Tour(mainjoueur : Main,deckJoueur : Deck, mainIA : Main, deckIA : Deck, terrain : Terrain, actif : String)
+    + {static} changementJoueur() : Void
+    + miseEnPlace() : Void
+    + deroulementTour() : Void
+    + demandeAjout(nombre : Integer) : Void
+    + affichage() : Void
+}
+
+class Terrain{
+    - m_pokemonJoueur: ArrayList<Pokemon>
+    - m_pokemonIA: ArrayList<Pokemon>
+
+    + <<create>>Terrain()
+    + getPokemonJoueur(): ArrayList<Pokemon
+    + getPokemonIA(): ArrayList<Pokemon>
+    + ajoutPokemonJoueur(main: Main, indexMain: Integer): void
+    + ajoutPokemonIA(main: Main): void
+    + toString(): String {redefines}
+}
 
 @enduml
