@@ -99,4 +99,9 @@ class Terrain{
     + toString(): String {redefines}
 }
 
+Main --> Tour
+Deck --> Tour
+Terrain --> Pokemon
+Pokemon --> Tour
+ Type *--> "1\n - m_type" Pokemon
 @enduml
