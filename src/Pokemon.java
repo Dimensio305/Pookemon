@@ -26,9 +26,9 @@ public class Pokemon {
      * @param nom Le nom du pokemon choisis dans le main plus bas
      */
     public Pokemon(String nom) {
-        m_attaque = new Random().nextInt(1, 4) * 10;
+        m_attaque = new Random().nextInt(1, 5) * 10;
         m_nom = nom;
-        m_pvMAX = new Random().nextInt(10, 20) * 10;
+        m_pvMAX = new Random().nextInt(10, 21) * 10;
         m_pv = m_pvMAX;
         m_type = Type.values()[new Random().nextInt(Type.values().length)];
         m_shiny = new Random().nextInt(1, 65)==1;
