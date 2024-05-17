@@ -65,9 +65,11 @@ public class Main {
      * @param deck Le deck à partir duquel la carte Pokémon est piochée.
      */
     public void pioche(Deck deck){
-        int index = new Random().nextInt(deck.getPile().size());
-        m_pokemonMain.add(deck.getPile().get(index));
-        deck.estTire(index);
+        if(!deck.estVide()){
+            int index = new Random().nextInt(deck.getPile().size());
+            m_pokemonMain.add(deck.getPile().get(index));
+            deck.estTire(index);
+        }
     }
 
     /**
@@ -80,7 +82,7 @@ public class Main {
         int numMain=1;
         String enMain ="En main :";
         for (Pokemon p: this.m_pokemonMain) {
-            enMain+= "\n"+numMain+": " +p.toString();
+            enMain+= "\n   "+numMain+": " + p.toString();
             numMain++;
         }
         return enMain;

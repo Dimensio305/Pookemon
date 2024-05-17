@@ -53,6 +53,10 @@ public class Deck {
      */
     public boolean estVide()
     {
-        return this.m_pile.size()>0;
+        return this.m_pile.size()<=0;
+    }
+
+    public void estDefausse(Pokemon p){
+        this.m_defausse.add(p);
     }
 }

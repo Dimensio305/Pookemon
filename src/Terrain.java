@@ -49,6 +49,50 @@ public class Terrain {
         main.getMain().remove(0);
     }
 
+    public void retirePokemonJoueur(int index){
+        this.m_pokemonJoueur.remove(index);
+    }
+
+    public void retirePokemonIA(int index){
+        this.m_pokemonIA.remove(index);
+    }
+
+    public boolean IAContient(String nom){
+        for (Pokemon p: this.m_pokemonIA) {
+            if (p.getNom().equalsIgnoreCase(nom)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean joueurContient(String nom){
+        for (Pokemon p: this.m_pokemonJoueur) {
+            if (p.getNom().equalsIgnoreCase(nom)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int getIndexIA(String nom){
+        for (int i = 0; i <this.m_pokemonIA.size() ; i++) {
+            if(this.m_pokemonIA.get(i).getNom().equalsIgnoreCase(nom)){
+                return i;
+            }
+        }
+        return -1;//ne dois jamais avoir lieu (on dois ajouter un trycatch)
+    }
+
+    public int getIndexJoueur(String nom){
+        for (int i = 0; i <this.m_pokemonJoueur.size() ; i++) {
+            if(this.m_pokemonJoueur.get(i).getNom().equalsIgnoreCase(nom)){
+                return i;
+            }
+        }
+        return -1;//ne dois jamais avoir lieu (on dois ajouter un trycatch)
+    }
+
     /**
      * Reécriture de toString pour une representation du terrains
      *
@@ -60,5 +104,10 @@ public class Terrain {
                 Pokemon.toStringCombat(m_pokemonIA)+
                 "\nVos pokémon en jeu : \n"
                 +Pokemon.toStringCombat(m_pokemonJoueur)+"\n";
+    }
+
+    public String toStringAdversraire() {
+        return "Camp adverse : \n" +
+                Pokemon.toStringCombat(m_pokemonIA);
     }
 }
