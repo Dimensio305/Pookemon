@@ -2,17 +2,18 @@ package Pookemon.Affichage;
 
 import Pookemon.Carte.*;
 import Pookemon.DetailPokemon.Pokemon;
+import Pookemon.Personnage.Humain;
+import Pookemon.Personnage.IA;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Tour {
+    private final Humain m_humain;
+    private final IA m_IA;
     private static String joueurActif;
-    private Main m_mainJoueur;
-    private Deck m_deckJoueur;
-    private Main m_mainIA;
-    private Deck m_deckIA;
     private Terrain m_terrain;
 
     /**
@@ -20,18 +21,12 @@ public class Tour {
      * Initialise un tour de jeu avec les éléments nécessaires : main du joueur, deck du joueur, main de l'IA,
      * deck de l'IA, terrain et joueur actif.
      *
-     * @param mainjoueur La main du joueur.
-     * @param deckJoueur Le deck du joueur.
-     * @param mainIA     La main de l'IA.
-     * @param deckIA     Le deck de l'IA.
      * @param terrain    Le terrain de jeu.
      * @param actif      Le joueur actif ("Joueur" ou "IA").
      */
-    public Tour(Main mainjoueur,Deck deckJoueur, Main mainIA,Deck deckIA, Terrain terrain,String actif){
-        m_mainJoueur = mainjoueur;
-        m_deckJoueur = deckJoueur;
-        m_mainIA = mainIA;
-        m_deckIA = deckIA;
+    public Tour(Humain humain, IA ia, Terrain terrain, String actif){
+        m_humain = humain;
+        m_IA = ia;
         m_terrain = terrain;
         joueurActif = actif;
     }
@@ -50,21 +45,21 @@ public class Tour {
     public void miseEnPlace(){
         if (joueurActif.equals("Joueur")) {
             while(this.m_terrain.getPokemonJoueur().size()<3){
-                System.out.println(this.m_mainJoueur.toString());
+                System.out.println(this.m_humain.getM_main().toString());
                 this.demandeAjout(3-this.m_terrain.getPokemonJoueur().size());
             }
             while(this.m_terrain.getPokemonIA().size()<3){
-                this.m_terrain.ajoutPokemonIA(this.m_mainIA);
+                this.m_terrain.ajoutPokemonIA(this.m_IA.getM_main());
             }
         }else {
             while(this.m_terrain.getPokemonIA().size()<3){
-                this.m_terrain.ajoutPokemonIA(this.m_mainIA);
+                this.m_terrain.ajoutPokemonIA(this.m_IA.getM_main());
             }
             System.out.println(this.m_terrain.toStringAdversraire());
             System.out.println("Voici les pokémon choisis par votre adversaire.");
             new Scanner(System.in).nextLine();
             while(this.m_terrain.getPokemonJoueur().size()<3){
-                System.out.println(this.m_mainJoueur.toString());
+                System.out.println(this.m_humain.getM_main().toString());
                 this.demandeAjout(3-this.m_terrain.getPokemonJoueur().size());
             }
         }
@@ -84,16 +79,16 @@ public class Tour {
         for (Pokemon p: this.m_terrain.getPokemonIA()) {
             p.setPossedeAttaque(true);
         }
-        while((this.m_mainJoueur.getMain().size()<5)&&!this.m_deckJoueur.estVide()){
-            m_mainJoueur.pioche(m_deckJoueur);
+        while((this.m_humain.getM_main().getMain().size()<5)&&!this.m_humain.getM_deck().estVide()){
+            m_humain.getM_main().pioche(m_humain.getM_deck());
         }
-        while((this.m_mainIA.getMain().size()<5)&&!this.m_deckIA.estVide()){
-            m_mainIA.pioche(m_deckIA);
+        while((this.m_IA.getM_main().getMain().size()<5)&&!this.m_IA.getM_deck().estVide()){
+            m_IA.getM_main().pioche(m_IA.getM_deck());
         }
-        while(joueurActif.equals("IA")&&this.m_terrain.getPokemonIA().size()<3&&this.m_mainIA.getMain().size()>0){
-            this.m_terrain.ajoutPokemonIA(this.m_mainIA);
+        while(joueurActif.equals("IA")&&this.m_terrain.getPokemonIA().size()<3&&this.m_IA.getM_main().getMain().size()>0){
+            this.m_terrain.ajoutPokemonIA(this.m_IA.getM_main());
         }
-        while(joueurActif.equals("Joueur")&&this.m_terrain.getPokemonJoueur().size()<3&&this.m_mainJoueur.getMain().size()>0){
+        while(joueurActif.equals("Joueur")&&this.m_terrain.getPokemonJoueur().size()<3&&this.m_humain.getM_main().getMain().size()>0){
             this.affichage();
             this.demandeAjout(3-this.m_terrain.getPokemonJoueur().size());
         }
@@ -115,7 +110,7 @@ public class Tour {
                     if (ciblePossible.size() == 1) {
                         ciblePossible.get(0).subitDegat(p.getAttaque(), p.getType());
                         if (ciblePossible.get(0).estMort()) {
-                            this.m_deckJoueur.estDefausse(ciblePossible.get(0));
+                            this.m_humain.getM_deck().estDefausse(ciblePossible.get(0));
                             this.m_terrain.retirePokemonJoueur(this.m_terrain.getIndexJoueur(ciblePossible.get(0).getNom()));
                         }
                         System.out.println(this.m_terrain.toString());
@@ -140,7 +135,7 @@ public class Tour {
                         if (ciblePossible.size() == 1) {
                             ciblePossible.get(0).subitDegat(p.getAttaque(), p.getType());
                             if (ciblePossible.get(0).estMort()) {
-                                this.m_deckJoueur.estDefausse(ciblePossible.get(0));
+                                this.m_humain.getM_deck().estDefausse(ciblePossible.get(0));
                                 this.m_terrain.retirePokemonJoueur(this.m_terrain.getIndexJoueur(ciblePossible.get(0).getNom()));
                             }
                             System.out.println(this.m_terrain.toString());
@@ -154,7 +149,7 @@ public class Tour {
                             cibleIndex =new Random().nextInt(0, ciblePossible.size());
                             ciblePossible.get(cibleIndex).subitDegat(p.getAttaque(), p.getType());
                             if (ciblePossible.get(cibleIndex).estMort()) {
-                                this.m_deckJoueur.estDefausse(ciblePossible.get(cibleIndex));
+                                this.m_humain.getM_deck().estDefausse(ciblePossible.get(cibleIndex));
                                 this.m_terrain.retirePokemonJoueur(this.m_terrain.getIndexJoueur(ciblePossible.get(cibleIndex).getNom()));
                             }
                             System.out.println(this.m_terrain.toString());
@@ -184,7 +179,7 @@ public class Tour {
                         if (ciblePossible.size() == 1) {
                             ciblePossible.get(0).subitDegat(p.getAttaque(), p.getType());
                             if (ciblePossible.get(0).estMort()) {
-                                this.m_deckJoueur.estDefausse(ciblePossible.get(0));
+                                this.m_humain.getM_deck().estDefausse(ciblePossible.get(0));
                                 this.m_terrain.retirePokemonJoueur(this.m_terrain.getIndexJoueur(ciblePossible.get(0).getNom()));
                             }
                             System.out.println(this.m_terrain.toString());
@@ -198,7 +193,7 @@ public class Tour {
                             cibleIndex =new Random().nextInt(0, ciblePossible.size());
                             ciblePossible.get(cibleIndex).subitDegat(p.getAttaque(), p.getType());
                             if (ciblePossible.get(cibleIndex).estMort()) {
-                                this.m_deckJoueur.estDefausse(ciblePossible.get(cibleIndex));
+                                this.m_humain.getM_deck().estDefausse(ciblePossible.get(cibleIndex));
                                 this.m_terrain.retirePokemonJoueur(this.m_terrain.getIndexJoueur(ciblePossible.get(cibleIndex).getNom()));
                             }
                             System.out.println(this.m_terrain.toString());
@@ -252,7 +247,7 @@ public class Tour {
                                 this.m_terrain.getPokemonIA().get(this.m_terrain.getIndexIA(cible)).subitDegat(this.m_terrain.getPokemonJoueur().get(this.m_terrain.getIndexJoueur(action)).getAttaque(), this.m_terrain.getPokemonJoueur().get(this.m_terrain.getIndexJoueur(action)).getType());
                                 this.m_terrain.getPokemonJoueur().get(this.m_terrain.getIndexJoueur(action)).setPossedeAttaque(false);
                                 if (this.m_terrain.getPokemonIA().get(this.m_terrain.getIndexIA(cible)).estMort()) {
-                                    this.m_deckIA.estDefausse(this.m_terrain.getPokemonIA().get(this.m_terrain.getIndexIA(cible)));
+                                    this.m_IA.getM_deck().estDefausse(this.m_terrain.getPokemonIA().get(this.m_terrain.getIndexIA(cible)));
                                     this.m_terrain.retirePokemonIA(this.m_terrain.getIndexIA(cible));
                                 }
                             }
@@ -261,7 +256,7 @@ public class Tour {
                                     this.m_terrain.getPokemonIA().get(Integer.valueOf(cible) - 1).subitDegat(this.m_terrain.getPokemonJoueur().get(this.m_terrain.getIndexJoueur(action)).getAttaque(), this.m_terrain.getPokemonJoueur().get(this.m_terrain.getIndexJoueur(action)).getType());
                                     this.m_terrain.getPokemonJoueur().get(this.m_terrain.getIndexJoueur(action)).setPossedeAttaque(false);
                                     if (this.m_terrain.getPokemonIA().get(Integer.valueOf(cible) - 1).estMort()) {
-                                        this.m_deckIA.estDefausse(this.m_terrain.getPokemonIA().get(Integer.valueOf(cible) - 1));
+                                        this.m_IA.getM_deck().estDefausse(this.m_terrain.getPokemonIA().get(Integer.valueOf(cible) - 1));
                                         this.m_terrain.retirePokemonIA(Integer.valueOf(cible) - 1);
                                     }
                                 }
@@ -278,7 +273,7 @@ public class Tour {
                                 this.m_terrain.getPokemonIA().get(this.m_terrain.getIndexIA(cible)).subitDegat(this.m_terrain.getPokemonJoueur().get(Integer.parseInt(action) - 1).getAttaque(), this.m_terrain.getPokemonJoueur().get(Integer.parseInt(action) - 1).getType());
                                 this.m_terrain.getPokemonJoueur().get(Integer.parseInt(action)-1).setPossedeAttaque(false);
                                 if (this.m_terrain.getPokemonIA().get(this.m_terrain.getIndexIA(cible)).estMort()) {
-                                    this.m_deckIA.estDefausse(this.m_terrain.getPokemonIA().get(this.m_terrain.getIndexIA(cible)));
+                                    this.m_IA.getM_deck().estDefausse(this.m_terrain.getPokemonIA().get(this.m_terrain.getIndexIA(cible)));
                                     this.m_terrain.retirePokemonIA(this.m_terrain.getIndexIA(cible));
                                 }
                             }
@@ -288,7 +283,7 @@ public class Tour {
                                     this.m_terrain.getPokemonIA().get(Integer.valueOf(cible) - 1).subitDegat(this.m_terrain.getPokemonJoueur().get(Integer.parseInt(action) - 1).getAttaque(), this.m_terrain.getPokemonJoueur().get(Integer.parseInt(action) - 1).getType());
                                     this.m_terrain.getPokemonJoueur().get(Integer.parseInt(action)-1).setPossedeAttaque(false);
                                     if (this.m_terrain.getPokemonIA().get(Integer.valueOf(cible) - 1).estMort()) {
-                                        this.m_deckIA.estDefausse(this.m_terrain.getPokemonIA().get(Integer.valueOf(cible) - 1));
+                                        this.m_IA.getM_deck().estDefausse(this.m_terrain.getPokemonIA().get(Integer.valueOf(cible) - 1));
                                         this.m_terrain.retirePokemonIA(Integer.valueOf(cible) - 1);
                                     }
                                 }
@@ -325,24 +320,24 @@ public class Tour {
         System.out.println("Quel pokemon souhaitez vous Placer sur le terrain ? ("+nombre+" restants)");
         Scanner s = new Scanner(System.in);
         String choix = s.nextLine();
-        if(this.m_mainJoueur.contient(choix)) {
-            this.m_terrain.ajoutPokemonJoueur(this.m_mainJoueur, this.m_mainJoueur.getIndex(choix));
+        if(this.m_humain.getM_main().contient(choix)) {
+            this.m_terrain.ajoutPokemonJoueur(this.m_humain.getM_main(), this.m_humain.getM_main().getIndex(choix));
         }
         switch (choix){
             case "1":
-                this.m_terrain.ajoutPokemonJoueur(this.m_mainJoueur,0);
+                this.m_terrain.ajoutPokemonJoueur(this.m_humain.getM_main(), 0);
                 break;
             case "2":
-                if(this.m_mainJoueur.getMain().size()>1){this.m_terrain.ajoutPokemonJoueur(this.m_mainJoueur,1);}
+                if(this.m_humain.getM_main().getMain().size()>1){this.m_terrain.ajoutPokemonJoueur(this.m_humain.getM_main(),1);}
                 break;
             case "3":
-                if(this.m_mainJoueur.getMain().size()>2){this.m_terrain.ajoutPokemonJoueur(this.m_mainJoueur,2);}
+                if(this.m_humain.getM_main().getMain().size()>2){this.m_terrain.ajoutPokemonJoueur(this.m_humain.getM_main(),2);}
                 break;
             case "4":
-                if(this.m_mainJoueur.getMain().size()>3){this.m_terrain.ajoutPokemonJoueur(this.m_mainJoueur,3);}
+                if(this.m_humain.getM_main().getMain().size()>3){this.m_terrain.ajoutPokemonJoueur(this.m_humain.getM_main(),3);}
                 break;
             case "5":
-                if(this.m_mainJoueur.getMain().size()>4){this.m_terrain.ajoutPokemonJoueur(this.m_mainJoueur,4);}
+                if(this.m_humain.getM_main().getMain().size()>4){this.m_terrain.ajoutPokemonJoueur(this.m_humain.getM_main(),4);}
                 break;
         }
     }
@@ -353,7 +348,7 @@ public class Tour {
      * Si c'est au tour de l'IA et qu'elle n'a pas assez de Pokémon sur le terrain, ajoute automatiquement des Pokémon.
      */
     public void affichage(){
-        System.out.println(this.m_terrain.toString()+this.m_mainJoueur.toString());
+        System.out.println(this.m_terrain.toString()+this.m_humain.getM_main().toString());
 
     }
 

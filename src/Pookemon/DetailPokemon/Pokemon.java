@@ -5,8 +5,9 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
-import Pookemon.Affichage.Tour;
+import Pookemon.Affichage.*;
 import Pookemon.Carte.*;
+import Pookemon.Personnage.*;
 
 public class Pokemon {
     private static ArrayList<Pokemon> m_pokedex = new ArrayList<>();
@@ -265,78 +266,7 @@ public class Pokemon {
         return false;
     };
 
-    /**
-     * Retourne une représentation textuelle des Pokémon combattants sous forme de chaîne de caractères.
-     * Chaque ligne représente un attribut des Pokémon (nom, type, PV, DMG) aligné avec les autres combattants.
-     *
-     * @param combattants La liste des Pokémon combattants.
-     * @return Une chaîne de caractères représentant les Pokémon combattants.
-     */
-    public static String toStringCombat(ArrayList<Pokemon> combattants){
-        String retour="";
-        for (Pokemon p: combattants) {
-            if(p.isM_shiny()) {
-                retour += "\u001B[93m";
-                retour += String.format("\t/-*-*-*-*-*-*-*-*-*-*-\\\t", p.getNom());
-                retour += "\u001B[0m";
-            }else {
-                retour += String.format("\t+---------------------+\t", p.getNom());
-            }
-        }
-        retour+="\n";
-        for (Pokemon p: combattants) {
-            if(p.isM_shiny()) {
-                retour += "\u001B[93m ";
-                retour += String.format("\t|\t%-27s\u001B[93m|\t", p.getNom());
-                retour += "\u001B[0m";
-            }else {
-                retour += String.format("\t|\t%-18s|\t", p.getNom());
-            }
-        }
-        retour+="\n";
-        for (Pokemon p: combattants) {
-            if (p.isM_shiny()) {
-                retour += "\u001B[93m ";
-                retour += String.format("\t|\tTYPE : %-11s|\t", p.getType());
-                retour += "\u001B[0m";
-            } else {
-                retour += String.format("\t|\tTYPE : %-11s|\t", p.getType());
-            }
-        }
-        retour+="\n";
-        for (Pokemon p: combattants) {
-            if(p.isM_shiny()) {
-                retour += "\u001B[93m ";
-                retour += String.format("\t|\tPV : %-3s/%-9s|\t", p.getPv(), p.getPvMAX());
-                retour += "\u001B[0m";
-            }else {
-                retour += String.format("\t|\tPV : %-3s/%-9s|\t", p.getPv(), p.getPvMAX());
-            }
-        }
-        retour+="\n";
-        for (Pokemon p: combattants) {
-            if(p.isM_shiny()) {
-                retour += "\u001B[93m ";
-                retour += String.format("\t|\tDMG : %-12s|\t", p.getAttaque());
-                retour += "\u001B[0m";
-            }else {
-                retour += String.format("\t|\tDMG : %-12s|\t", p.getAttaque());
-            }
-        }
-        retour+="\n";
-        for (Pokemon p: combattants) {
-            if(p.isM_shiny()) {
-                retour += "\u001B[93m ";
-                retour += String.format("\t\\-*-*-*-*-*-*-*-*-*-*-/\t", p.getNom());
-                retour += "\u001B[0m";
-            }else {
-                retour += String.format("\t+---------------------+\t", p.getNom());
-            }
-        }
 
-        return retour+"\n";
-
-    }
 
     /**
      * Renvoie le Pokedex entier de la variable m_pokedex
@@ -354,22 +284,22 @@ public class Pokemon {
             new Pokemon(nom);
         }
         //System.out.println("Choississez le type de votre deck (ou aléatoire pour un deck non-typé):");
-        Deck joueur;
-        Deck IA;
+        Humain joueurHumain;
+        IA ordinateur;
         if(new Random().nextBoolean()){
             System.out.println("Vous commencerez la partie ! Choisissez vos pokemon a mettre sur le terrain");
-            joueur= new Deck(1);
-            IA= new Deck(2);
+            joueurHumain = new Humain(new Deck(1));
+            ordinateur= new IA(new Deck(2));
             joueurActif="Joueur";
         }else {
             System.out.println("Vous jouerez en second.");
             new Scanner(System.in).nextLine();
-            joueur= new Deck(2);
-            IA= new Deck(1);
+            joueurHumain = new Humain(new Deck(2));
+            ordinateur= new IA(new Deck(1));
             joueurActif="IA";
         }
 
-        Tour T1 = new Tour(new Main(joueur), joueur, new Main(IA),IA, new Terrain(),joueurActif);
+        Tour T1 = new Tour(joueurHumain, ordinateur, new Terrain(),joueurActif);
         T1.miseEnPlace();
     }
 }

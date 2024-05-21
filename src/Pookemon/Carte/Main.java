@@ -90,4 +90,8 @@ public class Main {
         }
         return enMain;
     }
+
+    public void addMain(Pokemon p){
+        this.m_pokemonMain.add(p);
+    }
 }
