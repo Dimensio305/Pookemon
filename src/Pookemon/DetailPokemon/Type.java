@@ -1,3 +1,5 @@
+package Pookemon.DetailPokemon;
+
 public enum Type {
     FEU,
     EAU,

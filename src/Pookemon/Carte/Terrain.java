@@ -1,3 +1,6 @@
+package Pookemon.Carte;
+
+import Pookemon.DetailPokemon.Pokemon;
 import java.util.ArrayList;
 
 public class Terrain {
@@ -103,7 +106,7 @@ public class Terrain {
         return "Camp adverse : \n"+
                 Pokemon.toStringCombat(m_pokemonIA)+
                 "\nVos pokémon en jeu : \n"
-                +Pokemon.toStringCombat(m_pokemonJoueur)+"\n";
+                + Pokemon.toStringCombat(m_pokemonJoueur)+"\n";
     }
 
     public String toStringAdversraire() {

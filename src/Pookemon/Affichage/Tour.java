@@ -1,6 +1,7 @@
-import com.sun.jdi.IntegerValue;
+package Pookemon.Affichage;
 
-import java.security.PublicKey;
+import Pookemon.Carte.*;
+import Pookemon.DetailPokemon.Pokemon;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
