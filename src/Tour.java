@@ -305,7 +305,6 @@ public class Tour {
             joueurActif = "Joueur";
         }
     }
-
     public void demandeCibleAdverse(){
         System.out.println("Quelle pokemon adersaire souhaitez vous ciblez ?");
         int choix=1;
