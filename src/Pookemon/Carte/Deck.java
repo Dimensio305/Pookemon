@@ -1,3 +1,6 @@
+package Pookemon.Carte;
+
+import Pookemon.DetailPokemon.Pokemon;
 import java.util.ArrayList;
 import java.util.Random;
 

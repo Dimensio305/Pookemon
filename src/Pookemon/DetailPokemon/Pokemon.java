@@ -1,9 +1,12 @@
-import jdk.jshell.Snippet;
+package Pookemon.DetailPokemon;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
+
+import Pookemon.Affichage.Tour;
+import Pookemon.Carte.*;
 
 public class Pokemon {
     private static ArrayList<Pokemon> m_pokedex = new ArrayList<>();
