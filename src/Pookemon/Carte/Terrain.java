@@ -1,5 +1,6 @@
 package Pookemon.Carte;
 
+import Pookemon.Affichage.Affichage;
 import Pookemon.DetailPokemon.Pokemon;
 import java.util.ArrayList;
 
@@ -96,21 +97,4 @@ public class Terrain {
         return -1;//ne dois jamais avoir lieu (on dois ajouter un trycatch)
     }
 
-    /**
-     * Reécriture de toString pour une representation du terrains
-     *
-     * @return Une chaîne de caractères représentant le terrain.
-     */
-    @Override
-    public String toString(){
-        return "Camp adverse : \n"+
-                Pokemon.toStringCombat(m_pokemonIA)+
-                "\nVos pokémon en jeu : \n"
-                + Pokemon.toStringCombat(m_pokemonJoueur)+"\n";
-    }
-
-    public String toStringAdversraire() {
-        return "Camp adverse : \n" +
-                Pokemon.toStringCombat(m_pokemonIA);
-    }
 }

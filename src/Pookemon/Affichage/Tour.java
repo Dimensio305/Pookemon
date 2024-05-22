@@ -15,6 +15,8 @@ public class Tour {
     private final IA m_IA;
     private static String joueurActif;
     private Terrain m_terrain;
+    
+    private static final Affichage m_affiche= new Affichage();
 
     /**
      * Constructeur de la classe Tour.
@@ -45,8 +47,8 @@ public class Tour {
     public void miseEnPlace(){
         if (joueurActif.equals("Joueur")) {
             while(this.m_terrain.getPokemonJoueur().size()<3){
-                System.out.println(this.m_humain.getM_main().toString());
-                this.demandeAjout(3-this.m_terrain.getPokemonJoueur().size());
+                m_affiche.affichageMain(this.m_humain.getM_main());
+                this.ajoutTerrain(3-this.m_terrain.getPokemonJoueur().size());
             }
             while(this.m_terrain.getPokemonIA().size()<3){
                 this.m_terrain.ajoutPokemonIA(this.m_IA.getM_main());
@@ -55,12 +57,12 @@ public class Tour {
             while(this.m_terrain.getPokemonIA().size()<3){
                 this.m_terrain.ajoutPokemonIA(this.m_IA.getM_main());
             }
-            System.out.println(this.m_terrain.toStringAdversraire());
+            m_affiche.terrainAdverse(this.m_terrain);
             System.out.println("Voici les pokémon choisis par votre adversaire.");
             new Scanner(System.in).nextLine();
             while(this.m_terrain.getPokemonJoueur().size()<3){
-                System.out.println(this.m_humain.getM_main().toString());
-                this.demandeAjout(3-this.m_terrain.getPokemonJoueur().size());
+                m_affiche.affichageMain(this.m_humain.getM_main());
+                this.ajoutTerrain(3-this.m_terrain.getPokemonJoueur().size());
             }
         }
         while (true) {
@@ -89,8 +91,9 @@ public class Tour {
             this.m_terrain.ajoutPokemonIA(this.m_IA.getM_main());
         }
         while(joueurActif.equals("Joueur")&&this.m_terrain.getPokemonJoueur().size()<3&&this.m_humain.getM_main().getMain().size()>0){
-            this.affichage();
-            this.demandeAjout(3-this.m_terrain.getPokemonJoueur().size());
+            m_affiche.affichageTerrain(this.m_terrain);
+            m_affiche.affichageMain(this.m_humain.getM_main());
+            this.ajoutTerrain(3-this.m_terrain.getPokemonJoueur().size());
         }
         Scanner s = new Scanner(System.in);
 
@@ -113,7 +116,7 @@ public class Tour {
                             this.m_humain.getM_deck().estDefausse(ciblePossible.get(0));
                             this.m_terrain.retirePokemonJoueur(this.m_terrain.getIndexJoueur(ciblePossible.get(0).getNom()));
                         }
-                        System.out.println(this.m_terrain.toString());
+                        m_affiche.affichageTerrain(this.m_terrain);
                         System.out.println("Le " +p.getNom()+" adverse attaque " + ciblePossible.get(0).getNom());
 
                         if (ciblePossible.get(0).estMort()) {
@@ -138,7 +141,7 @@ public class Tour {
                                 this.m_humain.getM_deck().estDefausse(ciblePossible.get(0));
                                 this.m_terrain.retirePokemonJoueur(this.m_terrain.getIndexJoueur(ciblePossible.get(0).getNom()));
                             }
-                            System.out.println(this.m_terrain.toString());
+                            m_affiche.affichageTerrain(this.m_terrain);
                             System.out.println("Le " +p.getNom()+" adverse attaque " + ciblePossible.get(0).getNom());
 
                             if (ciblePossible.get(0).estMort()) {
@@ -152,7 +155,7 @@ public class Tour {
                                 this.m_humain.getM_deck().estDefausse(ciblePossible.get(cibleIndex));
                                 this.m_terrain.retirePokemonJoueur(this.m_terrain.getIndexJoueur(ciblePossible.get(cibleIndex).getNom()));
                             }
-                            System.out.println(this.m_terrain.toString());
+                            m_affiche.affichageTerrain(this.m_terrain);
                             System.out.println("Le " +p.getNom()+" adverse attaque " + ciblePossible.get(cibleIndex).getNom());
 
                             if (ciblePossible.get(cibleIndex).estMort()) {
@@ -182,7 +185,7 @@ public class Tour {
                                 this.m_humain.getM_deck().estDefausse(ciblePossible.get(0));
                                 this.m_terrain.retirePokemonJoueur(this.m_terrain.getIndexJoueur(ciblePossible.get(0).getNom()));
                             }
-                            System.out.println(this.m_terrain.toString());
+                            m_affiche.affichageTerrain(this.m_terrain);
                             System.out.println("Le " +p.getNom()+" adverse attaque " + ciblePossible.get(0).getNom());
 
                             if (ciblePossible.get(0).estMort()) {
@@ -196,7 +199,7 @@ public class Tour {
                                 this.m_humain.getM_deck().estDefausse(ciblePossible.get(cibleIndex));
                                 this.m_terrain.retirePokemonJoueur(this.m_terrain.getIndexJoueur(ciblePossible.get(cibleIndex).getNom()));
                             }
-                            System.out.println(this.m_terrain.toString());
+                            m_affiche.affichageTerrain(this.m_terrain);
                             System.out.println("Le " +p.getNom()+" adverse attaque " + ciblePossible.get(cibleIndex).getNom());
 
                             if (ciblePossible.get(cibleIndex).estMort()) {
@@ -214,7 +217,8 @@ public class Tour {
             String action = "";
             String cible = "-1";
             while (!action.equals("fin") && !action.equals("1")) {
-                this.affichage();
+                m_affiche.affichageTerrain(this.m_terrain);
+                m_affiche.affichageMain(this.m_humain.getM_main());
                 System.out.println("Que souhaitez vous faire ? \n   1: Fin du tour : [fin]");
                 Boolean actionPossible = false;
                 for (Pokemon p : this.m_terrain.getPokemonJoueur()) {
@@ -241,7 +245,7 @@ public class Tour {
                         action = s.nextLine();
 
                         if (this.m_terrain.joueurContient(action) && this.m_terrain.getPokemonJoueur().get(this.m_terrain.getIndexJoueur(action)).isPossedeAttaque()) {
-                            demandeCibleAdverse();
+                            m_affiche.demandeCibleAdverse(this.m_terrain);
                             cible = s.nextLine();
                             if (this.m_terrain.IAContient(cible)) {
                                 this.m_terrain.getPokemonIA().get(this.m_terrain.getIndexIA(cible)).subitDegat(this.m_terrain.getPokemonJoueur().get(this.m_terrain.getIndexJoueur(action)).getAttaque(), this.m_terrain.getPokemonJoueur().get(this.m_terrain.getIndexJoueur(action)).getType());
@@ -267,7 +271,7 @@ public class Tour {
                                 (action.equals("2") && this.m_terrain.getPokemonJoueur().get(1).isPossedeAttaque()) ||
                                 (action.equals("3") && this.m_terrain.getPokemonJoueur().get(2).isPossedeAttaque())) {
 
-                            demandeCibleAdverse();
+                            m_affiche.demandeCibleAdverse(this.m_terrain);
                             cible = s.nextLine();
                             if (this.m_terrain.IAContient(cible)) {
                                 this.m_terrain.getPokemonIA().get(this.m_terrain.getIndexIA(cible)).subitDegat(this.m_terrain.getPokemonJoueur().get(Integer.parseInt(action) - 1).getAttaque(), this.m_terrain.getPokemonJoueur().get(Integer.parseInt(action) - 1).getType());
@@ -294,20 +298,7 @@ public class Tour {
                 }
             }
         }
-
-        if(joueurActif.equals("Joueur")){
-            joueurActif = "IA";
-        }else{
-            joueurActif = "Joueur";
-        }
-    }
-    public void demandeCibleAdverse(){
-        System.out.println("Quelle pokemon adersaire souhaitez vous ciblez ?");
-        int choix=1;
-        for (Pokemon p : this.m_terrain.getPokemonIA()) {
-            System.out.println( choix+": " + p.getNom());
-            choix++;
-        }
+        changementJoueur();
     }
 
     /**
@@ -316,40 +307,9 @@ public class Tour {
      *
      * @param nombre Le nombre de pokémon restants à ajouter.
      */
-    public void demandeAjout(int nombre){
-        System.out.println("Quel pokemon souhaitez vous Placer sur le terrain ? ("+nombre+" restants)");
-        Scanner s = new Scanner(System.in);
-        String choix = s.nextLine();
-        if(this.m_humain.getM_main().contient(choix)) {
-            this.m_terrain.ajoutPokemonJoueur(this.m_humain.getM_main(), this.m_humain.getM_main().getIndex(choix));
-        }
-        switch (choix){
-            case "1":
-                this.m_terrain.ajoutPokemonJoueur(this.m_humain.getM_main(), 0);
-                break;
-            case "2":
-                if(this.m_humain.getM_main().getMain().size()>1){this.m_terrain.ajoutPokemonJoueur(this.m_humain.getM_main(),1);}
-                break;
-            case "3":
-                if(this.m_humain.getM_main().getMain().size()>2){this.m_terrain.ajoutPokemonJoueur(this.m_humain.getM_main(),2);}
-                break;
-            case "4":
-                if(this.m_humain.getM_main().getMain().size()>3){this.m_terrain.ajoutPokemonJoueur(this.m_humain.getM_main(),3);}
-                break;
-            case "5":
-                if(this.m_humain.getM_main().getMain().size()>4){this.m_terrain.ajoutPokemonJoueur(this.m_humain.getM_main(),4);}
-                break;
-        }
-    }
-
-    /**
-     * Affiche l'état actuel du jeu, comprenant le terrain et les mains des joueurs.
-     * Si c'est au tour du joueur et qu'il n'a pas assez de Pokémon sur le terrain, demande d'ajouter des Pokémon.
-     * Si c'est au tour de l'IA et qu'elle n'a pas assez de Pokémon sur le terrain, ajoute automatiquement des Pokémon.
-     */
-    public void affichage(){
-        System.out.println(this.m_terrain.toString()+this.m_humain.getM_main().toString());
-
+    public void ajoutTerrain(int nombre){
+        m_affiche.demandeAjout(nombre);
+        this.m_humain.ajoutPokemon(this.m_terrain);
     }
 
 }

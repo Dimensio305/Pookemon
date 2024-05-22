@@ -14,11 +14,7 @@ public class Joueur {
     public Joueur(Deck deck) {
         m_deck = deck;
         m_defausse = new Defausse();
-        for (int i = 0; i < 5; i++) {
-            int index = new Random().nextInt(m_deck.getPile().size());
-            m_main.addMain(deck.getPile().get(index));
-            deck.estTire(index);
-        }
+        m_main = new Main(m_deck);
     }
 
     public Deck getM_deck() {
@@ -32,4 +28,6 @@ public class Joueur {
     public Main getM_main() {
         return m_main;
     }
+
+
 }

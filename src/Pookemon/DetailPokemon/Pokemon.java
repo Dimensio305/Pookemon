@@ -1,5 +1,7 @@
 package Pookemon.DetailPokemon;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -7,7 +9,11 @@ import java.util.Scanner;
 
 import Pookemon.Affichage.*;
 import Pookemon.Carte.*;
+import Pookemon.GestionMusique.Musique;
 import Pookemon.Personnage.*;
+
+import javax.sound.sampled.*;
+import javax.swing.*;
 
 public class Pokemon {
     private static ArrayList<Pokemon> m_pokedex = new ArrayList<>();
@@ -35,7 +41,7 @@ public class Pokemon {
         m_pvMAX = new Random().nextInt(10, 21) * 10;
         m_pv = m_pvMAX;
         m_type = Type.values()[new Random().nextInt(Type.values().length)];
-        m_shiny = new Random().nextInt(1, 65)==1;
+        m_shiny = new Random().nextInt(1, 5)==1;
         m_pokedex.add(this);
     }
 
@@ -97,16 +103,6 @@ public class Pokemon {
         return m_possedeAttaque;
     }
 
-    /**
-     * Reécriture de toString pour une representation des Pokemons
-     * La représentation inclut le nom, le type, les points de vie actuels et maximum, ainsi que les dégâts d'attaque.
-     *
-     * @return Une chaîne de caractères représentant le Pokémon.
-     */
-    @Override
-    public String toString() {
-        return this.getNom() + ": " + this.getType() + ", PV : " + this.getPv() + "/" + this.getPvMAX() + ", DMG: " + this.getAttaque();
-    }
 
     public void subitDegat(int dmg, Type type){
         int affinite = this.affiniteType(type);
@@ -276,9 +272,10 @@ public class Pokemon {
     public static ArrayList<Pokemon> getPokedex() {
         return m_pokedex;
     }
+
     public static void main(String args[]){
         String joueurActif;
-
+        new Musique().Ecoute("src/Pookemon/GestionMusique/MainTheme.wav");
         System.out.println("Lancement du jeu ...");
         for (String nom: m_nomPokemon) {
             new Pokemon(nom);

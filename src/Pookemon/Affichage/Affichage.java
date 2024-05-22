@@ -10,27 +10,47 @@ public class Affichage {
 
     public void affichageMain(Main main) {
         int numMain=1;
-        String enMain ="En main :";
+        System.out.println("En main :");
         for (Pokemon p: main.getMain()) {
-            enMain+= "\n   "+numMain+": " + p.toString();
+            System.out.print("\t"+numMain+"|");
+            affichagePokemon(p);
             numMain++;
         }
-        System.out.println(enMain);
     }
 
     public void affichageTerrain(Terrain terrain) {
-        String retour = "";
         System.out.println("Camp adverse : ");
         affichagePokemonCombat(terrain.getPokemonIA());
-        System.out.println("\nVos pokémon en jeu : ");
+        System.out.println("Vos pokémon en jeu : ");
         affichagePokemonCombat(terrain.getPokemonJoueur());
-        System.out.println(retour);
+    }
+
+    public void terrainJoueur(Terrain terrain) {
+        System.out.println("Vos pokémon en jeu : ");
+        affichagePokemonCombat(terrain.getPokemonJoueur());
+    }
+
+    public void terrainAdverse(Terrain terrain) {
+        System.out.println("Camp adverse : ");
+        affichagePokemonCombat(terrain.getPokemonIA());
     }
 
     public void affichagePokemon(Pokemon pokemon) {
         System.out.println(pokemon.getNom() + ": " + pokemon.getType() + ", PV : " + pokemon.getPv() + "/" + pokemon.getPvMAX() + ", DMG: " + pokemon.getAttaque());
     }
 
+    public void demandeAjout(int nombre){
+        System.out.println("Quel pokemon souhaitez vous Placer sur le terrain ? ("+nombre+" restants)");
+    }
+
+    public void demandeCibleAdverse(Terrain terrain){
+        System.out.println("Quelle pokemon adersaire souhaitez vous ciblez ?");
+        int choix=1;
+        for (Pokemon p : terrain.getPokemonIA()) {
+            System.out.println( choix+": " + p.getNom());
+            choix++;
+        }
+    }
     /**
      * Retourne une représentation textuelle des Pokémon combattants sous forme de chaîne de caractères.
      * Chaque ligne représente un attribut des Pokémon (nom, type, PV, DMG) aligné avec les autres combattants.
@@ -40,67 +60,66 @@ public class Affichage {
      */
 
     public void affichagePokemonCombat(List<Pokemon> combattants) {
-        String retour="";
+
         for (Pokemon p: combattants) {
             if(p.isM_shiny()) {
-                retour += "\u001B[93m";
-                retour += String.format("\t/-*-*-*-*-*-*-*-*-*-*-\\\t", p.getNom());
-                retour += "\u001B[0m";
+                System.out.print("\u001B[93m");
+                System.out.print(String.format("\t/-*-*-*-*-*-*-*-*-*-*-\\\t"));
+                System.out.print("\u001B[0m");
             }else {
-                retour += String.format("\t+---------------------+\t", p.getNom());
+                System.out.print("\t+---------------------+\t");
             }
         }
-        retour+="\n";
+        System.out.println();
         for (Pokemon p: combattants) {
             if(p.isM_shiny()) {
-                retour += "\u001B[93m ";
-                retour += String.format("\t|\t%-27s\u001B[93m|\t", p.getNom());
-                retour += "\u001B[0m";
+                System.out.print("\u001B[93m ");
+                System.out.print(String.format("\t|\t%-27s\u001B[93m|\t", p.getNom()));
+                System.out.print("\u001B[0m");
             }else {
-                retour += String.format("\t|\t%-18s|\t", p.getNom());
+                System.out.print(String.format("\t|\t%-18s|\t", p.getNom()));
             }
         }
-        retour+="\n";
+        System.out.println();
         for (Pokemon p: combattants) {
             if (p.isM_shiny()) {
-                retour += "\u001B[93m ";
-                retour += String.format("\t|\tTYPE : %-11s|\t", p.getType());
-                retour += "\u001B[0m";
+                System.out.print("\u001B[93m ");
+                System.out.print(String.format("\t|\tTYPE : %-11s|\t", p.getType()));
+                System.out.print("\u001B[0m");
             } else {
-                retour += String.format("\t|\tTYPE : %-11s|\t", p.getType());
+                System.out.print(String.format("\t|\tTYPE : %-11s|\t", p.getType()));
             }
         }
-        retour+="\n";
+        System.out.println();
         for (Pokemon p: combattants) {
             if(p.isM_shiny()) {
-                retour += "\u001B[93m ";
-                retour += String.format("\t|\tPV : %-3s/%-9s|\t", p.getPv(), p.getPvMAX());
-                retour += "\u001B[0m";
+                System.out.print("\u001B[93m ");
+                System.out.print(String.format("\t|\tPV : %-3s/%-9s|\t", p.getPv(), p.getPvMAX()));
+                System.out.print("\u001B[0m");
             }else {
-                retour += String.format("\t|\tPV : %-3s/%-9s|\t", p.getPv(), p.getPvMAX());
+                System.out.print(String.format("\t|\tPV : %-3s/%-9s|\t", p.getPv(), p.getPvMAX()));
             }
         }
-        retour+="\n";
+        System.out.println();
         for (Pokemon p: combattants) {
             if(p.isM_shiny()) {
-                retour += "\u001B[93m ";
-                retour += String.format("\t|\tDMG : %-12s|\t", p.getAttaque());
-                retour += "\u001B[0m";
+                System.out.print("\u001B[93m ");
+                System.out.print(String.format("\t|\tDMG : %-12s|\t", p.getAttaque()));
+                System.out.print("\u001B[0m");
             }else {
-                retour += String.format("\t|\tDMG : %-12s|\t", p.getAttaque());
+                System.out.print(String.format("\t|\tDMG : %-12s|\t", p.getAttaque()));
             }
         }
-        retour+="\n";
+        System.out.println();
         for (Pokemon p: combattants) {
             if(p.isM_shiny()) {
-                retour += "\u001B[93m ";
-                retour += String.format("\t\\-*-*-*-*-*-*-*-*-*-*-/\t", p.getNom());
-                retour += "\u001B[0m";
+                System.out.print("\u001B[93m ");
+                System.out.print(String.format("\t\\-*-*-*-*-*-*-*-*-*-*-/\t"));
+                System.out.print("\u001B[0m");
             }else {
-                retour += String.format("\t+---------------------+\t", p.getNom());
+                System.out.print(String.format("\t+---------------------+\t"));
             }
         }
-
-        System.out.println(retour+"\n");
+        System.out.println();
     }
 }
