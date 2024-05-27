@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
-import Pookemon.Affichage.*;
+import Pookemon.Deroulement.*;
 import Pookemon.Carte.*;
 import Pookemon.GestionMusique.Musique;
 import Pookemon.Personnage.*;
@@ -51,6 +51,9 @@ public class Pokemon {
         else{return this.m_nom;}
     }
 
+    public String getNomComparable(){
+        return this.m_nom;
+    }
     /**
      * Renvoie le Type du Pokemon
      *

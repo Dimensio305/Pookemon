@@ -1,6 +1,5 @@
 package Pookemon.Carte;
 
-import Pookemon.Affichage.Affichage;
 import Pookemon.DetailPokemon.Pokemon;
 import java.util.ArrayList;
 
@@ -63,7 +62,7 @@ public class Terrain {
 
     public boolean IAContient(String nom){
         for (Pokemon p: this.m_pokemonIA) {
-            if (p.getNom().equalsIgnoreCase(nom)){
+            if (p.getNomComparable().equalsIgnoreCase(nom)){
                 return true;
             }
         }
@@ -72,7 +71,7 @@ public class Terrain {
 
     public boolean joueurContient(String nom){
         for (Pokemon p: this.m_pokemonJoueur) {
-            if (p.getNom().equalsIgnoreCase(nom)){
+            if (p.getNomComparable().equalsIgnoreCase(nom)){
                 return true;
             }
         }
@@ -81,7 +80,7 @@ public class Terrain {
 
     public int getIndexIA(String nom){
         for (int i = 0; i <this.m_pokemonIA.size() ; i++) {
-            if(this.m_pokemonIA.get(i).getNom().equalsIgnoreCase(nom)){
+            if(this.m_pokemonIA.get(i).getNomComparable().equalsIgnoreCase(nom)){
                 return i;
             }
         }
@@ -90,7 +89,7 @@ public class Terrain {
 
     public int getIndexJoueur(String nom){
         for (int i = 0; i <this.m_pokemonJoueur.size() ; i++) {
-            if(this.m_pokemonJoueur.get(i).getNom().equalsIgnoreCase(nom)){
+            if(this.m_pokemonJoueur.get(i).getNomComparable().equalsIgnoreCase(nom)){
                 return i;
             }
         }

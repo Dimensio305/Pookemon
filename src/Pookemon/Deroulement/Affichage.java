@@ -1,4 +1,4 @@
-package Pookemon.Affichage;
+package Pookemon.Deroulement;
 
 import Pookemon.Carte.Main;
 import Pookemon.Carte.Terrain;
@@ -121,5 +121,45 @@ public class Affichage {
             }
         }
         System.out.println();
+    }
+
+    public void questionAction(int etape){
+        switch (etape){
+            case 1:
+                System.out.println("Que souhaitez vous faire ? \n   1: Fin du tour : [fin]");
+                break;
+            case 2:
+                System.out.println("   2: Attaquer [atk]");
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void questionAction(int etape, Terrain terrain){
+        switch (etape){
+            case 3:
+                System.out.println("Quel pokemon souhaitez vous utilisez ?");
+                if (terrain.getPokemonJoueur().get(0).isPossedeAttaque()) {
+                    System.out.println("   1: " + terrain.getPokemonJoueur().get(0).getNom());
+                }
+                if (terrain.getPokemonJoueur().get(1).isPossedeAttaque()) {
+                    System.out.println("   2: " + terrain.getPokemonJoueur().get(1).getNom());
+                }
+                if (terrain.getPokemonJoueur().get(2).isPossedeAttaque()) {
+                    System.out.println("   3: " + terrain.getPokemonJoueur().get(2).getNom());
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void attaqueIA(Pokemon attaquant, Pokemon cible){
+        System.out.println("Le " +attaquant.getNom()+" adverse attaque " + cible.getNom());
+
+        if (cible.estMort()) {
+            System.out.println(cible.getNom() + "a été mis KO.");
+        }
     }
 }
