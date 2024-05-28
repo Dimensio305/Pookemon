@@ -36,7 +36,7 @@ public class IA extends Joueur{
                     ciblePossible.get(0).subitDegat(p.getAttaque(), p.getType());
                     if (ciblePossible.get(0).estMort()) {
                         adversaire.defausse(ciblePossible.get(0));
-                        terrain.retirePokemonJoueur(terrain.getIndexJoueur(ciblePossible.get(0).getNom()));
+                        terrain.retirePokemonJoueur(terrain.getIndexJoueur(ciblePossible.get(0).getNomComparable()));
                     }
                     print.affichageTerrain(terrain);
                     print.attaqueIA(p, ciblePossible.get(0));
@@ -62,7 +62,7 @@ public class IA extends Joueur{
                         ciblePossible.get(0).subitDegat(p.getAttaque(), p.getType());
                         if (ciblePossible.get(0).estMort()) {
                             adversaire.defausse(ciblePossible.get(0));
-                            terrain.retirePokemonJoueur(terrain.getIndexJoueur(ciblePossible.get(0).getNom()));
+                            terrain.retirePokemonJoueur(terrain.getIndexJoueur(ciblePossible.get(0).getNomComparable()));
                         }
                         print.affichageTerrain(terrain);
                         print.attaqueIA(p, ciblePossible.get(0));
@@ -72,7 +72,7 @@ public class IA extends Joueur{
                         ciblePossible.get(cibleIndex).subitDegat(p.getAttaque(), p.getType());
                         if (ciblePossible.get(cibleIndex).estMort()) {
                             adversaire.defausse(ciblePossible.get(cibleIndex));
-                            terrain.retirePokemonJoueur(terrain.getIndexJoueur(ciblePossible.get(cibleIndex).getNom()));
+                            terrain.retirePokemonJoueur(terrain.getIndexJoueur(ciblePossible.get(cibleIndex).getNomComparable()));
                         }
                         print.affichageTerrain(terrain);
                         print.attaqueIA(p, ciblePossible.get(cibleIndex));
@@ -98,7 +98,7 @@ public class IA extends Joueur{
                         ciblePossible.get(0).subitDegat(p.getAttaque(), p.getType());
                         if (ciblePossible.get(0).estMort()) {
                             adversaire.defausse(ciblePossible.get(0));
-                            terrain.retirePokemonJoueur(terrain.getIndexJoueur(ciblePossible.get(0).getNom()));
+                            terrain.retirePokemonJoueur(terrain.getIndexJoueur(ciblePossible.get(0).getNomComparable()));
                         }
                         print.affichageTerrain(terrain);
                         print.attaqueIA(p,ciblePossible.get(0));
@@ -108,7 +108,7 @@ public class IA extends Joueur{
                         ciblePossible.get(cibleIndex).subitDegat(p.getAttaque(), p.getType());
                         if (ciblePossible.get(cibleIndex).estMort()) {
                             adversaire.defausse(ciblePossible.get(cibleIndex));
-                            terrain.retirePokemonJoueur(terrain.getIndexJoueur(ciblePossible.get(cibleIndex).getNom()));
+                            terrain.retirePokemonJoueur(terrain.getIndexJoueur(ciblePossible.get(cibleIndex).getNomComparable()));
                         }
                         print.affichageTerrain(terrain);
                         print.attaqueIA(p,ciblePossible.get(cibleIndex));
