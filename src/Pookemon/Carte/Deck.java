@@ -8,8 +8,6 @@ public class Deck {
     private static ArrayList<Integer> m_doublon= new ArrayList<>();
 
     private ArrayList<Pokemon> m_pile= new ArrayList<>();
-    private ArrayList<Pokemon> m_defausse = new ArrayList<>();
-
 
     /**
      * Constructeur de la classe Deck.
@@ -57,9 +55,5 @@ public class Deck {
     public boolean estVide()
     {
         return this.m_pile.size()<=0;
-    }
-
-    public void estDefausse(Pokemon p){
-        this.m_defausse.add(p);
     }
 }

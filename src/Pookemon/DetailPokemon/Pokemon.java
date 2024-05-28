@@ -39,6 +39,7 @@ public class Pokemon {
         m_type = Type.values()[new Random().nextInt(Type.values().length)];
         m_shiny = new Random().nextInt(1, 5)==1;
         m_pokedex.add(this);
+        m_possedeAttaque = true;
     }
 
     /**
@@ -103,7 +104,7 @@ public class Pokemon {
     }
 
 
-    public void subitDegat(int dmg, Type type){
+    public void subitDegat(int dmg, Type type,Joueur adversaire, Terrain terrain){
         int affinite = this.affiniteType(type);
         switch (affinite){
             case -1:
@@ -114,6 +115,10 @@ public class Pokemon {
                 break;
             case 1:
                 this.m_pv-= (dmg+10);
+        }
+        if (this.estMort()) {
+            adversaire.defausse(this);
+            adversaire.pokemonEnterre(this, terrain);
         }
 
     }
@@ -257,6 +262,7 @@ public class Pokemon {
     public boolean estMort(){
         return (this.m_pv<1);
     };
+
 
 
 

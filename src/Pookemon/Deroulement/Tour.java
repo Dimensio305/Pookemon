@@ -78,9 +78,6 @@ public class Tour {
         for (Pokemon p: this.m_terrain.getPokemonJoueur()) {
             p.setPossedeAttaque(true);
         }
-        for (Pokemon p: this.m_terrain.getPokemonIA()) {
-            p.setPossedeAttaque(true);
-        }
         while((this.m_humain.getMainListe().size()<5)&&!this.m_humain.getM_deck().estVide()){
             m_humain.pioche();
         }

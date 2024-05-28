@@ -17,6 +17,11 @@ public class IA extends Joueur{
     }
 
     @Override
+    public void pokemonEnterre(Pokemon victime, Terrain sceneDuCrime) {
+        sceneDuCrime.retirePokemonIA(sceneDuCrime.getIndexJoueur(victime.getNomComparable()));
+    }
+
+    @Override
     public boolean actionDuTour(Terrain terrain, Joueur adversaire) {
         Affichage print = new Affichage();
         Scanner s = new Scanner(System.in);
@@ -33,11 +38,7 @@ public class IA extends Joueur{
                 }
                 i=0;
                 if (ciblePossible.size() == 1) {
-                    ciblePossible.get(0).subitDegat(p.getAttaque(), p.getType());
-                    if (ciblePossible.get(0).estMort()) {
-                        adversaire.defausse(ciblePossible.get(0));
-                        terrain.retirePokemonJoueur(terrain.getIndexJoueur(ciblePossible.get(0).getNomComparable()));
-                    }
+                    ciblePossible.get(0).subitDegat(p.getAttaque(), p.getType(),adversaire, terrain);
                     print.affichageTerrain(terrain);
                     print.attaqueIA(p, ciblePossible.get(0));
                     s.nextLine();
@@ -59,21 +60,13 @@ public class IA extends Joueur{
                         ciblePossible.remove(pasCible);
                     }
                     if (ciblePossible.size() == 1) {
-                        ciblePossible.get(0).subitDegat(p.getAttaque(), p.getType());
-                        if (ciblePossible.get(0).estMort()) {
-                            adversaire.defausse(ciblePossible.get(0));
-                            terrain.retirePokemonJoueur(terrain.getIndexJoueur(ciblePossible.get(0).getNomComparable()));
-                        }
+                        ciblePossible.get(0).subitDegat(p.getAttaque(), p.getType(),adversaire, terrain);
                         print.affichageTerrain(terrain);
                         print.attaqueIA(p, ciblePossible.get(0));
                         s.nextLine();
                     } else {
                         cibleIndex =new Random().nextInt(0, ciblePossible.size());
-                        ciblePossible.get(cibleIndex).subitDegat(p.getAttaque(), p.getType());
-                        if (ciblePossible.get(cibleIndex).estMort()) {
-                            adversaire.defausse(ciblePossible.get(cibleIndex));
-                            terrain.retirePokemonJoueur(terrain.getIndexJoueur(ciblePossible.get(cibleIndex).getNomComparable()));
-                        }
+                        ciblePossible.get(cibleIndex).subitDegat(p.getAttaque(), p.getType(),adversaire, terrain);
                         print.affichageTerrain(terrain);
                         print.attaqueIA(p, ciblePossible.get(cibleIndex));
                         s.nextLine();
@@ -95,21 +88,13 @@ public class IA extends Joueur{
                     }
                     i=0;
                     if (ciblePossible.size() == 1) {
-                        ciblePossible.get(0).subitDegat(p.getAttaque(), p.getType());
-                        if (ciblePossible.get(0).estMort()) {
-                            adversaire.defausse(ciblePossible.get(0));
-                            terrain.retirePokemonJoueur(terrain.getIndexJoueur(ciblePossible.get(0).getNomComparable()));
-                        }
+                        ciblePossible.get(0).subitDegat(p.getAttaque(), p.getType(),adversaire, terrain);
                         print.affichageTerrain(terrain);
                         print.attaqueIA(p,ciblePossible.get(0));
                         s.nextLine();
                     } else {
                         cibleIndex =new Random().nextInt(0, ciblePossible.size());
-                        ciblePossible.get(cibleIndex).subitDegat(p.getAttaque(), p.getType());
-                        if (ciblePossible.get(cibleIndex).estMort()) {
-                            adversaire.defausse(ciblePossible.get(cibleIndex));
-                            terrain.retirePokemonJoueur(terrain.getIndexJoueur(ciblePossible.get(cibleIndex).getNomComparable()));
-                        }
+                        ciblePossible.get(cibleIndex).subitDegat(p.getAttaque(), p.getType(),adversaire, terrain);
                         print.affichageTerrain(terrain);
                         print.attaqueIA(p,ciblePossible.get(cibleIndex));
                         s.nextLine();

@@ -11,11 +11,13 @@ public class Affichage {
     public void affichageMain(Main main) {
         int numMain=1;
         System.out.println("En main :");
+        System.out.println("/----------------------------------------------------\\");
         for (Pokemon p: main.getMain()) {
-            System.out.print("\t"+numMain+"|");
+            System.out.print("|"+numMain+": ");
             affichagePokemon(p);
             numMain++;
         }
+        System.out.println("\\----------------------------------------------------/");
     }
 
     public void affichageTerrain(Terrain terrain) {
@@ -36,15 +38,15 @@ public class Affichage {
     }
 
     public void affichagePokemon(Pokemon pokemon) {
-        System.out.println(pokemon.getNom() + ": " + pokemon.getType() + ", PV : " + pokemon.getPv() + "/" + pokemon.getPvMAX() + ", DMG: " + pokemon.getAttaque());
+        System.out.println(String.format("%-13s: %-10s PV : %-3s/%-3s DMG : %-3s |",pokemon.getNomComparable(), pokemon.getType(),pokemon.getPv(),pokemon.getPvMAX(),pokemon.getAttaque()));
     }
 
     public void demandeAjout(int nombre){
-        System.out.println("Quel pokemon souhaitez vous Placer sur le terrain ? ("+nombre+" restants)");
+        System.out.println("Quel est le numéro du Pokemon que vous souhaitez placer sur le terrain ? ("+nombre+" restants)");
     }
 
     public void demandeCibleAdverse(Terrain terrain){
-        System.out.println("Quelle pokemon adersaire souhaitez vous ciblez ?");
+        System.out.println("Quel est le numéro du pokemon adersaire que vous souhaitez ciblez ?");
         int choix=1;
         for (Pokemon p : terrain.getPokemonIA()) {
             System.out.println( choix+": " + p.getNom());
@@ -139,7 +141,7 @@ public class Affichage {
     public void questionAction(int etape, Terrain terrain){
         switch (etape){
             case 3:
-                System.out.println("Quel pokemon souhaitez vous utilisez ?");
+                System.out.println("Entrez le numéro du Pokemon que vous souhaitez utilisez?");
                 if (terrain.getPokemonJoueur().get(0).isPossedeAttaque()) {
                     System.out.println("   1: " + terrain.getPokemonJoueur().get(0).getNom());
                 }

@@ -33,7 +33,7 @@ public abstract class Joueur {
     }
 
     public void defausse(Pokemon p){
-        this.getM_deck().estDefausse(p);
+        this.getM_defausse().estDefausse(p);
     }
 
     public Main getM_main() {
@@ -43,6 +43,8 @@ public abstract class Joueur {
     public ArrayList<Pokemon> getMainListe() {
         return m_main.getMain();
     }
+
+    public abstract void pokemonEnterre(Pokemon victime, Terrain sceneDuCrime);
 
     public abstract boolean actionDuTour(Terrain terrain, Joueur adversaire);
 
