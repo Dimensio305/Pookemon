@@ -75,21 +75,6 @@ public class Main {
         }
     }
 
-    /**
-     * Retourne une représentation textuelle de la main, indiquant chaque carte Pokémon présente.
-     *
-     * @return Une chaîne de caractères représentant les cartes Pokémon dans la main.
-     */
-    @Override
-    public String toString(){
-        int numMain=1;
-        String enMain ="En main :";
-        for (Pokemon p: this.m_pokemonMain) {
-            enMain+= "\n   "+numMain+": " + p.toString();
-            numMain++;
-        }
-        return enMain;
-    }
 
     public void addMain(Pokemon p){
         this.m_pokemonMain.add(p);

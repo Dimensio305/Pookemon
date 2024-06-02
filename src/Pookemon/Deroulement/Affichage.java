@@ -38,7 +38,11 @@ public class Affichage {
     }
 
     public void affichagePokemon(Pokemon pokemon) {
-        System.out.println(String.format("%-13s: %-10s PV : %-3s/%-3s DMG : %-3s |",pokemon.getNomComparable(), pokemon.getType(),pokemon.getPv(),pokemon.getPvMAX(),pokemon.getAttaque()));
+        if (pokemon.isM_shiny()){
+            System.out.println(String.format("\u001B[93m%-13s\u001B[0m: %-10s PV : %-3s/%-3s DMG : %-3s |", pokemon.getNomComparable(), pokemon.getType(), pokemon.getPv(), pokemon.getPvMAX(), pokemon.getAttaque()));
+        }else {
+            System.out.println(String.format("%-13s: %-10s PV : %-3s/%-3s DMG : %-3s |", pokemon.getNomComparable(), pokemon.getType(), pokemon.getPv(), pokemon.getPvMAX(), pokemon.getAttaque()));
+        }
     }
 
     public void demandeAjout(int nombre){

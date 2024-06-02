@@ -45,6 +45,7 @@ public class Tour {
      * Affiche l'état actuel du jeu deux fois.
      */
     public void miseEnPlace(){
+
         if (joueurActif.equals("Joueur")) {
             while(this.m_terrain.getPokemonJoueur().size()<3){
                 m_affiche.affichageMain(this.m_humain.getM_main());

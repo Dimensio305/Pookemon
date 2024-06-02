@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import Pookemon.Deroulement.*;
 import Pookemon.Carte.*;
+import Pookemon.DetailPokemon.Pouvoirs.Pouvoir;
 import Pookemon.GestionMusique.Musique;
 import Pookemon.Personnage.*;
 
@@ -19,10 +20,11 @@ public class Pokemon {
     private int m_pvMAX;
     private int m_pv;
     private int m_attaque;
+    private boolean m_possedeAttaque;
 
+    private Pouvoir m_pouvoir;
     private boolean m_shiny;
 
-    private boolean m_possedeAttaque;
 
 
     /**
@@ -38,6 +40,7 @@ public class Pokemon {
         m_pv = m_pvMAX;
         m_type = Type.values()[new Random().nextInt(Type.values().length)];
         m_shiny = new Random().nextInt(1, 5)==1;
+        m_pouvoir = null;
         m_pokedex.add(this);
         m_possedeAttaque = true;
     }
@@ -282,7 +285,7 @@ public class Pokemon {
         for (String nom: m_nomPokemon) {
             new Pokemon(nom);
         }
-        //System.out.println("Choississez le type de votre deck (ou aléatoire pour un deck non-typé):");
+
         Humain joueurHumain;
         IA ordinateur;
         if(new Random().nextBoolean()){
