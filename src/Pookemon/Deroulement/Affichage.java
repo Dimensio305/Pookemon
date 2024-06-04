@@ -11,13 +11,13 @@ public class Affichage {
     public void affichageMain(Main main) {
         int numMain=1;
         System.out.println("En main :");
-        System.out.println("/----------------------------------------------------\\");
+        System.out.println("/------------------------------------------------------------------------------\\");
         for (Pokemon p: main.getMain()) {
             System.out.print("|"+numMain+": ");
             affichagePokemon(p);
             numMain++;
         }
-        System.out.println("\\----------------------------------------------------/");
+        System.out.println("\\------------------------------------------------------------------------------/");
     }
 
     public void affichageTerrain(Terrain terrain) {
@@ -39,10 +39,16 @@ public class Affichage {
 
     public void affichagePokemon(Pokemon pokemon) {
         if (pokemon.isM_shiny()){
-            System.out.println(String.format("\u001B[93m%-13s\u001B[0m: %-10s PV : %-3s/%-3s DMG : %-3s |", pokemon.getNomComparable(), pokemon.getType(), pokemon.getPv(), pokemon.getPvMAX(), pokemon.getAttaque()));
+            System.out.print(String.format("\u001B[93m%-13s\u001B[0m: %-10s PV : %-3s/%-3s DMG : %-3s ", pokemon.getNomComparable(), pokemon.getType(), pokemon.getPv(), pokemon.getPvMAX(), pokemon.getAttaque()));
         }else {
-            System.out.println(String.format("%-13s: %-10s PV : %-3s/%-3s DMG : %-3s |", pokemon.getNomComparable(), pokemon.getType(), pokemon.getPv(), pokemon.getPvMAX(), pokemon.getAttaque()));
+            System.out.print(String.format("%-13s: %-10s PV : %-3s/%-3s DMG : %-3s ", pokemon.getNomComparable(), pokemon.getType(), pokemon.getPv(), pokemon.getPvMAX(), pokemon.getAttaque()));
         }
+        if (pokemon.getM_pouvoir()!=null){
+            System.out.print(String.format("Pouvoir : %-16s", pokemon.getM_pouvoir().getNom()));
+        }else{
+            System.out.print(String.format("Pouvoir : %-16s", "Aucun"));
+        }
+        System.out.println("|");
     }
 
     public void demandeAjout(int nombre){
@@ -53,6 +59,14 @@ public class Affichage {
         System.out.println("Quel est le numéro du pokemon adersaire que vous souhaitez ciblez ?");
         int choix=1;
         for (Pokemon p : terrain.getPokemonIA()) {
+            System.out.println( choix+": " + p.getNom());
+            choix++;
+        }
+    }
+    public void demandeCibleHumain(Terrain terrain){
+        System.out.println("Quel est le numéro de votre pokemon que vous souhaitez ciblez ?");
+        int choix=1;
+        for (Pokemon p : terrain.getPokemonJoueur()) {
             System.out.println( choix+": " + p.getNom());
             choix++;
         }
@@ -70,60 +84,90 @@ public class Affichage {
         for (Pokemon p: combattants) {
             if(p.isM_shiny()) {
                 System.out.print("\u001B[93m");
-                System.out.print(String.format("\t/-*-*-*-*-*-*-*-*-*-*-\\\t"));
+                System.out.print(String.format("\t/-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\\\t"));
                 System.out.print("\u001B[0m");
             }else {
-                System.out.print("\t+---------------------+\t");
+                System.out.print("\t+-----------------------------+\t");
             }
         }
         System.out.println();
         for (Pokemon p: combattants) {
             if(p.isM_shiny()) {
                 System.out.print("\u001B[93m ");
-                System.out.print(String.format("\t|\t%-27s\u001B[93m|\t", p.getNom()));
+                System.out.print(String.format("\t|\t%-35s\u001B[93m|\t", p.getNom()));
                 System.out.print("\u001B[0m");
             }else {
-                System.out.print(String.format("\t|\t%-18s|\t", p.getNom()));
+                System.out.print(String.format("\t|\t%-26s|\t", p.getNom()));
             }
         }
         System.out.println();
         for (Pokemon p: combattants) {
             if (p.isM_shiny()) {
                 System.out.print("\u001B[93m ");
-                System.out.print(String.format("\t|\tTYPE : %-11s|\t", p.getType()));
+                System.out.print(String.format("\t|\tTYPE : %-19s|\t", p.getType()));
                 System.out.print("\u001B[0m");
             } else {
-                System.out.print(String.format("\t|\tTYPE : %-11s|\t", p.getType()));
+                System.out.print(String.format("\t|\tTYPE : %-19s|\t", p.getType()));
             }
         }
         System.out.println();
         for (Pokemon p: combattants) {
             if(p.isM_shiny()) {
                 System.out.print("\u001B[93m ");
-                System.out.print(String.format("\t|\tPV : %-3s/%-9s|\t", p.getPv(), p.getPvMAX()));
+                System.out.print(String.format("\t|\tPV : %-3s/%-17s|\t", p.getPv(), p.getPvMAX()));
                 System.out.print("\u001B[0m");
             }else {
-                System.out.print(String.format("\t|\tPV : %-3s/%-9s|\t", p.getPv(), p.getPvMAX()));
+                System.out.print(String.format("\t|\tPV : %-3s/%-17s|\t", p.getPv(), p.getPvMAX()));
             }
         }
         System.out.println();
         for (Pokemon p: combattants) {
             if(p.isM_shiny()) {
                 System.out.print("\u001B[93m ");
-                System.out.print(String.format("\t|\tDMG : %-12s|\t", p.getAttaque()));
+                System.out.print(String.format("\t|\tDMG : %-20s|\t", p.getAttaque()));
                 System.out.print("\u001B[0m");
             }else {
-                System.out.print(String.format("\t|\tDMG : %-12s|\t", p.getAttaque()));
+                System.out.print(String.format("\t|\tDMG : %-20s|\t", p.getAttaque()));
             }
         }
         System.out.println();
         for (Pokemon p: combattants) {
             if(p.isM_shiny()) {
                 System.out.print("\u001B[93m ");
-                System.out.print(String.format("\t\\-*-*-*-*-*-*-*-*-*-*-/\t"));
+                if (p.getM_pouvoir()!=null) {
+                    System.out.print(String.format("\t|\tPouvoir : %-16s|\t", p.getM_pouvoir().getNom()));
+                }else {
+                    System.out.print(String.format("\t|\tPouvoir : %-16s|\t", "Aucun"));
+
+                }
                 System.out.print("\u001B[0m");
             }else {
-                System.out.print(String.format("\t+---------------------+\t"));
+                if (p.getM_pouvoir()!=null) {
+                    System.out.print(String.format("\t|\tPouvoir : %-16s|\t", p.getM_pouvoir().getNom()));
+                }else {
+                    System.out.print(String.format("\t|\tPouvoir : %-16s|\t", "Aucun"));
+
+                }
+            }
+        }
+        System.out.println();
+        for (Pokemon p: combattants) {
+            if(p.isM_shiny()) {
+                System.out.print("\u001B[93m ");
+                System.out.print(String.format("\t|\tStatut : %-17s|\t", p.getM_statut().name().substring(0,1)+ p.getM_statut().name().substring(1).toLowerCase()));
+                System.out.print("\u001B[0m");
+            }else {
+                System.out.print(String.format("\t|\tStatut : %-17s|\t", p.getM_statut().name().substring(0,1)+ p.getM_statut().name().substring(1).toLowerCase()));
+            }
+        }
+        System.out.println();
+        for (Pokemon p: combattants) {
+            if(p.isM_shiny()) {
+                System.out.print("\u001B[93m ");
+                System.out.print(String.format("\t\\-*-*-*-*-*-*-*-*-*-*-*-*-*-*-/\t"));
+                System.out.print("\u001B[0m");
+            }else {
+                System.out.print(String.format("\t+-----------------------------+\t"));
             }
         }
         System.out.println();
@@ -137,6 +181,8 @@ public class Affichage {
             case 2:
                 System.out.println("   2: Attaquer [atk]");
                 break;
+            case 3:
+                System.out.println("   3: Pouvoir [pov]");
             default:
                 break;
         }
@@ -144,16 +190,28 @@ public class Affichage {
 
     public void questionAction(int etape, Terrain terrain){
         switch (etape){
-            case 3:
+            case 2:
                 System.out.println("Entrez le numéro du Pokemon que vous souhaitez utilisez?");
-                if (terrain.getPokemonJoueur().get(0).isPossedeAttaque()) {
+                if (terrain.getPokemonJoueur().size()>0&&terrain.getPokemonJoueur().get(0).isPossedeAttaque()) {
                     System.out.println("   1: " + terrain.getPokemonJoueur().get(0).getNom());
                 }
-                if (terrain.getPokemonJoueur().get(1).isPossedeAttaque()) {
+                if (terrain.getPokemonJoueur().size()>1&&terrain.getPokemonJoueur().get(1).isPossedeAttaque()) {
                     System.out.println("   2: " + terrain.getPokemonJoueur().get(1).getNom());
                 }
-                if (terrain.getPokemonJoueur().get(2).isPossedeAttaque()) {
+                if (terrain.getPokemonJoueur().size()>2&&terrain.getPokemonJoueur().get(2).isPossedeAttaque()) {
                     System.out.println("   3: " + terrain.getPokemonJoueur().get(2).getNom());
+                }
+                break;
+            case 3:
+                System.out.println("Entrez le numéro du Pokemon que vous souhaitez utilisez?");
+                if (terrain.getPokemonJoueur().size()>0&&terrain.getPokemonJoueur().get(0).getM_pouvoir()!= null && terrain.getPokemonJoueur().get(0).getM_pouvoir().utilisable()) {
+                    System.out.println("   1: " + terrain.getPokemonJoueur().get(0).getNom()+ " : " + terrain.getPokemonJoueur().get(0).getM_pouvoir().getNom());
+                }
+                if (terrain.getPokemonJoueur().size()>1&&terrain.getPokemonJoueur().get(1).getM_pouvoir()!= null && terrain.getPokemonJoueur().get(1).getM_pouvoir().utilisable()) {
+                    System.out.println("   2: " + terrain.getPokemonJoueur().get(1).getNom()+ " : " + terrain.getPokemonJoueur().get(1).getM_pouvoir().getNom());
+                }
+                if (terrain.getPokemonJoueur().size()>2&&terrain.getPokemonJoueur().get(2).getM_pouvoir()!= null && terrain.getPokemonJoueur().get(2).getM_pouvoir().utilisable()) {
+                    System.out.println("   3: " + terrain.getPokemonJoueur().get(2).getNom() + " : " + terrain.getPokemonJoueur().get(2).getM_pouvoir().getNom());
                 }
                 break;
             default:

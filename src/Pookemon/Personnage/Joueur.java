@@ -16,6 +16,9 @@ public abstract class Joueur {
 
     public Joueur(Deck deck) {
         m_deck = deck;
+        for (Pokemon p : this.m_deck.getPile()) {
+            p.setM_joueur(this);
+        }
         m_defausse = new Defausse();
         m_main = new Main(m_deck);
     }
@@ -45,6 +48,8 @@ public abstract class Joueur {
     }
 
     public abstract void pokemonEnterre(Pokemon victime, Terrain sceneDuCrime);
+
+    public abstract void pokemonDeuil(Pokemon victime, Terrain sceneDuCrime);
 
     public abstract boolean actionDuTour(Terrain terrain, Joueur adversaire);
 
