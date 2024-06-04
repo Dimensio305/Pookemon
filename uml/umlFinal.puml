@@ -1,0 +1,125 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package carte{
+    class Deck{
+        -{static} m_doublon : ArrayList<Integer>
+        -m_pile : ArrayList<Pokemon>
+        +<<create>>Deck(joueur : Integer)
+        +getPile() : ArrayList<Pokemon>
+        +estTire(index : Integer)
+        +estVide() : Boolean
+    }
+
+    class Defausse{
+        -m_defausse : ArrayList<Pokemon>
+        +estDefausse(p : Pokemon)
+    }
+
+    class Main{
+        -m_pokemonMain : ArrayList<Pokemon>
+        +<<create>>Main(deck : Deck)
+        +getMain() : ArrayList<Pokemon>
+        +getIndex(nom : String) : Integer
+        +contient(nom : String) : Boolean
+        +pioche(deck : Deck)
+        +addMain(p : Pokemon)
+    }
+
+    class Terrain{
+        -m_pokemonJoueur : ArrayList<Pokemon>
+        -m_pokemonIA : ArrayList<Pokemon>
+        +<<create>>Terrain()
+        +getPokemonJoueur() : ArrayList<Pokemon>
+        +getPokemonIA() : ArrayList<Pokemon>
+        +ajoutPokemonJoueur(main : Main,indexMain : Integer)
+        +ajoutPokemonIA(main : Main)
+        +retirePokemonJoueur(index : Integer)
+        +retirePokemonIA(index : Integer)
+        +IAContient(nom : String) : boolean
+        +joueurContient(nom : String) : boolean
+        +getIndexIA(nom : String) : Integer
+        +getIndexJoueur(nom : String) : Integer
+    }
+}
+
+package Deroulement{
+    class Affichage{
+    }
+
+    class Tour{
+    }
+}
+
+package DetailPokemon{
+    class Pokemon{
+    }
+
+    Enum Type{
+        FEU
+        EAU
+        PLANTE
+        ACIER
+        ROCHE
+        VOL
+        POISON
+        GLACE
+        INSECTE
+        PSY
+        TENEBRE
+        FEE
+        ELECTRIQUE
+        NORMAL
+        COMBAT
+        SPECTRE
+        SOL
+        DRAGON
+    }
+
+    package Pouvoir{
+        abstract class  Pouvoir{
+        }
+
+        class Berserk{
+        }
+
+        class Empoisonnement{
+        }
+
+        class SoinTotal{
+        }
+    }
+}
+
+package Personnage{
+    abstract class Joueur{
+        #m_deck : Deck
+        #m_defausse : Defausse
+        #m_main : Main
+        +<<create>>Joueur(deck : Deck)
+        +getM_deck() : Deck
+        +pioche()
+        +getM_defausse() : Defausse
+        +defausse(p : Pokemon)
+        +getM_main() : Main
+        +getMainListe() : ArrayList<Pokemon>
+        +<<abstract>> pokemonEnterre(victime : Pokemon, sceneDuCrime : Terrain)
+        +<<abstract>> actionDuTour(terrain : Terrain, adversaire : Joueur) : Boolean
+    }
+
+    class Humain{
+
+    }
+
+    class IA{
+    }
+}
+
+package GestionMusique{
+    class Musique{
+    }
+}
+
+
+
+@enduml
