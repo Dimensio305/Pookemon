@@ -22,6 +22,12 @@ public class IA extends Joueur{
     }
 
     @Override
+    public void pokemonDeuil(Pokemon victime, Terrain sceneDuCrime) {
+        sceneDuCrime.retirePokemonIA(sceneDuCrime.getIndexIA(victime.getNomComparable()));
+
+    }
+
+    @Override
     public boolean actionDuTour(Terrain terrain, Joueur adversaire) {
         Affichage print = new Affichage();
         Scanner s = new Scanner(System.in);

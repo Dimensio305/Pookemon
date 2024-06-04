@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 import Pookemon.Deroulement.*;
 import Pookemon.Carte.*;
-import Pookemon.DetailPokemon.Pouvoirs.Pouvoir;
+import Pookemon.DetailPokemon.Pouvoirs.*;
 import Pookemon.GestionMusique.Musique;
 import Pookemon.Personnage.*;
 
@@ -21,10 +21,11 @@ public class Pokemon {
     private int m_pv;
     private int m_attaque;
     private boolean m_possedeAttaque;
-
+    private Statut m_statut;
     private Pouvoir m_pouvoir;
-    private boolean m_shiny;
 
+    private Joueur m_joueur;
+    private boolean m_shiny;
 
 
     /**
@@ -40,9 +41,15 @@ public class Pokemon {
         m_pv = m_pvMAX;
         m_type = Type.values()[new Random().nextInt(Type.values().length)];
         m_shiny = new Random().nextInt(1, 5)==1;
-        m_pouvoir = null;
+        m_statut = Statut.AUCUN;
+        if(new Random().nextInt(1, 3)==1){
+            m_pouvoir = new Empoisonnement();
+        }else {
+            m_pouvoir = null;
+        }
         m_pokedex.add(this);
         m_possedeAttaque = true;
+        m_joueur = null;
     }
 
     /**
@@ -81,6 +88,14 @@ public class Pokemon {
      *
      * @return Un entier correspondant aux PV maximum du Pokemon
      */
+
+    public void setM_pv(int pv, Terrain terrain){
+        this.m_pv = pv;
+        if (this.estMort()) {
+            this.m_joueur.defausse(this);
+            this.m_joueur.pokemonDeuil(this, terrain);
+        }
+    }
     public int getPvMAX() {
         return this.m_pvMAX;
     }
@@ -102,9 +117,30 @@ public class Pokemon {
         this.m_possedeAttaque=bool;
     }
 
+    public Pouvoir getM_pouvoir(){
+        return m_pouvoir;
+    }
+
     public boolean isPossedeAttaque(){
         return m_possedeAttaque;
     }
+
+    public Statut getM_statut(){
+        return m_statut;
+    }
+
+    public void setM_statut(Statut statut){
+        this.m_statut = statut;
+    }
+
+    public Joueur getM_joueur(){
+        return m_joueur;
+    }
+
+    public void setM_joueur(Joueur maitreAbsoluAuquelleJeDoisObeir){
+        this.m_joueur = maitreAbsoluAuquelleJeDoisObeir;
+    }
+
 
 
     public void subitDegat(int dmg, Type type,Joueur adversaire, Terrain terrain){

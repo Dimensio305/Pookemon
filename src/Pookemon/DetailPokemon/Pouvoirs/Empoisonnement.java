@@ -1,7 +1,17 @@
 package Pookemon.DetailPokemon.Pouvoirs;
 
+import Pookemon.Carte.Terrain;
+import Pookemon.DetailPokemon.Pokemon;
+import Pookemon.DetailPokemon.Statut;
+
 public class Empoisonnement extends Pouvoir {
-    private final int m_nbUtil = 1;
+    private int m_nbUtil = 3;
+    private boolean m_UtiliseCeTour = false;
+
+    @Override
+    public void UtilisableCeTour(){
+        this.m_UtiliseCeTour = false;
+    }
 
     @Override
     public String getNom() {
@@ -9,8 +19,23 @@ public class Empoisonnement extends Pouvoir {
     }
 
     @Override
-    public void onUse() {
+    public boolean utilisable() {
+        if(!m_UtiliseCeTour && this.m_nbUtil>0){
+            return true;
+        }
+        return false;
+    }
 
+    @Override
+    public boolean cibleAdversaire() {
+        return true;
+    }
+
+    @Override
+    public void onUse(Pokemon lanceur, Pokemon cible, Terrain terrain) {
+        cible.setM_statut(Statut.EMPOISONNE);
+        this.m_nbUtil -= 1;
+        this.m_UtiliseCeTour = true;
     }
 
 }

@@ -78,6 +78,30 @@ public class Tour {
     public void deroulementTour(){
         for (Pokemon p: this.m_terrain.getPokemonJoueur()) {
             p.setPossedeAttaque(true);
+            if (p.getM_pouvoir()!=null) {
+                p.getM_pouvoir().UtilisableCeTour();
+            }
+            switch (p.getM_statut()){
+                case AUCUN:
+                    break;
+                case EMPOISONNE:
+                    if(joueurActif.equals("Joueur")) {
+                        p.setM_pv(p.getPv() - 10, this.m_terrain);
+                    }
+            }
+        }
+        for (Pokemon p: this.m_terrain.getPokemonIA()) {
+            if (p.getM_pouvoir()!=null) {
+                p.getM_pouvoir().UtilisableCeTour();
+            }
+            switch (p.getM_statut()){
+                case AUCUN:
+                    break;
+                case EMPOISONNE:
+                    if(joueurActif.equals("IA")) {
+                        p.setM_pv(p.getPv() - 10, this.m_terrain);
+                    }
+            }
         }
         while((this.m_humain.getMainListe().size()<5)&&!this.m_humain.getM_deck().estVide()){
             m_humain.pioche();

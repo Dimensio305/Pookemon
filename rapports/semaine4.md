@@ -10,7 +10,7 @@ Pour la restructuration nous avons avant tout séparé les différentes classes 
 nous avons augmenté le nombre de nos classe en en créant de nouvelle tel que : 
 - Joueur, Humain et IA : Qui s'occupe de gérer le joueur humain et son opposant l'IA. Joueur est une classe abstraite, dont IA et Humain héritent.
 - Affichage : Une classe où nous avons regroupé toutes les partie de code s'occupant d'afficher certaines chose
-- Deffause : initialement un attribut de Deck, nous avons opté pour la séparé suite au conseil de Mr. Ayadi  
+- Defausse : initialement un attribut de Deck, nous avons opté pour la séparé suite au conseil de Mr. Ayadi  
 
 ## Détails Ajout de Pouvoirs
 Pour le moment l'implémentation n'est pas encore présente/fonctionnel, nous avons juste ajouté un package "Pouvoirs" contenant chaque pouvoir, 

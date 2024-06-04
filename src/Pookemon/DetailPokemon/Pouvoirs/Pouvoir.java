@@ -1,7 +1,14 @@
 package Pookemon.DetailPokemon.Pouvoirs;
 
+import Pookemon.Carte.Terrain;
+import Pookemon.DetailPokemon.Pokemon;
+
 abstract public class Pouvoir {
 
     abstract public String getNom();
-    abstract public void onUse();
+    public void UtilisableCeTour(){};
+    abstract public boolean utilisable();
+
+    abstract public boolean cibleAdversaire();
+    abstract public void onUse(Pokemon lanceur, Pokemon cible, Terrain terrain);
 }

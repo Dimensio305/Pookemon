@@ -18,7 +18,7 @@ public class Deck {
      */
     public Deck(int joueur){
         m_doublon.add(-1);
-        for (int i = 0; this.m_pile.size()<(19+joueur);i++) {
+        while(this.m_pile.size()<(19+joueur)) {
             int index = new Random().nextInt(Pokemon.getPokedex().size());
             if (!m_doublon.contains(index)) {
                 m_doublon.add(index);
