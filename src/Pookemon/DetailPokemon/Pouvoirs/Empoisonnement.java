@@ -33,7 +33,7 @@ public class Empoisonnement extends Pouvoir {
 
     @Override
     public void onUse(Pokemon lanceur, Pokemon cible, Terrain terrain) {
-        cible.setM_statut(Statut.EMPOISONNE);
+        cible.setStatut(Statut.EMPOISONNE);
         this.m_nbUtil -= 1;
         this.m_UtiliseCeTour = true;
     }

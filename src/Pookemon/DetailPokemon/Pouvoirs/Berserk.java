@@ -1,6 +1,7 @@
 package Pookemon.DetailPokemon.Pouvoirs;
 
 import Pookemon.Carte.Terrain;
+import Pookemon.DetailPokemon.Boost;
 import Pookemon.DetailPokemon.Pokemon;
 
 public class Berserk extends Pouvoir {
@@ -26,6 +27,7 @@ public class Berserk extends Pouvoir {
 
     @Override
     public void onUse(Pokemon lanceur, Pokemon cible, Terrain terrain) {
+        cible.ajoutBoost(new Boost("Berserk", true, cible.getAttaqueInitial(), false));
         this.m_nbUtil -= 1;
     }
 }

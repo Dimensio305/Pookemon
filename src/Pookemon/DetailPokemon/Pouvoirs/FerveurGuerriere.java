@@ -1,14 +1,15 @@
 package Pookemon.DetailPokemon.Pouvoirs;
 
 import Pookemon.Carte.Terrain;
+import Pookemon.DetailPokemon.Boost;
 import Pookemon.DetailPokemon.Pokemon;
 
-public class SoinTotal extends Pouvoir {
+public class FerveurGuerriere extends Pouvoir{
     private int m_nbUtil = 1;
 
     @Override
     public String getNom() {
-        return "Soin Total";
+        return "Ferveur Guerrière";
     }
 
     @Override
@@ -25,8 +26,9 @@ public class SoinTotal extends Pouvoir {
     }
 
     @Override
-    public void onUse(Pokemon lanceur, Pokemon cible, Terrain terrain){
-        cible.setPv(cible.getPvMAX(), terrain);
+    public void onUse(Pokemon lanceur, Pokemon cible, Terrain terrain) {
+        cible.ajoutBoost(new Boost("Ferveur Guerrière", true, 10, true));
+
         this.m_nbUtil-=1;
     }
 }

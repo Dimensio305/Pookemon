@@ -14,7 +14,7 @@ public class Main {
      * @param deck Le deck à partir duquel les cartes Pokémon sont tirées pour initialiser la main.
      */
     public Main(Deck deck){
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 3; i++) {
             int index = new Random().nextInt(deck.getPile().size());
             m_pokemonMain.add(deck.getPile().get(index));
             deck.estTire(index);

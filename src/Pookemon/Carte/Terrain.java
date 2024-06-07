@@ -1,6 +1,8 @@
 package Pookemon.Carte;
 
 import Pookemon.DetailPokemon.Pokemon;
+import org.w3c.dom.css.ViewCSS;
+
 import java.util.ArrayList;
 
 public class Terrain {
@@ -93,7 +95,13 @@ public class Terrain {
                 return i;
             }
         }
-        return -1;//ne dois jamais avoir lieu (on dois ajouter un trycatch)
+        return -1;
+    }
+    public void ajoutDeForceIA(Pokemon pokemon){
+        this.m_pokemonIA.add(pokemon);
     }
 
+    public void ajoutDeForceJoueur(Pokemon pokemon){
+        this.m_pokemonJoueur.add(pokemon);
+    }
 }

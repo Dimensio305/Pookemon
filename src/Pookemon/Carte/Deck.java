@@ -1,6 +1,8 @@
 package Pookemon.Carte;
 
 import Pookemon.DetailPokemon.Pokemon;
+import Pookemon.DetailPokemon.Pouvoirs.*;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -18,14 +20,46 @@ public class Deck {
      */
     public Deck(int joueur){
         m_doublon.add(-1);
+        int index;
         while(this.m_pile.size()<(19+joueur)) {
-            int index = new Random().nextInt(Pokemon.getPokedex().size());
+            index = new Random().nextInt(Pokedex.getPokedex().size());
             if (!m_doublon.contains(index)) {
                 m_doublon.add(index);
-                m_pile.add(Pokemon.getPokedex().get(index));
+                m_pile.add(Pokedex.getPokedex().get(index));
                 index = -1;
             }
         }
+        index = new Random().nextInt(19+joueur);
+        this.m_pile.get(index).setPouvoir(new Berserk());
+        while (this.m_pile.get(index).getPouvoir()!=null){
+            index = new Random().nextInt(19+joueur);
+        }
+        this.m_pile.get(index).setPouvoir(new Empoisonnement());
+        while (this.m_pile.get(index).getPouvoir()!=null){
+            index = new Random().nextInt(19+joueur);
+        }
+        this.m_pile.get(index).setPouvoir(new FerveurGuerriere());
+        while (this.m_pile.get(index).getPouvoir()!=null){
+            index = new Random().nextInt(19+joueur);
+        }
+        this.m_pile.get(index).setPouvoir(new Kamikaze());
+        while (this.m_pile.get(index).getPouvoir()!=null){
+            index = new Random().nextInt(19+joueur);
+        }
+        this.m_pile.get(index).setPouvoir(new Peur());
+        while (this.m_pile.get(index).getPouvoir()!=null){
+            index = new Random().nextInt(19+joueur);
+        }
+        this.m_pile.get(index).setPouvoir(new SoinDeZone());
+        while (this.m_pile.get(index).getPouvoir()!=null){
+            index = new Random().nextInt(19+joueur);
+        }
+        this.m_pile.get(index).setPouvoir(new SoinSimple());
+        while (this.m_pile.get(index).getPouvoir()!=null){
+            index = new Random().nextInt(19+joueur);
+        }
+        this.m_pile.get(index).setPouvoir(new SoinTotal());
+
     }
 
     /**

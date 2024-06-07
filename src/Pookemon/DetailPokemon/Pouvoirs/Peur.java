@@ -1,14 +1,15 @@
 package Pookemon.DetailPokemon.Pouvoirs;
 
 import Pookemon.Carte.Terrain;
+import Pookemon.DetailPokemon.Boost;
 import Pookemon.DetailPokemon.Pokemon;
 
-public class SoinTotal extends Pouvoir {
+public class Peur extends Pouvoir {
     private int m_nbUtil = 1;
 
     @Override
     public String getNom() {
-        return "Soin Total";
+        return "Peur";
     }
 
     @Override
@@ -21,12 +22,12 @@ public class SoinTotal extends Pouvoir {
 
     @Override
     public boolean cibleAdversaire() {
-        return false;
+        return true;
     }
 
     @Override
-    public void onUse(Pokemon lanceur, Pokemon cible, Terrain terrain){
-        cible.setPv(cible.getPvMAX(), terrain);
-        this.m_nbUtil-=1;
+    public void onUse(Pokemon lanceur, Pokemon cible, Terrain terrain) {
+        cible.ajoutBoost(new Boost("Berserk", true, -10, true));
+        this.m_nbUtil -= 1;
     }
 }

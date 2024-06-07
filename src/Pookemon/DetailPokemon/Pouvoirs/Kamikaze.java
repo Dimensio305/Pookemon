@@ -27,8 +27,8 @@ public class Kamikaze extends Pouvoir {
 
     @Override
     public void onUse(Pokemon lanceur, Pokemon cible, Terrain terrain) {
-        lanceur.setM_pv(0, terrain);
-        cible.setM_pv(0, terrain);
+        lanceur.setPv(0, terrain);
+        cible.setPv(0, terrain);
         this.m_nbUtil-=1;
     }
 }

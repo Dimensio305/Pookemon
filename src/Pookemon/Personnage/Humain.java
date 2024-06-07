@@ -13,10 +13,6 @@ public class Humain extends Joueur {
         super(deck);
     }
 
-    @Override
-    public void pokemonEnterre(Pokemon victime, Terrain sceneDuCrime) {
-        sceneDuCrime.retirePokemonJoueur(sceneDuCrime.getIndexJoueur(victime.getNomComparable()));
-    }
 
     @Override
     public void pokemonDeuil(Pokemon victime, Terrain sceneDuCrime) {
@@ -27,24 +23,24 @@ public class Humain extends Joueur {
     public void ajoutPokemon(Terrain terrain){
         Scanner s = new Scanner(System.in);
         String choix = s.nextLine();
-        if(this.getM_main().contient(choix)) {
-            terrain.ajoutPokemonJoueur(this.getM_main(), this.getM_main().getIndex(choix));
+        if(this.getMain().contient(choix)) {
+            terrain.ajoutPokemonJoueur(this.getMain(), this.getMain().getIndex(choix));
         }
         switch (choix){
             case "1":
-                terrain.ajoutPokemonJoueur(this.getM_main(), 0);
+                terrain.ajoutPokemonJoueur(this.getMain(), 0);
                 break;
             case "2":
-                if(this.getMainListe().size()>1){terrain.ajoutPokemonJoueur(this.getM_main(),1);}
+                if(this.getMainListe().size()>1){terrain.ajoutPokemonJoueur(this.getMain(),1);}
                 break;
             case "3":
-                if(this.getMainListe().size()>2){terrain.ajoutPokemonJoueur(this.getM_main(),2);}
+                if(this.getMainListe().size()>2){terrain.ajoutPokemonJoueur(this.getMain(),2);}
                 break;
             case "4":
-                if(this.getMainListe().size()>3){terrain.ajoutPokemonJoueur(this.getM_main(),3);}
+                if(this.getMainListe().size()>3){terrain.ajoutPokemonJoueur(this.getMain(),3);}
                 break;
             case "5":
-                if(this.getMainListe().size()>4){terrain.ajoutPokemonJoueur(this.getM_main(),4);}
+                if(this.getMainListe().size()>4){terrain.ajoutPokemonJoueur(this.getMain(),4);}
                 break;
         }
     }
@@ -63,7 +59,7 @@ public class Humain extends Joueur {
             if (p.isPossedeAttaque()) {
                 actionPossible = true;
             }
-            if (p.getM_pouvoir()!=null &&p.getM_pouvoir().utilisable()){
+            if (p.getPouvoir()!=null &&p.getPouvoir().utilisable()){
                 pouvoirUtilisable = true;
             }
         }
@@ -101,26 +97,53 @@ public class Humain extends Joueur {
             print.questionAction(3, terrain);
             action = s.nextLine();
 
-            if ((action.equals("1") && terrain.getPokemonJoueur().get(0).getM_pouvoir()!= null && terrain.getPokemonJoueur().get(0).getM_pouvoir().utilisable())
-                    || (action.equals("2") && terrain.getPokemonJoueur().get(1).getM_pouvoir()!= null && terrain.getPokemonJoueur().get(1).getM_pouvoir().utilisable())
-                    || (action.equals("3") && terrain.getPokemonJoueur().get(2).getM_pouvoir()!= null && terrain.getPokemonJoueur().get(2).getM_pouvoir().utilisable())) {
-                if(terrain.getPokemonJoueur().get(Integer.parseInt(action)-1).getM_pouvoir().cibleAdversaire()){
-                    print.demandeCibleAdverse(terrain);
-                    cible = s.nextLine();
-                    if ((cible.equals("1") || cible.equals("2") || cible.equals("3"))&&
-                            (Integer.parseInt(cible) <= terrain.getPokemonIA().size() && Integer.valueOf(cible) >= 0)) {
-                        terrain.getPokemonJoueur().get(Integer.parseInt(action)-1).getM_pouvoir().onUse(terrain.getPokemonJoueur().get(Integer.parseInt(action)-1), terrain.getPokemonIA().get(Integer.valueOf(cible) - 1), terrain);
+            if ((action.equals("1") && terrain.getPokemonJoueur().get(0).getPouvoir()!= null && terrain.getPokemonJoueur().get(0).getPouvoir().utilisable())
+                    || (action.equals("2") && terrain.getPokemonJoueur().get(1).getPouvoir()!= null && terrain.getPokemonJoueur().get(1).getPouvoir().utilisable())
+                    || (action.equals("3") && terrain.getPokemonJoueur().get(2).getPouvoir()!= null && terrain.getPokemonJoueur().get(2).getPouvoir().utilisable())) {
+                if(terrain.getPokemonJoueur().get(Integer.parseInt(action)-1).getPouvoir().cibleAdversaire()){
+                    if(terrain.getPokemonJoueur().get(Integer.parseInt(action)-1).getPouvoir().cible()) {
+                        print.demandeCibleAdverse(terrain);
+                        cible = s.nextLine();
+
+                        if ((cible.equals("1") || cible.equals("2") || cible.equals("3")) &&
+                                (Integer.parseInt(cible) <= terrain.getPokemonIA().size() && Integer.valueOf(cible) >= 0)) {
+                            terrain.getPokemonJoueur().get(Integer.parseInt(action) - 1).getPouvoir().onUse(terrain.getPokemonJoueur().get(Integer.parseInt(action) - 1), terrain.getPokemonIA().get(Integer.valueOf(cible) - 1), terrain);
+                        }
+                    }else {
+                        terrain.getPokemonJoueur().get(Integer.parseInt(action)-1).getPouvoir().onUse(terrain.getPokemonJoueur().get(Integer.parseInt(action) - 1), terrain.getPokemonJoueur().get(Integer.parseInt(action) - 1), terrain);
                     }
                 }else {
-                    print.demandeCibleHumain(terrain);
-                    cible = s.nextLine();
-                    if ((cible.equals("1") || cible.equals("2") || cible.equals("3"))&&
-                            (Integer.parseInt(cible) <= terrain.getPokemonJoueur().size() && Integer.valueOf(cible) >= 0)) {
-                        terrain.getPokemonJoueur().get(Integer.parseInt(action)-1).getM_pouvoir().onUse(terrain.getPokemonJoueur().get(Integer.parseInt(action)-1), terrain.getPokemonJoueur().get(Integer.valueOf(cible) - 1), terrain);
+                    if(terrain.getPokemonJoueur().get(Integer.parseInt(action)-1).getPouvoir().cible()) {
+                        print.demandeCibleHumain(terrain);
+                        cible = s.nextLine();
+                        if ((cible.equals("1") || cible.equals("2") || cible.equals("3"))&&
+                                (Integer.parseInt(cible) <= terrain.getPokemonJoueur().size() && Integer.valueOf(cible) >= 0)) {
+                            terrain.getPokemonJoueur().get(Integer.parseInt(action)-1).getPouvoir().onUse(terrain.getPokemonJoueur().get(Integer.parseInt(action)-1), terrain.getPokemonJoueur().get(Integer.valueOf(cible) - 1), terrain);
+                        }
+                    }else {
+                        terrain.getPokemonJoueur().get(Integer.parseInt(action)-1).getPouvoir().onUse(terrain.getPokemonJoueur().get(Integer.parseInt(action)-1), terrain.getPokemonJoueur().get(Integer.parseInt(action)-1) , terrain);
                     }
                 }
             }
         }
+        if(this.victoireAdversaire(terrain)||adversaire.victoireAdversaire(terrain)){
+            print.finJeu(adversaire.victoireAdversaire(terrain));
+            System.exit(0);
+        }
         return true;
     }
+
+    @Override
+    public boolean victoireAdversaire(Terrain terrain){
+        if (this.m_deck.estVide()&&this.m_main.getMain().size()==0&&terrain.getPokemonJoueur().size()==0){
+            return true;
+        }
+        return false;
+    }
+
+    public void pressEnter(){
+        new Scanner(System.in).nextLine();
+    }
+
+
 }

@@ -17,40 +17,39 @@ public abstract class Joueur {
     public Joueur(Deck deck) {
         m_deck = deck;
         for (Pokemon p : this.m_deck.getPile()) {
-            p.setM_joueur(this);
+            p.setJoueur(this);
         }
         m_defausse = new Defausse();
         m_main = new Main(m_deck);
     }
 
-    public Deck getM_deck() {
+    public Deck getDeck() {
         return m_deck;
     }
 
     public void pioche(){
-        this.getM_main().pioche(this.m_deck);
+        this.getMain().pioche(this.m_deck);
     }
 
-    public Defausse getM_defausse() {
+    public Defausse getDefausse() {
         return m_defausse;
     }
 
     public void defausse(Pokemon p){
-        this.getM_defausse().estDefausse(p);
+        this.getDefausse().estDefausse(p);
     }
 
-    public Main getM_main() {
+    public Main getMain() {
         return m_main;
     }
 
     public ArrayList<Pokemon> getMainListe() {
         return m_main.getMain();
     }
-
-    public abstract void pokemonEnterre(Pokemon victime, Terrain sceneDuCrime);
-
     public abstract void pokemonDeuil(Pokemon victime, Terrain sceneDuCrime);
 
     public abstract boolean actionDuTour(Terrain terrain, Joueur adversaire);
+
+    public abstract boolean victoireAdversaire(Terrain terrain);
 
 }
