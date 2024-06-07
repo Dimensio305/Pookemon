@@ -129,9 +129,11 @@ public class Humain extends Joueur {
                         if ((cible.equals("1") || cible.equals("2") || cible.equals("3")) &&
                                 (Integer.parseInt(cible) <= terrain.getPokemonIA().size() && Integer.valueOf(cible) >= 0)) {
                             terrain.getPokemonJoueur().get(Integer.parseInt(action) - 1).getPouvoir().onUse(terrain.getPokemonJoueur().get(Integer.parseInt(action) - 1), terrain.getPokemonIA().get(Integer.valueOf(cible) - 1), terrain);
+                            this.pressEnter();
                         }
                     }else {
                         terrain.getPokemonJoueur().get(Integer.parseInt(action)-1).getPouvoir().onUse(terrain.getPokemonJoueur().get(Integer.parseInt(action) - 1), terrain.getPokemonJoueur().get(Integer.parseInt(action) - 1), terrain);
+                        this.pressEnter();
                     }
                 }else {
                     if(terrain.getPokemonJoueur().get(Integer.parseInt(action)-1).getPouvoir().cible()) {
@@ -144,9 +146,11 @@ public class Humain extends Joueur {
                         if ((cible.equals("1") || cible.equals("2") || cible.equals("3"))&&
                                 (Integer.parseInt(cible) <= terrain.getPokemonJoueur().size() && Integer.valueOf(cible) >= 0)) {
                             terrain.getPokemonJoueur().get(Integer.parseInt(action)-1).getPouvoir().onUse(terrain.getPokemonJoueur().get(Integer.parseInt(action)-1), terrain.getPokemonJoueur().get(Integer.valueOf(cible) - 1), terrain);
+                            this.pressEnter();
                         }
                     }else {
                         terrain.getPokemonJoueur().get(Integer.parseInt(action)-1).getPouvoir().onUse(terrain.getPokemonJoueur().get(Integer.parseInt(action)-1), terrain.getPokemonJoueur().get(Integer.parseInt(action)-1) , terrain);
+                        this.pressEnter();
                     }
                 }
             }

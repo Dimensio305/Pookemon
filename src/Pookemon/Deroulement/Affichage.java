@@ -4,6 +4,7 @@ import Pookemon.Carte.Main;
 import Pookemon.Carte.Terrain;
 import Pookemon.DetailPokemon.Pokemon;
 import Pookemon.DetailPokemon.Pouvoirs.*;
+import org.junit.jupiter.api.Disabled;
 
 import java.util.List;
 import java.util.Scanner;
@@ -309,8 +310,8 @@ public class Affichage {
                 System.out.println(utilisateur.getNom()+ " soigne totalement " + cible.getNom() + " !");
                 break;
         }
-        new Scanner(System.in).nextLine();
     }
+
     public void attaqueIA(Pokemon attaquant, Pokemon cible){
         System.out.println("Le " +attaquant.getNom()+" adverse attaque " + cible.getNom());
 
