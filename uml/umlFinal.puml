@@ -1,24 +1,24 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-package carte{
-    class Deck{
-        -{static} m_doublon : ArrayList<Integer>
+package Carte{
+    class Deck {
+        {static} -m_doublon : ArrayList<Integer>
         -m_pile : ArrayList<Pokemon>
-        +<<create>>Deck(joueur : Integer)
+        <<create>> +Deck(joueur : Integer)
         +getPile() : ArrayList<Pokemon>
         +estTire(index : Integer)
         +estVide() : Boolean
     }
 
-    class Defausse{
+    class Defausse {
         -m_defausse : ArrayList<Pokemon>
         +estDefausse(p : Pokemon)
     }
 
-    class Main{
+    class Main {
         -m_pokemonMain : ArrayList<Pokemon>
-        +<<create>>Main(deck : Deck)
+        <<create>> +Main(deck : Deck)
         +getMain() : ArrayList<Pokemon>
         +getIndex(nom : String) : Integer
         +contient(nom : String) : Boolean
@@ -26,21 +26,44 @@ package carte{
         +addMain(p : Pokemon)
     }
 
-    class Terrain{
+    class Terrain {
         -m_pokemonJoueur : ArrayList<Pokemon>
         -m_pokemonIA : ArrayList<Pokemon>
-        +<<create>>Terrain()
+        +<<create>> Terrain()
         +getPokemonJoueur() : ArrayList<Pokemon>
         +getPokemonIA() : ArrayList<Pokemon>
-        +ajoutPokemonJoueur(main : Main,indexMain : Integer)
+        +ajoutPokemonJoueur(main : Main, indexMain : Integer)
         +ajoutPokemonIA(main : Main)
         +retirePokemonJoueur(index : Integer)
         +retirePokemonIA(index : Integer)
-        +IAContient(nom : String) : boolean
-        +joueurContient(nom : String) : boolean
+        +IAContient(nom : String) : Boolean
+        +joueurContient(nom : String) : Boolean
         +getIndexIA(nom : String) : Integer
         +getIndexJoueur(nom : String) : Integer
+        +ajoutDeForceIA(pokemon : Pokemon)
+        +ajoutDeForceJoueur(pokemon : Pokemon)
     }
+
+    class Pokedex {
+        {static} -m_pokedex : ArrayList<Pokemon>
+        {static} -m_nomPokemon : ArrayList<String>
+
+        {static} +add(pokemon : Pokemon)
+        {static} +getNom() : ArrayList<String>
+        {static} +getPokedex() : ArrayList<Pokemon>
+    }
+
+    Pokedex --> Pokemon
+
+    Deck --> Pokemon
+
+    Defausse --> Pokemon
+
+    Main --> Deck
+    Main --> Pokemon
+
+    Terrain --> Pokemon
+    Terrain --> Main
 }
 
 package Deroulement{
@@ -52,7 +75,41 @@ package Deroulement{
 }
 
 package DetailPokemon{
-    class Pokemon{
+    class Pokemon {
+        -m_nom : String
+        -m_type : Type
+        -m_pvMAX : Integer
+        -m_pv : Integer
+        -m_attaque : Integer
+        -m_possedeAttaque : Boolean
+        -m_statut : Statut
+        -m_boost : ArrayList<Boost>
+        -m_pouvoir : Pouvoir
+        -m_joueur : Joueur
+        -m_shiny : Boolean
+        +Pokemon(nom : String)
+        +getNom() : String
+        +getNomComparable() : String
+        +getType() : Type
+        +getPv() : Integer
+        +getPvMAX() : Integer
+        +setPv(pv : Integer, terrain : Terrain)
+        +getAttaqueInitial() : Integer
+        +getAttaque() : Integer
+        +isShiny() : Boolean
+        +setPossedeAttaque(bool : Boolean)
+        +getPouvoir() : Pouvoir
+        +setPouvoir(p : Pouvoir)
+        +isPossedeAttaque() : Boolean
+        +getStatut() : Statut
+        +setStatut(statut : Statut)
+        +getJoueur() : Joueur
+        +setJoueur(maitreAbsoluAuquelleJeDoisObeir : Joueur)
+        +getBoost() : ArrayList<Boost>
+        +ajoutBoost(b : Boost)
+        +subitDegat(dmg : Integer, type : Type, joueur : Joueur, terrain : Terrain)
+        +affiniteType(type : Type) : Integer
+        +estMort() : Boolean
     }
 
     Enum Type{
@@ -76,18 +133,115 @@ package DetailPokemon{
         DRAGON
     }
 
+    Enum Statut{
+        AUCUN
+        EMPOISONNE
+    }
+
+    class Boost{
+        -m_nom : String
+        -m_Attaque : Boolean
+        -m_valeur : Integer
+        -m_dureeInfini : Boolean
+
+        +<<create>>Boost(nom : String, isAttaque : Boolean, valeur : Integer, dureeInfini :  Boolean)
+        +isAttaque() : Boolean
+        +getValeur() : Integer
+        +isDureeInfini() :  Boolean
+    }
+
+    Pokemon --> Type
+    Pokemon --> Statut
+    Pokemon --> Boost
+    Pokemon --> Pouvoir
+    Pokemon --> Joueur
+    Pokemon --> Terrain
+
     package Pouvoir{
         abstract class  Pouvoir{
+            +<<abstract>>getNom() : String
+            +UtilisableCeTour()
+            +<<abstract>>utilisable() : Boolean
+            +<<abstract>>cibleAdversaire() : Boolean
+            +<<abstract>>onUse(lanceur : Pokemon, cible : Pokemon, terrain : Terrain)
         }
 
         class Berserk{
+            -m_nbUtil : Integer
+            +getNom() : String {redefine}
+            +utilisable() : Boolean {redefine}
+            +cibleAdversaire() : Boolean {redefine}
+            +onUse(lanceur : Pokemon, cible : Pokemon, terrain : Terrain)
         }
 
         class Empoisonnement{
+            -m_UtiliseCeTour : Boolean
+            -m_nbUtil : Integer
+            +UtilisableCeTour()
+            +getNom() : String {redefine}
+            +utilisable() : Boolean {redefine}
+            +cibleAdversaire() : Boolean {redefine}
+            +onUse(lanceur : Pokemon, cible : Pokemon, terrain : Terrain)
         }
 
         class SoinTotal{
+            -m_nbUtil : Integer
+            +getNom() : String {redefine}
+            +utilisable() : Boolean {redefine}
+            +cibleAdversaire() : Boolean {redefine}
+            +onUse(lanceur : Pokemon, cible : Pokemon, terrain : Terrain)
         }
+
+        class Kamikaze{
+            -m_nbUtil : Integer
+            +getNom() : String {redefine}
+            +utilisable() : Boolean {redefine}
+            +cibleAdversaire() : Boolean {redefine}
+            +onUse(lanceur : Pokemon, cible : Pokemon, terrain : Terrain)
+        }
+
+        class SoinDeZone{
+            -m_UtiliseCeTour : Boolean
+            +getNom() : String {redefine}
+            +UtilisableCeTour()
+            +utilisable() : Boolean {redefine}
+            +cibleAdversaire() : Boolean {redefine}
+            +onUse(lanceur : Pokemon, cible : Pokemon, terrain : Terrain)
+        }
+
+        class SoinSimple{
+            -m_UtiliseCeTour : Boolean
+            +getNom() : String {redefine}
+            +UtilisableCeTour()
+            +utilisable() : Boolean {redefine}
+            +cibleAdversaire() : Boolean {redefine}
+            +onUse(lanceur : Pokemon, cible : Pokemon, terrain : Terrain)
+        }
+
+        class Peur{
+            -m_nbUtil : Integer
+            +getNom() : String {redefine}
+            +utilisable() : Boolean {redefine}
+            +cibleAdversaire() : Boolean {redefine}
+            +onUse(lanceur : Pokemon, cible : Pokemon, terrain : Terrain)
+        }
+
+        class FerveurGuerriere{
+            -m_nbUtil : Integer
+            +getNom() : String {redefine}
+            +utilisable() : Boolean {redefine}
+            +cibleAdversaire() : Boolean {redefine}
+            +onUse(lanceur : Pokemon, cible : Pokemon, terrain : Terrain)
+        }
+
+        Pouvoir <|-- FerveurGuerriere
+        Pouvoir <|-- Berserk
+        Pouvoir <|-- Empoisonnement
+        Pouvoir <|-- SoinDeZone
+        Pouvoir <|-- SoinSimple
+        Pouvoir <|-- SoinTotal
+        Pouvoir <|-- Peur
+        Pouvoir <|-- Kamikaze
     }
 }
 
@@ -107,12 +261,33 @@ package Personnage{
         +<<abstract>> actionDuTour(terrain : Terrain, adversaire : Joueur) : Boolean
     }
 
-    class Humain{
-
+    class Humain {
+        +<<create>>Humain(deck : Deck)
+        +pokemonDeuil(victime : Pokemon, sceneDuCrime : Terrain){redefines}
+        +ajoutPokemon(terrain : Terrain)
+        +actionDuTour(terrain : Terrain, adversaire : Joueur) : Boolean {redefines}
+        +victoireAdversaire(terrain : Terrain) : Boolean {redefines}
+        +pressEnter()
     }
 
-    class IA{
+    class IA {
+        <<create>> +IA(deck : Deck)
+        +pokemonDeuil(victime : Pokemon, sceneDuCrime : Terrain) {redefines}
+        +actionDuTour(terrain : Terrain, adversaire : Joueur) : Boolean {redefines}
+        +victoireAdversaire(terrain : Terrain) : Boolean {redefines}
     }
+
+    Humain --|> Joueur
+    Humain --> Deck
+    Humain --> Pokemon
+    Humain --> Terrain
+    Humain --> Affichage
+
+    IA --|> Joueur
+    IA --> Deck
+    IA --> Pokemon
+    IA --> Terrain
+    IA --> Affichage
 }
 
 package GestionMusique{
