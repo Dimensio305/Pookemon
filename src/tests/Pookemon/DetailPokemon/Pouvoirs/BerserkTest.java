@@ -1,0 +1,21 @@
+package Pookemon.DetailPokemon.Pouvoirs;
+
+import Pookemon.Carte.Terrain;
+import Pookemon.DetailPokemon.Pokemon;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class BerserkTest {
+
+    @Test
+    void onUse() {
+        Pokemon p1 = new Pokemon("Utilisateur");
+        Pokemon p2 = new Pokemon("cible");
+        Terrain terrain = new Terrain();
+        p1.setPouvoir(new Berserk());
+        p1.getPouvoir().onUse(p1, p2, terrain);
+        Assertions.assertEquals(p2.getAttaqueInitial()*2, p2.getAttaque());
+    }
+}

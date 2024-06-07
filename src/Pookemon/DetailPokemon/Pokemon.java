@@ -13,8 +13,6 @@ import Pookemon.Personnage.*;
 
 
 public class Pokemon {
-    private static final ArrayList<Pokemon>  m_pokedex = new ArrayList<>();
-    private static ArrayList<String> m_nomPokemon = new ArrayList<>(Arrays.asList("Bulbizarre", "Herbizarre", "Florizarre", "Salamèche", "Reptincel", "Dracaufeu", "Carapuce", "Carabaffe", "Tortank", "Chenipan", "Chrysacier", "Papilusion", "Aspicot", "Coconfort", "Dardargnan", "Roucool", "Roucoups", "Roucarnage", "Rattata", "Rattatac", "Piafabec", "Rapasdepic", "Abo", "Arbok", "Pikachu", "Raichu", "Sabelette", "Sablaireau", "Nidoran♀", "Nidorina", "Nidoqueen", "Nidoran♂", "Nidorino", "Nidoking", "Mélofée", "Mélodelfe", "Goupix", "Feunard", "Rondoudou", "Grodoudou", "Nosferapti", "Nosferalto", "Mystherbe", "Ortide", "Rafflesia", "Paras", "Parasect", "Mimitoss", "Aéromite", "Taupiqueur", "Triopikeur", "Miaouss", "Persian", "Psykokwak", "Akwakwak", "Férosinge", "Colossinge", "Caninos", "Arcanin", "Ptitard", "Têtarte", "Tartard", "Abra", "Kadabra", "Alakazam", "Machoc", "Machopeur", "Mackogneur", "Chétiflor", "Boustiflor", "Empiflor", "Tentacool", "Tentacruel", "Racaillou", "Gravalanch", "Grolem", "Ponyta", "Galopa", "Ramoloss", "Flagadoss", "Magnéti", "Magnéton", "Canarticho", "Doduo", "Dodrio", "Otaria", "Lamantine", "Tadmorv", "Grotadmorv", "Kokiyas", "Crustabri", "Fantominus", "Spectrum", "Ectoplasma", "Onix", "Soporifik", "Hypnomade", "Krabby", "Krabboss", "Voltorbe", "Électrode", "Noeunoeuf", "Noadkoko", "Osselait", "Ossatueur", "Kicklee", "Tygnon", "Excelangue", "Smogo", "Smogogo", "Rhinocorne", "Rhinoféros", "Leveinard", "Saquedeneu", "Kangourex", "Hypotrempe", "Hypocéan", "Poissirène", "Poissoroy", "Stari", "Staross", "M.Mime", "Insécateur", "Lippoutou", "Élektek", "Magmar", "Scarabrute", "Tauros", "Magicarpe", "Léviator", "Lokhlass", "Métamorph", "Évoli", "Aquali", "Voltali", "Pyroli", "Porygon", "Amonita", "Amonistar", "Kabuto", "Kabutops", "Ptéra", "Ronflex", "Artikodin", "Électhor", "Sulfura", "Minidraco", "Draco", "Dracolosse", "Mewtwo", "Mew"));
     private String m_nom;
     private Type m_type;
     private int m_pvMAX;
@@ -22,8 +20,8 @@ public class Pokemon {
     private int m_attaque;
     private boolean m_possedeAttaque;
     private Statut m_statut;
+    private ArrayList<Boost> m_boost = new ArrayList<>();
     private Pouvoir m_pouvoir;
-
     private Joueur m_joueur;
     private boolean m_shiny;
 
@@ -42,12 +40,8 @@ public class Pokemon {
         m_type = Type.values()[new Random().nextInt(Type.values().length)];
         m_shiny = new Random().nextInt(1, 5)==1;
         m_statut = Statut.AUCUN;
-        if(new Random().nextInt(1, 3)==1){
-            m_pouvoir = new Empoisonnement();
-        }else {
-            m_pouvoir = null;
-        }
-        m_pokedex.add(this);
+        m_pouvoir = null;
+        Pokedex.add(this);
         m_possedeAttaque = true;
         m_joueur = null;
     }
@@ -58,7 +52,7 @@ public class Pokemon {
      * @return La chaine de caractère du nom du Pokemon
      */
     public String getNom() {
-        if(this.isM_shiny()){return "\u001B[93m"+this.m_nom +" \u001B[0m";}
+        if(this.isShiny()){return "\u001B[93m"+this.m_nom +" \u001B[0m";}
         else{return this.m_nom;}
     }
 
@@ -89,75 +83,95 @@ public class Pokemon {
      * @return Un entier correspondant aux PV maximum du Pokemon
      */
 
-    public void setM_pv(int pv, Terrain terrain){
+    public void setPv(int pv, Terrain terrain){
         this.m_pv = pv;
         if (this.estMort()) {
             this.m_joueur.defausse(this);
             this.m_joueur.pokemonDeuil(this, terrain);
         }
     }
+
     public int getPvMAX() {
         return this.m_pvMAX;
     }
 
+    public int getAttaqueInitial() {
+        return this.m_attaque;
+    }
     /**
      * Renvoie les dégats qu'inflige le Pokemon
      *
      * @return Un entier correspondant aux dégats du Pokemon
      */
     public int getAttaque() {
-        return this.m_attaque;
+        int dgt = this.m_attaque;
+        for (Boost b: this.m_boost) {
+            if (b.isAttaque()){
+                dgt += b.getValeur();
+            }
+        }
+        return dgt;
     }
 
-    public boolean isM_shiny(){
-        return m_shiny;
+    public boolean isShiny(){
+        return this.m_shiny;
     }
 
     public void setPossedeAttaque(boolean bool){
         this.m_possedeAttaque=bool;
     }
 
-    public Pouvoir getM_pouvoir(){
-        return m_pouvoir;
+    public Pouvoir getPouvoir(){
+        return this.m_pouvoir;
+    }
+
+    public void setPouvoir(Pouvoir p){
+        this.m_pouvoir = p;
     }
 
     public boolean isPossedeAttaque(){
-        return m_possedeAttaque;
+        return this.m_possedeAttaque;
     }
 
-    public Statut getM_statut(){
-        return m_statut;
+    public Statut getStatut(){
+        return this.m_statut;
     }
 
-    public void setM_statut(Statut statut){
+    public void setStatut(Statut statut){
         this.m_statut = statut;
     }
 
-    public Joueur getM_joueur(){
-        return m_joueur;
+    public Joueur getJoueur(){
+        return this.m_joueur;
     }
 
-    public void setM_joueur(Joueur maitreAbsoluAuquelleJeDoisObeir){
+    public void setJoueur(Joueur maitreAbsoluAuquelleJeDoisObeir){
         this.m_joueur = maitreAbsoluAuquelleJeDoisObeir;
     }
 
+    public ArrayList<Boost> getBoost() {
+        return this.m_boost;
+    }
 
+    public void ajoutBoost(Boost b){
+        this.m_boost.add(b);
+    }
 
-    public void subitDegat(int dmg, Type type,Joueur adversaire, Terrain terrain){
+    public void subitDegat(int dmg, Type type, Joueur joueur, Terrain terrain){
         int affinite = this.affiniteType(type);
-        switch (affinite){
-            case -1:
-                this.m_pv-= (dmg-10);
-                break;
-            case 0:
-                this.m_pv-= dmg;
-                break;
-            case 1:
-                this.m_pv-= (dmg+10);
+         affinite += dmg;
+        for (Boost b: this.m_boost) {
+            if (!b.isAttaque()){
+                affinite -= b.getValeur();
+            }
         }
+        if (affinite < 0){
+            affinite = 0;
+        }
+        this.m_pv-= affinite;
         if (this.estMort()) {
-            adversaire.defausse(this);
-            adversaire.pokemonEnterre(this, terrain);
+            joueur.defausse(this);
+            joueur.pokemonDeuil(this, terrain);
         }
 
     }
@@ -166,131 +180,131 @@ public class Pokemon {
         switch (this.m_type){
             case FEE :
                 if (type.equals(Type.POISON)||type.equals(Type.ACIER)){
-                    return 1;
+                    return 10;
                 } else if (type.equals(Type.COMBAT)||type.equals(Type.DRAGON)||type.equals(Type.INSECTE)||type.equals(Type.TENEBRE)) {
-                    return -1;
+                    return -10;
                 }
                 return 0;
             case ACIER:
                 if (type.equals(Type.COMBAT)||type.equals(Type.FEU)||type.equals(Type.SOL)){
-                    return 1;
+                    return 10;
                 } else if (type.equals(Type.ACIER)||type.equals(Type.DRAGON)||type.equals(Type.FEE)||type.equals(Type.GLACE)
                         ||type.equals(Type.INSECTE)||type.equals(Type.NORMAL)||type.equals(Type.PLANTE)||type.equals(Type.POISON)
                         ||type.equals(Type.PSY)||type.equals(Type.ROCHE)||type.equals(Type.VOL)) {
-                    return -1;
+                    return -10;
                 }
                 return 0;
             case COMBAT:
                 if (type.equals(Type.FEE)||type.equals(Type.PSY)||type.equals(Type.VOL)){
-                    return 1;
+                    return 10;
                 } else if (type.equals(Type.INSECTE)||type.equals(Type.ROCHE)||type.equals(Type.TENEBRE)) {
-                    return -1;
+                    return -10;
                 }
                 return 0;
             case DRAGON:
                 if (type.equals(Type.DRAGON)||type.equals(Type.FEE)||type.equals(Type.GLACE)){
-                    return 1;
+                    return 10;
                 } else if (type.equals(Type.EAU)||type.equals(Type.ELECTRIQUE)||type.equals(Type.FEU)||type.equals(Type.PLANTE)) {
-                    return -1;
+                    return -10;
                 }
                 return 0;
             case EAU:
                 if (type.equals(Type.PLANTE)||type.equals(Type.ELECTRIQUE)){
-                    return 1;
+                    return 10;
                 } else if (type.equals(Type.ACIER)||type.equals(Type.EAU)||type.equals(Type.FEU)||type.equals(Type.GLACE)) {
-                    return -1;
+                    return -10;
                 }
                 return 0;
             case ELECTRIQUE:
                 if (type.equals(Type.SOL)){
-                    return 1;
+                    return 10;
                 } else if (type.equals(Type.ACIER)||type.equals(Type.ELECTRIQUE)||type.equals(Type.VOL)) {
-                    return -1;
+                    return -10;
                 }
                 return 0;
             case FEU:
                 if (type.equals(Type.EAU)||type.equals(Type.ROCHE)||type.equals(Type.SOL)){
-                    return 1;
+                    return 10;
                 } else if (type.equals(Type.ACIER)||type.equals(Type.FEE)||type.equals(Type.FEU)||type.equals(Type.GLACE)
                         ||type.equals(Type.INSECTE)||type.equals(Type.PLANTE)) {
-                    return -1;
+                    return -10;
                 }
                 return 0;
             case GLACE:
                 if (type.equals(Type.ACIER)||type.equals(Type.COMBAT)||type.equals(Type.FEU)||type.equals(Type.ROCHE)){
-                    return 1;
+                    return 10;
                 } else if (type.equals(Type.GLACE)) {
-                    return -1;
+                    return -10;
                 }
                 return 0;
             case INSECTE:
                 if (type.equals(Type.FEU)||type.equals(Type.ROCHE)||type.equals(Type.VOL)){
-                    return 1;
+                    return 10;
                 } else if (type.equals(Type.COMBAT)||type.equals(Type.PLANTE)||type.equals(Type.SOL)) {
-                    return -1;
+                    return -10;
                 }
                 return 0;
             case NORMAL:
                 if (type.equals(Type.COMBAT)){
-                    return 1;
+                    return 10;
                 } else if (type.equals(Type.SPECTRE)) {
-                    return -1;
+                    return -10;
                 }
                 return 0;
             case PLANTE:
                 if (type.equals(Type.FEU)||type.equals(Type.GLACE)||type.equals(Type.INSECTE)||type.equals(Type.POISON)||type.equals(Type.VOL)){
-                    return 1;
+                    return 10;
                 } else if (type.equals(Type.EAU)||type.equals(Type.ELECTRIQUE)||type.equals(Type.PLANTE)||type.equals(Type.SOL)) {
-                    return -1;
+                    return -10;
                 }
                 return 0;
             case POISON:
                 if (type.equals(Type.PSY)||type.equals(Type.SOL)){
-                    return 1;
+                    return 10;
                 } else if (type.equals(Type.COMBAT)||type.equals(Type.FEE)||type.equals(Type.INSECTE)||type.equals(Type.PLANTE)||type.equals(Type.POISON)) {
-                    return -1;
+                    return -10;
                 }
                 return 0;
             case PSY:
                 if (type.equals(Type.INSECTE)||type.equals(Type.SPECTRE)||type.equals(Type.TENEBRE)){
-                    return 1;
+                    return 10;
                 } else if (type.equals(Type.COMBAT)||type.equals(Type.PSY)) {
-                    return -1;
+                    return -10;
                 }
                 return 0;
             case ROCHE:
                 if (type.equals(Type.ACIER)||type.equals(Type.COMBAT)||type.equals(Type.EAU)||type.equals(Type.PLANTE)||type.equals(Type.SOL)){
-                    return 1;
+                    return 10;
                 } else if (type.equals(Type.FEU)||type.equals(Type.NORMAL)||type.equals(Type.POISON)||type.equals(Type.VOL)) {
-                    return -1;
+                    return -10;
                 }
                 return 0;
             case SOL:
                 if (type.equals(Type.EAU)||type.equals(Type.GLACE)||type.equals(Type.PLANTE)){
-                    return 1;
+                    return 10;
                 }else if (type.equals(Type.ELECTRIQUE)||type.equals(Type.POISON)||type.equals(Type.ROCHE)) {
-                    return -1;
+                    return -10;
                 }
                 return 0;
             case SPECTRE:
                 if (type.equals(Type.SPECTRE)||type.equals(Type.TENEBRE)){
-                    return 1;
+                    return 10;
                 } else if (type.equals(Type.COMBAT)||type.equals(Type.NORMAL)||type.equals(Type.INSECTE)||type.equals(Type.POISON)) {
-                    return -1;
+                    return -10;
                 }
                 return 0;
             case TENEBRE:
                 if (type.equals(Type.COMBAT)||type.equals(Type.FEE)||type.equals(Type.INSECTE)){
-                    return 1;
+                    return 10;
                 } else if (type.equals(Type.PSY)||type.equals(Type.SPECTRE)||type.equals(Type.TENEBRE)) {
-                    return -1;
+                    return -10;
                 }
                 return 0;
             case VOL:
                 if (type.equals(Type.ELECTRIQUE)||type.equals(Type.GLACE)||type.equals(Type.ROCHE)){
-                    return 1;
+                    return 10;
                 } else if (type.equals(Type.COMBAT)||type.equals(Type.INSECTE)||type.equals(Type.PLANTE)||type.equals(Type.SOL)) {
-                    return -1;
+                    return -10;
                 }
                 return 0;
             default:
@@ -310,33 +324,31 @@ public class Pokemon {
      *
      * @return Une liste de Pokemon dans le Pokedex
      */
-    public static ArrayList<Pokemon> getPokedex() {
-        return m_pokedex;
-    }
 
     public static void main(String args[]){
         String joueurActif;
-        new Musique().Ecoute("src/Pookemon/GestionMusique/MainTheme.wav");
-        System.out.println("Lancement du jeu ...");
-        for (String nom: m_nomPokemon) {
-            new Pokemon(nom);
-        }
-
         Humain joueurHumain;
         IA ordinateur;
+        for (String nom: Pokedex.getNom()) {
+            new Pokemon(nom);
+        }
         if(new Random().nextBoolean()){
-            System.out.println("Vous commencerez la partie ! Choisissez vos pokemon a mettre sur le terrain");
             joueurHumain = new Humain(new Deck(1));
             ordinateur= new IA(new Deck(2));
             joueurActif="Joueur";
         }else {
-            System.out.println("Vous jouerez en second.");
-            new Scanner(System.in).nextLine();
+
+
             joueurHumain = new Humain(new Deck(2));
             ordinateur= new IA(new Deck(1));
             joueurActif="IA";
         }
-
+        new Musique().Ecoute("src/Pookemon/GestionMusique/MainTheme.wav");
+        Affichage print = new Affichage();
+        print.StartingGame();
+        joueurHumain.pressEnter();
+        print.tourJoueur(joueurActif);
+        joueurHumain.pressEnter();
         Tour T1 = new Tour(joueurHumain, ordinateur, new Terrain(),joueurActif);
         T1.miseEnPlace();
     }

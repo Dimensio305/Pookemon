@@ -17,11 +17,6 @@ public class IA extends Joueur{
     }
 
     @Override
-    public void pokemonEnterre(Pokemon victime, Terrain sceneDuCrime) {
-        sceneDuCrime.retirePokemonIA(sceneDuCrime.getIndexJoueur(victime.getNomComparable()));
-    }
-
-    @Override
     public void pokemonDeuil(Pokemon victime, Terrain sceneDuCrime) {
         sceneDuCrime.retirePokemonIA(sceneDuCrime.getIndexIA(victime.getNomComparable()));
 
@@ -99,15 +94,29 @@ public class IA extends Joueur{
                         print.attaqueIA(p,ciblePossible.get(0));
                         s.nextLine();
                     } else {
-                        cibleIndex =new Random().nextInt(0, ciblePossible.size());
-                        ciblePossible.get(cibleIndex).subitDegat(p.getAttaque(), p.getType(),adversaire, terrain);
-                        print.affichageTerrain(terrain);
-                        print.attaqueIA(p,ciblePossible.get(cibleIndex));
-                        s.nextLine();
+                        if(terrain.getPokemonJoueur().size()!=0) {
+                            cibleIndex = new Random().nextInt(0, ciblePossible.size());
+                            ciblePossible.get(cibleIndex).subitDegat(p.getAttaque(), p.getType(), adversaire, terrain);
+                            print.affichageTerrain(terrain);
+                            print.attaqueIA(p, ciblePossible.get(cibleIndex));
+                            s.nextLine();
+                        }
                     }
                 }
             }
         }
-    return true;
+        if(this.victoireAdversaire(terrain)||adversaire.victoireAdversaire(terrain)){
+            print.finJeu(this.victoireAdversaire(terrain));
+            System.exit(0);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean victoireAdversaire(Terrain terrain){
+        if (this.m_deck.estVide()&&this.m_main.getMain().size()==0&&terrain.getPokemonIA().size()==0){
+            return true;
+        }
+        return false;
     }
 }

@@ -8,16 +8,61 @@ import java.util.List;
 
 public class Affichage {
 
+    public void StartingGame(){
+        System.out.println(String.format(
+                "                                                                                  ██████╗ ██████╗ ███████╗███████╗███████╗   \n" +
+                "                                                                                  ██╔══██╗██╔══██╗██╔════╝██╔════╝██╔════╝   \n" +
+                "                                                                                  ██████╔╝██████╔╝█████╗  ███████╗███████╗   \n" +
+                "                                                                                  ██╔═══╝ ██╔══██╗██╔══╝  ╚════██║╚════██║   \n" +
+                "                                                                                  ██║     ██║  ██║███████╗███████║███████║   \n" +
+                "                                                                                  ╚═╝     ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝   \n\n" +
+                "                                                                                 ███████╗███╗   ██╗████████╗███████╗██████╗ \n" +
+                "                                                                                 ██╔════╝████╗  ██║╚══██╔══╝██╔════╝██╔══██╗\n" +
+                "                                                                                 █████╗  ██╔██╗ ██║   ██║   █████╗  ██████╔╝\n" +
+                "                                                                                 ██╔══╝  ██║╚██╗██║   ██║   ██╔══╝  ██╔══██╗\n" +
+                "                                                                                 ███████╗██║ ╚████║   ██║   ███████╗██║  ██║\n" +
+                "                                                                                 ╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝╚═╝  ╚═╝\n\n" +
+                "                                                                                          ⠀    ⠀⠀⠀⠀⠀⠀⠀\033[92m⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n"+
+                "\033[31m⠀⠀⠀                                                     ⠀⠀⠀⠀⠀⢀⣠⣤⣶⣶⣿⣿⣿⣿⣿⣶⣶⣤⣄⡀⠀⠀⠀⠀⠀\033[92m⠀⠀⠀⠀⠀    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠉⢳⠴⢲⠂⠀⠀⠀⠀⠀\n" +
+                "\033[31m⠀⠀                                                     ⠀⠀⠀⠀⣠⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣄⠀⠀⠀⠀⠀⠀\033[92m⠀⠀⠀    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⠤⠤⠤⠤⠤⠤⠤⠤⠤⠖⠊⠀⣠⠎⠀⡞⢹⠏⠀⠀⠀⠀\n" +
+                "\033[31m⠀                                                     ⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀  \033[92m  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡴⠊⠁⠀⠀⠀⠀⠀⢀⡠⠤⠄⠀⠀⠀⠁⠀⠀⢀⠀⢸⠀⠀⠀⠀⠀\n" +
+                "\033[31m⠀                                                     ⠀⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⠀⠀⠙⣿⣿⣿⣿⣿⣆⠀⠀\033[94m⠀    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠤⠤⠄⣀⠀⠀⠀\033[92m⠀⢀⣌⠀\033[94m⠀⠀⠀⠀⢀⣠⣆\033[32m⡁⠀⠀⠀\033[92m⠀⠀⠀⠀⠀⠀⠀⡀⠘⡄⠀⠀⠀⠀\n" +
+                "\033[31m⠀                                                     ⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠿⢿⣧⡀⠀⢠⣿⠟⠛⠛⠿⣿⡆⠀\033[94m⠀  ⠀⠀⠀⠀⠀  ⠀⠀⠀⠀⡴⠁⠀⠀⠐⠛⠉⠁⠀⠀⣉⠉⠉⠉⠑⠒⠉⠁⠀⠀⢸⡀⠀⠀\033[92m⠀⠀⠀⠀⠀⠀⠀⢧⠀⠱⡀⠀⠀⠀\n" +
+                "\033[31m                                                     ⠀⢰⣿⣿⣿⣿⣿⣿⠿⠟⠋⠉⠁⠀⠀⠀⠀⠀⠙⠿⠿⠟⠋⠀⠀⠀⣠⣿⠇⠀ \033[94m   ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣥⠆⠀⠀⠀\033[94m⣠⣴⣶⣿⣿⣿⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⢇⠀\033[92m⠀⠀⠀⠀⠀⠀⠀⠀⠈⡆⠀⠑⡄⠀⠀\n" +
+                "\033[31m⠀                                                     ⢸⣿⣿⡿⠟⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣾⠟⠋⠀⠀ \033[94m  ⠀⠀⠀⠀⠀ ⠀⠀⠀⢀⡜⠁⠀⠀⢀\033[94m⠀⠻⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡀⠀\033[92m⠀⠀⠀⠀⠀⠀⠀⠀⢰⠀⠀⠸⡀⠀\n" +
+                "\033[31m⠀                                                     ⢸⣿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣴⣾⠿⠛⠉⠀⠀⠀⠀⠀ \033[94m  ⠀⠀⠀⠀⠀ ⠀⠀⢀⣮⢖\033[31m⣧⢠⠀\033[94m⣿⠇⠀⠀⠁⠀⠀⠀⠠⠀⢀⣠\033[31m⣴⣤⡀⠀\033[94m⠀⠀⠈⡗⢄⠀⠀\033[92m⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⢱⠀\n" +
+                "\033[31m⠀                                                     ⠈⢿⣷⣤⣤⣄⣠⣤⣤⣤⣤⣶⣶⣾⠿⠿⠛⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀\033[94m   ⠀⠀⠀⠀⠀ ⠀⠀⣼⠃\033[31m⣼\033[0m⣿\033[31m⠘⠀⠀\033[94m⠀⢠⣶⣿⡆⠀⠀⠁⣠⠊\033[31m⣸⣿\033[0m⣿⣿\033[31m⡄⠀⠀\033[94m⠀⡇⠀⢑⣄⠀⠀\033[92m⠀⠀⠀⠀⢠⠃⠀⠀⠸⡆\n" +
+                "⠀\033[0m                                                     ⢠⣾\033[37m⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣦⣤⣀⠀⠀⠀⠀⠀\033[94m⠀⠀⠀⠀⠀⠀⠀⠀    ⠀⠀⣿\033[31m⢰⣿⣿⠀⠀⠀⠀\033[94m⠙⠻⠿⠁⠀\033[94m⠀⠠⠁⠀\033[31m⣿⣿⣿\033[0m⣿\033[31m⡇⠀\033[94m⠀⠀⠇⠀⢻⣿⣷⣦⣀\033[32m⡀⣀⠠⠋⠀⠀⠀⢀⡇\n" +
+                "⠀\033[0m                                                     ⢸⣿\033[37m⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣄⠀⠀⠀\033[94m  ⠀⠀⠀⠀⠀  ⠀⠀⠈⠉\033[31m⠺⠿⠏⠀⠀⠀\033[94m⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀\033[31m⢿⣿⣿⣿⠇⠀\033[94m⠀⠀⠀⠀⠈⢿⣿⣿⣿⣿⢦⡀\033[32m⠀⠀⠀⠀⡸⠀\n" +
+                "⠀\033[0m                                                     ⢸⣿\033[37m⡛⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀ \033[94m   ⠀⠀⠀⠀⠀⠀⠀⠘⣟⠦⢀⠀⠀⢠⠀⠀⡠⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠁⣀⠔⠀⠀⠀⠀⠀⠀⠀⠛⠻⠟⠋⠀⠙⢦\033[32m⠀⣠⠜⠀⠀\n" +
+                "\033[0m⠀                                                     ⠀⢻⣧⠀\033[37m⠈⠙⠛⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀ \033[94m   ⠀⠀⠀⠀⠀⠀⠀⠈⠑⠤\033[31m⠙\033[0m⠳\033[31m⣶⣦⣤⣤⣤⣤⣤⣤⣤⣤⣴⣶⡶\033[0m⠞\033[31m⠁\033[94m⠀⠀⣠⠖⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⠈⢯⠁⠀⠀⠀\n" +
+                "\033[0m⠀                                                     ⠀⠈⢿⣧⠀⠀⠀⠀⠀⠀\033[37m⠉⠙⠛⠻⠿⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠁⠀    \033[94m⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢳⠤\033[31m⠙⠻⠿⣿⣿⣿⣿⡿⠿⠛⠉⠀\033[94m⢀⣀⡤⡚⠁⠀⠀⠀⠀⠀⠀⣧⠖⣁⣤⣦⠀⠀⠈⢇⠀⠀⠀\n" +
+                "\033[0m⠀⠀                                                     ⠀⠀⠻⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\033[37m⠹⣿⣿⣿⣿⠟\033[0m⠀⣠⣾⠟⠀⠀\033[94m⠀ ⠀⠀⠀⠀⠀   ⠀⠀⠀⠀⠀⠀⢸⠉⠉⣩⣍⠓⠒⣒⠒⠒⠒⠒⠊⠉⠁⢀⡟⠀⠀⣾⣷⠀⠀⠀⠀⠏⢴⣿⣿⣿⠀⠀⠀⢸⠀⠀⠀\n" +
+                "\033[0m⠀⠀                                                     ⠀⠀⠀⠈⠻⣷⣦⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀\033[37m⠉⠉\033[0m⢀⣤⣾⠟⠁⠀⠀⠀\033[94m⠀ ⠀⠀⠀⠀⠀   ⠀⠀⠀⠀⠀⠀⠘⣶⣿⣿⣿⠀⠀⠈⠒⢄⣀⡀⠀⠀⠀⣼⣶⣿⡇⠈⠋⠀⠀⠀⡼⠀⠈⠻⣿⡿⠀⠀⠀⢸⠀⠀⠀\n" +
+                "\033[0m⠀⠀⠀                                                     ⠀⠀⠀⠀⠀⠙⠻⠿⣶⣦⣤⣤⣤⣤⣤⣤⣶⡿⠟⠋⠁⠀⠀⠀⠀⠀⠀    ⠀\033[94m⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⡿⠿⠋⠀⠀⠀⠀⡜⠁⠈⢯⡀⢺⣿⣿⣿⠃⠀⠀⠀⢀⣼⣇⠀⠀⠀⠀⠀⠀⠀⠀⡞⠀⠀⠀\n" +
+                "\033[0m⠀⠀⠀⠀                                                     ⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠉⠉⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  \033[94m  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣦⣄⣠⣀⣠⠞⠀⠀⠀⠈⠛⣿⡛⠛⠁⠀⠀⠀⣠⠊⠀⠈⢦⣄⣀⣀⣀⣀⢀⡼⠁⠀⠀⠀\n"+
+                "                                                                                          ⠀    ⠀⠀\033[94m⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠛⠉⠀⠀⠀⠀⠀⠀⠘⠛⠿⣿⠷⡾⠗⠊⠁⠀⠀⠀⠈⠉⠙⠛⠛⠛⠉⠀⠀⠀⠀⠀\033[0m\n"));
+
+    }
+
+    public void tourJoueur(String premierJoueur){
+        if (premierJoueur.equals("Joueur")){
+            System.out.println("Vous commencerez la partie ! Choisissez vos pokemon a mettre sur le terrain");
+
+        }else{
+            System.out.println("Vous jouerez en second.");
+        }
+    }
     public void affichageMain(Main main) {
         int numMain=1;
         System.out.println("En main :");
-        System.out.println("/------------------------------------------------------------------------------\\");
+        System.out.println("/-----------------------------------------------------------------------------------\\");
         for (Pokemon p: main.getMain()) {
             System.out.print("|"+numMain+": ");
             affichagePokemon(p);
             numMain++;
         }
-        System.out.println("\\------------------------------------------------------------------------------/");
+        System.out.println("\\-----------------------------------------------------------------------------------/");
     }
 
     public void affichageTerrain(Terrain terrain) {
@@ -38,15 +83,15 @@ public class Affichage {
     }
 
     public void affichagePokemon(Pokemon pokemon) {
-        if (pokemon.isM_shiny()){
+        if (pokemon.isShiny()){
             System.out.print(String.format("\u001B[93m%-13s\u001B[0m: %-10s PV : %-3s/%-3s DMG : %-3s ", pokemon.getNomComparable(), pokemon.getType(), pokemon.getPv(), pokemon.getPvMAX(), pokemon.getAttaque()));
         }else {
             System.out.print(String.format("%-13s: %-10s PV : %-3s/%-3s DMG : %-3s ", pokemon.getNomComparable(), pokemon.getType(), pokemon.getPv(), pokemon.getPvMAX(), pokemon.getAttaque()));
         }
-        if (pokemon.getM_pouvoir()!=null){
-            System.out.print(String.format("Pouvoir : %-16s", pokemon.getM_pouvoir().getNom()));
+        if (pokemon.getPouvoir()!=null){
+            System.out.print(String.format("Pouvoir : %-21s", pokemon.getPouvoir().getNom()));
         }else{
-            System.out.print(String.format("Pouvoir : %-16s", "Aucun"));
+            System.out.print(String.format("Pouvoir : %-21s", "Aucun"));
         }
         System.out.println("|");
     }
@@ -82,92 +127,92 @@ public class Affichage {
     public void affichagePokemonCombat(List<Pokemon> combattants) {
 
         for (Pokemon p: combattants) {
-            if(p.isM_shiny()) {
+            if(p.isShiny()) {
                 System.out.print("\u001B[93m");
-                System.out.print(String.format("\t/-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\\\t"));
+                System.out.print(String.format("\t/-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*\\\t"));
                 System.out.print("\u001B[0m");
             }else {
-                System.out.print("\t+-----------------------------+\t");
+                System.out.print("\t+----------------------------------+\t");
             }
         }
         System.out.println();
         for (Pokemon p: combattants) {
-            if(p.isM_shiny()) {
+            if(p.isShiny()) {
                 System.out.print("\u001B[93m ");
-                System.out.print(String.format("\t|\t%-35s\u001B[93m|\t", p.getNom()));
+                System.out.print(String.format("\t|\t%-40s\u001B[93m|\t", p.getNom()));
                 System.out.print("\u001B[0m");
             }else {
-                System.out.print(String.format("\t|\t%-26s|\t", p.getNom()));
+                System.out.print(String.format("\t|\t%-31s|\t", p.getNom()));
             }
         }
         System.out.println();
         for (Pokemon p: combattants) {
-            if (p.isM_shiny()) {
+            if (p.isShiny()) {
                 System.out.print("\u001B[93m ");
-                System.out.print(String.format("\t|\tTYPE : %-19s|\t", p.getType()));
+                System.out.print(String.format("\t|\tTYPE : %-24s|\t", p.getType()));
                 System.out.print("\u001B[0m");
             } else {
-                System.out.print(String.format("\t|\tTYPE : %-19s|\t", p.getType()));
+                System.out.print(String.format("\t|\tTYPE : %-24s|\t", p.getType()));
             }
         }
         System.out.println();
         for (Pokemon p: combattants) {
-            if(p.isM_shiny()) {
+            if(p.isShiny()) {
                 System.out.print("\u001B[93m ");
-                System.out.print(String.format("\t|\tPV : %-3s/%-17s|\t", p.getPv(), p.getPvMAX()));
+                System.out.print(String.format("\t|\tPV : %-3s/%-22s|\t", p.getPv(), p.getPvMAX()));
                 System.out.print("\u001B[0m");
             }else {
-                System.out.print(String.format("\t|\tPV : %-3s/%-17s|\t", p.getPv(), p.getPvMAX()));
+                System.out.print(String.format("\t|\tPV : %-3s/%-22s|\t", p.getPv(), p.getPvMAX()));
             }
         }
         System.out.println();
         for (Pokemon p: combattants) {
-            if(p.isM_shiny()) {
+            if(p.isShiny()) {
                 System.out.print("\u001B[93m ");
-                System.out.print(String.format("\t|\tDMG : %-20s|\t", p.getAttaque()));
+                System.out.print(String.format("\t|\tDMG : %-25s|\t", p.getAttaque()));
                 System.out.print("\u001B[0m");
             }else {
-                System.out.print(String.format("\t|\tDMG : %-20s|\t", p.getAttaque()));
+                System.out.print(String.format("\t|\tDMG : %-25s|\t", p.getAttaque()));
             }
         }
         System.out.println();
         for (Pokemon p: combattants) {
-            if(p.isM_shiny()) {
+            if(p.isShiny()) {
                 System.out.print("\u001B[93m ");
-                if (p.getM_pouvoir()!=null) {
-                    System.out.print(String.format("\t|\tPouvoir : %-16s|\t", p.getM_pouvoir().getNom()));
+                if (p.getPouvoir()!=null) {
+                    System.out.print(String.format("\t|\tPouvoir : %-21s|\t", p.getPouvoir().getNom()));
                 }else {
-                    System.out.print(String.format("\t|\tPouvoir : %-16s|\t", "Aucun"));
+                    System.out.print(String.format("\t|\tPouvoir : %-21s|\t", "Aucun"));
 
                 }
                 System.out.print("\u001B[0m");
             }else {
-                if (p.getM_pouvoir()!=null) {
-                    System.out.print(String.format("\t|\tPouvoir : %-16s|\t", p.getM_pouvoir().getNom()));
+                if (p.getPouvoir()!=null) {
+                    System.out.print(String.format("\t|\tPouvoir : %-21s|\t", p.getPouvoir().getNom()));
                 }else {
-                    System.out.print(String.format("\t|\tPouvoir : %-16s|\t", "Aucun"));
+                    System.out.print(String.format("\t|\tPouvoir : %-21s|\t", "Aucun"));
 
                 }
             }
         }
         System.out.println();
         for (Pokemon p: combattants) {
-            if(p.isM_shiny()) {
+            if(p.isShiny()) {
                 System.out.print("\u001B[93m ");
-                System.out.print(String.format("\t|\tStatut : %-17s|\t", p.getM_statut().name().substring(0,1)+ p.getM_statut().name().substring(1).toLowerCase()));
+                System.out.print(String.format("\t|\tStatut : %-22s|\t", p.getStatut().name().substring(0,1)+ p.getStatut().name().substring(1).toLowerCase()));
                 System.out.print("\u001B[0m");
             }else {
-                System.out.print(String.format("\t|\tStatut : %-17s|\t", p.getM_statut().name().substring(0,1)+ p.getM_statut().name().substring(1).toLowerCase()));
+                System.out.print(String.format("\t|\tStatut : %-22s|\t", p.getStatut().name().substring(0,1)+ p.getStatut().name().substring(1).toLowerCase()));
             }
         }
         System.out.println();
         for (Pokemon p: combattants) {
-            if(p.isM_shiny()) {
+            if(p.isShiny()) {
                 System.out.print("\u001B[93m ");
-                System.out.print(String.format("\t\\-*-*-*-*-*-*-*-*-*-*-*-*-*-*-/\t"));
+                System.out.print(String.format("\t\\-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/\t"));
                 System.out.print("\u001B[0m");
             }else {
-                System.out.print(String.format("\t+-----------------------------+\t"));
+                System.out.print(String.format("\t+----------------------------------+\t"));
             }
         }
         System.out.println();
@@ -204,14 +249,14 @@ public class Affichage {
                 break;
             case 3:
                 System.out.println("Entrez le numéro du Pokemon que vous souhaitez utilisez?");
-                if (terrain.getPokemonJoueur().size()>0&&terrain.getPokemonJoueur().get(0).getM_pouvoir()!= null && terrain.getPokemonJoueur().get(0).getM_pouvoir().utilisable()) {
-                    System.out.println("   1: " + terrain.getPokemonJoueur().get(0).getNom()+ " : " + terrain.getPokemonJoueur().get(0).getM_pouvoir().getNom());
+                if (terrain.getPokemonJoueur().size()>0&&terrain.getPokemonJoueur().get(0).getPouvoir()!= null && terrain.getPokemonJoueur().get(0).getPouvoir().utilisable()) {
+                    System.out.println("   1: " + terrain.getPokemonJoueur().get(0).getNom()+ " : " + terrain.getPokemonJoueur().get(0).getPouvoir().getNom());
                 }
-                if (terrain.getPokemonJoueur().size()>1&&terrain.getPokemonJoueur().get(1).getM_pouvoir()!= null && terrain.getPokemonJoueur().get(1).getM_pouvoir().utilisable()) {
-                    System.out.println("   2: " + terrain.getPokemonJoueur().get(1).getNom()+ " : " + terrain.getPokemonJoueur().get(1).getM_pouvoir().getNom());
+                if (terrain.getPokemonJoueur().size()>1&&terrain.getPokemonJoueur().get(1).getPouvoir()!= null && terrain.getPokemonJoueur().get(1).getPouvoir().utilisable()) {
+                    System.out.println("   2: " + terrain.getPokemonJoueur().get(1).getNom()+ " : " + terrain.getPokemonJoueur().get(1).getPouvoir().getNom());
                 }
-                if (terrain.getPokemonJoueur().size()>2&&terrain.getPokemonJoueur().get(2).getM_pouvoir()!= null && terrain.getPokemonJoueur().get(2).getM_pouvoir().utilisable()) {
-                    System.out.println("   3: " + terrain.getPokemonJoueur().get(2).getNom() + " : " + terrain.getPokemonJoueur().get(2).getM_pouvoir().getNom());
+                if (terrain.getPokemonJoueur().size()>2&&terrain.getPokemonJoueur().get(2).getPouvoir()!= null && terrain.getPokemonJoueur().get(2).getPouvoir().utilisable()) {
+                    System.out.println("   3: " + terrain.getPokemonJoueur().get(2).getNom() + " : " + terrain.getPokemonJoueur().get(2).getPouvoir().getNom());
                 }
                 break;
             default:
@@ -224,6 +269,84 @@ public class Affichage {
 
         if (cible.estMort()) {
             System.out.println(cible.getNom() + "a été mis KO.");
+        }
+    }
+
+
+    public void finJeu(boolean Victoire){
+        if(Victoire){
+            System.out.println(
+                                    "\n                                                                               \033[93m██╗   ██╗ ██████╗ ██╗   ██╗    ██╗    ██╗██╗███╗   ██╗\n" +
+                                    "                                                                               ╚██╗ ██╔╝██╔═══██╗██║   ██║    ██║    ██║██║████╗  ██║\n" +
+                                    "                                                                                ╚████╔╝ ██║   ██║██║   ██║    ██║ █╗ ██║██║██╔██╗ ██║\n" +
+                                    "                                                                                 ╚██╔╝  ██║   ██║██║   ██║    ██║███╗██║██║██║╚██╗██║\n" +
+                                    "                                                                                  ██║   ╚██████╔╝╚██████╔╝    ╚███╔███╔╝██║██║ ╚████║\n" +
+                                    "                                                                                  ╚═╝    ╚═════╝  ╚═════╝      ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝\n\n" +
+                                    "                                                                                 ⠀⠀\033[30m⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                                    "                                                                                 ⠀⠀\033[30m⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                                    "                                                                                 ⠀⠀⠀\033[30m⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                                    "                                                                                 ⠀⠀⠀\033[30m⠀⠀⠀⠀⠀⠀⠀⡾⠋⠉\033[93m⠀⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                                    "                                                                                 ⠀⠀⠀\033[30m⠀⠀⠀⠀⠀⠀⣼⠃⠀⠀\033[93m⠀⡇\033[91m⠀⠀⠀⠀⠀⠀⣠⠖⠲⢤⡖⠒⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                                    "                                                                                 ⠀⠀⠀\033[30m⠀⠀⠀⠀⠀⢀⡏⠀⠀⠀\033[93m⠀⡇\033[91m⠀⠀⠀⠀⠀⠀⡏⠀⠀⠀⠀⠀⢀⡇\033[93m⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                                    "                                                                                 \033[91m⠀⠀⠀⠀⢀⣀⠀\033[93m⠀⢸⠀⠀⠀⠀⠀⡇\033[91m⠀⠀⠀⠀⠀⠀⠸⣄⠀⠁⣠⠞⠉\033[93m⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀\033[30m⣀⣠⣤⣤⣤⣤⠀⠀\n" +
+                                    "                                                                                 \033[91m⠀⡞⠉⠻⠁⢹⠀\033[93m⠀⡏⠀⠀⠀⠀⢸⠃⠀⠀⠀⠀⠀⠀\033[91m⠀⠀⠹⣶⠋\033[93m⠀⠀⠀⠀⣀⡤⠴⠒⠊⠉⠉⠀⠀\033[30m⣿⣿⣿⠿⠋⠀⠀\n" +
+                                    "                                                                                 \033[91m⠀⠳⢤⡀⠀⡞⠁\033[93m⠀⡇⠀⠀⢀⡠⠼⠴⠒⠒⠒⠒⠦⠤⠤⣄⣀⠀⢀⣠⠴⠚⠉⠀⠀⠀⠀\033[30m⠀⠀⠀⠀⣼⠿⠋⠁⠀⠀⠀⠀\n" +
+                                    "                                                                                 \033[91m⠀⠀⠀⠈⠷⡏⠀\033[93m⠀⣇⠔⠂⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢨⠿⠋⠀⠀⠀⠀⠀⠀⠀⠀⣀⡤⠖⠋⠁⠀⠀⠀⠀⠀⠀⠀\n" +
+                                    "⠀⠀⠀                                                                                 \033[93m⠀⠀⠀⠀⢰⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⠤⠒⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                                    "                                                                                 \033[93m⠀⠀⠀⠀⠀⠀⢀⡟\033[30m⠀⣠⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀\033[93m    ⠀⠀⠈⠉⢻⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⣤⡤⠤⢴\n" +
+                                    "                                                                                 \033[93m⠀⠀⠀⠀⠀⠀⣸⠁\033[30m⣾⣿\033[0m⣿\033[30m⣿⡆⠀⠀ ⠀⠀⠀⠀⢠⣾\033[0m⣿\033[30m⣿⣦\033[93m⠀⠀⠀\033[93m⢸⡀⠀⠀⢀⣠⠤⠔⠒⠋⠉⠉⠀⠀⠀⠀⢀⡞\n" +
+                                    "                                                                                 ⠀\033[93m⠀⠀⠀⠀⢀⡏⠀\033[30m⠹⠿⠿⠟⠁⠀⠰⠦⠀⠀⠀⠀⠸⣿⣿⣿⡿⠀⠀\033[93m⠀⢘⡧⠖⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡼⠀\n" +
+                                    "                                                                                 ⠀\033[91m⠀⠀⠀⠀⣼⠦⣄⠀⠀\033[30m⢠⣀⣀⣴⠟⠶⣄⡀⠀⠀⡀⠀⠉⠁⠀⠀⠀⠀\033[93m⢸⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⠁⠀\n" +
+                                    "                                                                                 ⠀⠀⠀\033[91m⠀⢰⡇⠀⠈⡇⠀\033[30m⠀⠸⡾⠁⠀⠀⠀⠉⠉⡏⠀⠀\033[91m⠀⣠⠖⠉⠓⢤\033[93m⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⠃⠀⠀\n" +
+                                    "                                                                                 ⠀⠀⠀\033[91m⠀⠀⢧⣀⡼⠃⠀\033[30m⠀⠀⢧⠀⠀⠀⠀⠀⢸⠃⠀\033[91m⠀⠀⣧⠀⠀⠀⣸\033[93m⢹⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡰⠃⠀⠀⠀\n" +
+                                    "                                                                                 ⠀\033[93m⠀⠀⠀⠀⠈⢧⡀⠀⠀\033[30m⠀⠀⠘⣆⠀⠀⠀⢠⠏⠀⠀⠀\033[91m⠀⠈⠳⠤⠖⠃\033[93m⡟⠀⠀⠀⢾⠛⠛⠛⠛⠛⠛⠛⠛⠁⠀⠀⠀⠀\n" +
+                                    "                                                                                 ⠀\033[93m⠀⠀⠀⠀⠀⠀⠙⣆⠀\033[30m⠀⠀⠀⠈⠦⣀⡴⠋⠀⠀⠀⠀⠀\033[93m⠀⠀⠀⢀⣼⠙⢦⠀⠀⠘⡇⠀⠀\033[91m⠀⠀⠀⠀⢀⣀⠀⠀⠀⠀\033[93m\n" +
+                                    "                                                                                 ⠀⠀⠀⠀⠀⠀⠀⢠⡇⠙⠦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⠴⠋⠸⡇⠈⢳⡀⠀⢹⡀\033[91m⠀⠀⠀⢀⡞⠁⠉⣇⣀⠀⠀\033[93m\n" +
+                                    "                                                                                 ⠀⠀⠀⠀⠀⠀⠀⡼⣀⠀⠀⠈⠙⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⣷⠴⠚⠁⠀⣀⣷\033[91m⠀⠀⠀⢠⠇⠀⠀⠀⠀⠀⣳\033[93m\n" +
+                                    "                                                                                 ⠀⠀⠀⠀⠀⠀⡴⠁⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣆⡴⠚⠉⠉⠀\033[91m⠀⠀⠀⢸⠃⣀⣠⠤⠤⠖⠋\033[93m\n" +
+                                    "                                                                                 ⣼⢷⡆⠀⣠⡴⠧⣄⣇⠀⠀\033[91m⠀⠀⡴⠚⠙⠲⠞⠛⠙⡆⠀\033[93m⠀⠀⠀⠀⢀⡇⣠⣽⢦⣄⢀⣴⣶⠀\033[91m⠋⠉⠀⠀⠀\033[93m⠀⠀⠀⠀⠀\n" +
+                                    "                                                                                 ⡿⣼⣽⡞⠁⠀⠀⠀⢹⡀⠀\033[91m⠀⠀⢹⠀⠀⠀⠀⠀⠀⣸⠀⠀\033[93m⠀⠀⠀⣼⠉⠁⠀⠀⢠⢟⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                                    "                                                                                 ⣷⠉⠁⢳⠀⠀⠀⠀⠈⣧\033[91m⠀⠀⠀⠀⠙⢦⠀⠀⠀⡠⠁⠀\033[93m⠀⠀⠀⣰⠃⠀⠀⠀⠀⠏⠀⠀⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                                    "                                                                                 ⠹⡆⠀⠈⡇⠀⠀⠀⠀⠘⣆⠀⠀⠀\033[91m⠀⠀⠹⣧⠞⠁\033[93m⠀⠀⠀⠀⣰⠃⠀⠀⠀⠀⠀⠀⠀⣸⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                                    "                                                                                 ⠀⢳⡀⠀⠙⠀⠀⠀⠀⠀⠘⣆⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⠀⣰⠃⠀⠀⠀⠀⢀⡄⠀⢠⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                                    "                                                                                 ⠀⠀⢳⡀⣰⣀⣀⣀⠀⠀⠀⠘⣦⣀⠀⠀⠀⡇⠀⠀⠀⢀⡴⠃⠀⠀⠀⠀⠀⢸⡇⢠⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                                    "                                                                                 ⠀⠀⠀⠉⠉⠀⠀⠈⠉⠉⠉⠙⠻⠿⠾⠾⠻⠓⢦⠦⡶⡶⠿⠛⠛⠓⠒⠒⠚⠛⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
+            );
+        }else {
+            System.out.println(
+                            "\033[107m\n\n                                                                         ██╗   ██╗ ██████╗ ██╗   ██╗    ██╗      ██████╗ ███████╗███████╗\n" +
+                            "                                                                         ╚██╗ ██╔╝██╔═══██╗██║   ██║    ██║     ██╔═══██╗██╔════╝██╔════╝\n" +
+                            "                                                                          ╚████╔╝ ██║   ██║██║   ██║    ██║     ██║   ██║███████╗█████╗  \n" +
+                            "                                                                           ╚██╔╝  ██║   ██║██║   ██║    ██║     ██║   ██║╚════██║██╔══╝  \n" +
+                            "                                                                            ██║   ╚██████╔╝╚██████╔╝    ███████╗╚██████╔╝███████║███████╗\n" +
+                            "                                                                            ╚═╝    ╚═════╝  ╚═════╝     ╚══════╝ ╚═════╝ ╚══════╝╚══════╝\n\n\n" +
+                            "                                                                                  \033[30m⠀⠀⠀⠀⠀⢀⣤⣶⡖⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                            "                                                                                 \033[30m⠀⠀⠀⠀⣴⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                            "                                                                                 \033[33m    ⣸⣿⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                            "                                                                                 ⠀⣠⣾⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣴⣶⣶⣦\033[30m⣤⣀⠀⠀⠀\033[33m⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                            "                                                                                 ⠀⣿⣿⣿⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣾⣿⣿⣿⣿⣿\033[30m⣿⣿⣿⣦⡀⠀\033[33m⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                            "                                                                                 ⠀⣽⣿⣿⣿⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⠿\033[30m⠿⠿⠿⠿⠛⠀⠀⠀\033[33m⠀⠀⠀⠀⠀⠀⠀\n" +
+                            "                                                                                 ⢰⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣿⣿⣿⣿⣿⣿⣿⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                            "                                                                                 ⢸⣿⣿⣿⣿⣿⣿⣷⡀⣀⣤⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                            "                                                                                 ⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                            "                                                                                 ⠀⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠁\033[30m⣠⣶⣄\033[33m⢿⣿⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                            "                                                                                 ⠀⠀⠹⣿⣿⣿⡟⠉⠉⠙⢿⣿⣿⣿⣿⣿⠀\033[30m⠹⣿⡟\033[33m⢸⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                            "                                                                                 ⠀⠀⠀⢿⣿⣿⡀\033[30m⣾⣿⣄\033[33m⢸⣿⣿⣿⣿⣿⣷⣄⣀⣠⣿⡿⠉⠙⢿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                            "                                                                                 ⠀⠀⠀⢸⣿⠿⣧⡀\033[30m⠙⠉\033[33m⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠁\033[31m⣠⣄\033[33m⠘⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                            "                                                                                 ⠀⠀ ⣼\033[31m⢰⣿\033[33m⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠿⠿⠋⡀\033[31m⠹⡟\033[33m⢰⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                            "                                                                                 ⠀⠀⠀⠹\033[31m⠙⡟\033[33m⢀⣄⡈⠙⠻⠟⢁⣠⣈⠙⢁⣠⣶⣤⣾⣿⣦⣴⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                            "                                                                                 ⠀⠀⠀⠈⢷⣤⣾⣿⣿⣷⣤⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⠀\033[30m⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⣶⣿⣿⣷⠀\033[33m\n" +
+                            "                                                                                 ⠀⠀⠀⠀⠀⠙⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀\033[30m⠀⠀⠀⠀⠀⣀⣤⣾⣿⣿⣿⣿⣿⣿⣿⡇\033[33m\n" +
+                            "                                                                                 ⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠙⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣇⠀⠀\033[30m⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇\033[33m\n" +
+                            "                                                                                 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⠀⠀\033[30m⠀⣿⣿⣿⣿⣿⣿⠿⠟⠛⠛⠉⠉\033[33m⠀\n" +
+                            "                                                                                 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⣿⣿⣿⠿⣿⣿⡿⢿⣿⣿⣿⣿⣿⣿⣧⠀\033[30m⢀⣴⣿⣿⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀\033[33m⠀\n" +
+                            "                                                                                 ⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣿⣿⣿⣿⠀⣿⣿⡇⠈⣿⣿⣿⣿⣿⣿⣿⡀\033[30m⢾⣿⣿⠿⠟⠋⠀⠀⠀⠀⠀⠀⠀⠀\033[33m⠀\n" +
+                            "                                                                                 ⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⣿⣿⣿⣿⣤⣿⣿⣷⣼⣿⣿⣿⣿⣿⣿⣿⡇\033[30m⢨⣿⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\033[33m⠀\n" +
+                            "                                                                                 ⠀⠀⠀⢀⣀⣤⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                            "                                                                                 ⠀⠠⣾⣿⣿\033[30m⣿⣿\033[33m⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                            "                                                                                 ⠀\033[30m⠀⠀⠾⠿⠿\033[33m⣿⣿⣿\033[30m⣿⣿⣿\033[33m⣿⣿⣿⣿⣿\033[30m⣿⣿⣿\033[33m⣿⣿⣿⡟\033[30m⠻⠿⠿⠯\033[33m⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                            "                                                                                 ⠀⠀⠀⠀⠀⠀⠉⠉⠀⠀\033[30m⠈⠉⠀\033[33m⠀⠙⠋⠁\033[30m⠈⠛⠋\033[33m⠈⠛⠿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n\n"
+            );
         }
     }
 }
