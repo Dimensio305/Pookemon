@@ -1,6 +1,7 @@
 package Pookemon.DetailPokemon.Pouvoirs;
 
 import Pookemon.Carte.Terrain;
+import Pookemon.Deroulement.Affichage;
 import Pookemon.DetailPokemon.Pokemon;
 import Pookemon.DetailPokemon.Statut;
 
@@ -15,6 +16,11 @@ public class Empoisonnement extends Pouvoir {
 
     @Override
     public String getNom() {
+        return "\033[35mEmpoisonnement\033[0m";
+    }
+
+    @Override
+    public String getNomComparable() {
         return "Empoisonnement";
     }
 
@@ -34,6 +40,7 @@ public class Empoisonnement extends Pouvoir {
     @Override
     public void onUse(Pokemon lanceur, Pokemon cible, Terrain terrain) {
         cible.setStatut(Statut.EMPOISONNE);
+        new Affichage().utilisationPouvoir(this.getNomComparable(),lanceur, cible);
         this.m_nbUtil -= 1;
         this.m_UtiliseCeTour = true;
     }

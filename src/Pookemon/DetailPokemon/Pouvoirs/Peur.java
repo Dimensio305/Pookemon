@@ -1,6 +1,7 @@
 package Pookemon.DetailPokemon.Pouvoirs;
 
 import Pookemon.Carte.Terrain;
+import Pookemon.Deroulement.Affichage;
 import Pookemon.DetailPokemon.Boost;
 import Pookemon.DetailPokemon.Pokemon;
 
@@ -9,6 +10,11 @@ public class Peur extends Pouvoir {
 
     @Override
     public String getNom() {
+        return "\033[36mPeur\033[0m";
+    }
+
+    @Override
+    public String getNomComparable() {
         return "Peur";
     }
 
@@ -28,6 +34,7 @@ public class Peur extends Pouvoir {
     @Override
     public void onUse(Pokemon lanceur, Pokemon cible, Terrain terrain) {
         cible.ajoutBoost(new Boost("Berserk", true, -10, true));
+        new Affichage().utilisationPouvoir(this.getNomComparable(),lanceur, cible);
         this.m_nbUtil -= 1;
     }
 }

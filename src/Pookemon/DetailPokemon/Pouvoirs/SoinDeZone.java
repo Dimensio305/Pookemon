@@ -1,6 +1,7 @@
 package Pookemon.DetailPokemon.Pouvoirs;
 
 import Pookemon.Carte.Terrain;
+import Pookemon.Deroulement.Affichage;
 import Pookemon.DetailPokemon.Pokemon;
 
 public class SoinDeZone extends Pouvoir {
@@ -8,6 +9,11 @@ public class SoinDeZone extends Pouvoir {
 
     @Override
     public String getNom() {
+        return "\033[92mSoin de Zone\033[0m";
+    }
+
+    @Override
+    public String getNomComparable() {
         return "Soin de Zone";
     }
 
@@ -53,6 +59,7 @@ public class SoinDeZone extends Pouvoir {
                 }
             }
         }
+        new Affichage().utilisationPouvoir(this.getNomComparable(),lanceur, cible);
         this.m_UtiliseCeTour = true;
     }
 }

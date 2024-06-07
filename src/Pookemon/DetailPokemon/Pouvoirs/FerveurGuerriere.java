@@ -1,6 +1,7 @@
 package Pookemon.DetailPokemon.Pouvoirs;
 
 import Pookemon.Carte.Terrain;
+import Pookemon.Deroulement.Affichage;
 import Pookemon.DetailPokemon.Boost;
 import Pookemon.DetailPokemon.Pokemon;
 
@@ -9,6 +10,11 @@ public class FerveurGuerriere extends Pouvoir{
 
     @Override
     public String getNom() {
+        return "\033[33mFerveur Guerrière\033[0m";
+    }
+
+    @Override
+    public String getNomComparable() {
         return "Ferveur Guerrière";
     }
 
@@ -28,7 +34,7 @@ public class FerveurGuerriere extends Pouvoir{
     @Override
     public void onUse(Pokemon lanceur, Pokemon cible, Terrain terrain) {
         cible.ajoutBoost(new Boost("Ferveur Guerrière", true, 10, true));
-
+        new Affichage().utilisationPouvoir(this.getNomComparable(),lanceur, cible);
         this.m_nbUtil-=1;
     }
 }

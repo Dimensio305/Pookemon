@@ -6,6 +6,7 @@ import Pookemon.DetailPokemon.Pokemon;
 abstract public class Pouvoir {
 
     abstract public String getNom();
+    abstract public String getNomComparable();
     public void UtilisableCeTour(){};
     abstract public boolean utilisable();
     public boolean cible(){
