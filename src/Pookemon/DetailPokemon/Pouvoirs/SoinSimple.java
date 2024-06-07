@@ -1,6 +1,7 @@
 package Pookemon.DetailPokemon.Pouvoirs;
 
 import Pookemon.Carte.Terrain;
+import Pookemon.Deroulement.Affichage;
 import Pookemon.DetailPokemon.Pokemon;
 
 public class SoinSimple extends Pouvoir {
@@ -8,9 +9,14 @@ public class SoinSimple extends Pouvoir {
 
     @Override
     public String getNom() {
-        return "Soin Simple";
+        return "\033[92mSoin Simple\033[0m";
     }
 
+
+    @Override
+    public String getNomComparable() {
+        return "Soin Simple";
+    }
     @Override
     public void UtilisableCeTour(){
         this.m_UtiliseCeTour = false;
@@ -36,6 +42,7 @@ public class SoinSimple extends Pouvoir {
         }else {
             cible.setPv(cible.getPvMAX(), terrain);
         }
+        new Affichage().utilisationPouvoir(this.getNomComparable(),lanceur, cible);
         this.m_UtiliseCeTour = true;
     }
 }

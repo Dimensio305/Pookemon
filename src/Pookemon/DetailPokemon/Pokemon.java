@@ -347,6 +347,8 @@ public class Pokemon {
         Affichage print = new Affichage();
         print.StartingGame();
         joueurHumain.pressEnter();
+        print.tuto();
+        joueurHumain.pressEnter();
         print.tourJoueur(joueurActif);
         joueurHumain.pressEnter();
         Tour T1 = new Tour(joueurHumain, ordinateur, new Terrain(),joueurActif);

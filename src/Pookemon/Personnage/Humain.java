@@ -5,6 +5,7 @@ import Pookemon.Carte.Terrain;
 import Pookemon.Deroulement.Affichage;
 import Pookemon.DetailPokemon.Pokemon;
 
+import javax.swing.*;
 import java.util.Scanner;
 
 public class Humain extends Joueur {
@@ -42,6 +43,10 @@ public class Humain extends Joueur {
             case "5":
                 if(this.getMainListe().size()>4){terrain.ajoutPokemonJoueur(this.getMain(),4);}
                 break;
+            case "help":
+                new Affichage().tuto();
+                pressEnter();
+                break;
         }
     }
 
@@ -72,17 +77,27 @@ public class Humain extends Joueur {
         action = s.nextLine();
         if (action.equals("fin")||action.equals("1")){
             return false;
+        } else if (action.equals("help")) {
+            print.tuto();
+            this.pressEnter();
         }
         if (actionPossible&&action.equals("2") || action.equals("atk")) {
             print.questionAction(2, terrain);
             action = s.nextLine();
-
+            if (action.equals("help")) {
+                print.tuto();
+                this.pressEnter();
+            }
             if ((action.equals("1") && terrain.getPokemonJoueur().get(0).isPossedeAttaque())
                     || (action.equals("2") && terrain.getPokemonJoueur().get(1).isPossedeAttaque())
                     || (action.equals("3") && terrain.getPokemonJoueur().get(2).isPossedeAttaque())) {
 
                 print.demandeCibleAdverse(terrain);
                 cible = s.nextLine();
+                if (action.equals("help")) {
+                    print.tuto();
+                    this.pressEnter();
+                }
                 if ((cible.equals("1") || cible.equals("2") || cible.equals("3"))&&
                         (Integer.parseInt(cible) <= terrain.getPokemonIA().size() && Integer.valueOf(cible) >= 0)) {
                         terrain.getPokemonIA().get(Integer.valueOf(cible) - 1).subitDegat(terrain.getPokemonJoueur()
@@ -96,7 +111,10 @@ public class Humain extends Joueur {
         if (pouvoirUtilisable&&action.equals("3")|| action.equals("pov")){
             print.questionAction(3, terrain);
             action = s.nextLine();
-
+            if (action.equals("help")) {
+                print.tuto();
+                this.pressEnter();
+            }
             if ((action.equals("1") && terrain.getPokemonJoueur().get(0).getPouvoir()!= null && terrain.getPokemonJoueur().get(0).getPouvoir().utilisable())
                     || (action.equals("2") && terrain.getPokemonJoueur().get(1).getPouvoir()!= null && terrain.getPokemonJoueur().get(1).getPouvoir().utilisable())
                     || (action.equals("3") && terrain.getPokemonJoueur().get(2).getPouvoir()!= null && terrain.getPokemonJoueur().get(2).getPouvoir().utilisable())) {
@@ -104,24 +122,35 @@ public class Humain extends Joueur {
                     if(terrain.getPokemonJoueur().get(Integer.parseInt(action)-1).getPouvoir().cible()) {
                         print.demandeCibleAdverse(terrain);
                         cible = s.nextLine();
-
+                        if (action.equals("help")) {
+                            print.tuto();
+                            this.pressEnter();
+                        }
                         if ((cible.equals("1") || cible.equals("2") || cible.equals("3")) &&
                                 (Integer.parseInt(cible) <= terrain.getPokemonIA().size() && Integer.valueOf(cible) >= 0)) {
                             terrain.getPokemonJoueur().get(Integer.parseInt(action) - 1).getPouvoir().onUse(terrain.getPokemonJoueur().get(Integer.parseInt(action) - 1), terrain.getPokemonIA().get(Integer.valueOf(cible) - 1), terrain);
+                            this.pressEnter();
                         }
                     }else {
                         terrain.getPokemonJoueur().get(Integer.parseInt(action)-1).getPouvoir().onUse(terrain.getPokemonJoueur().get(Integer.parseInt(action) - 1), terrain.getPokemonJoueur().get(Integer.parseInt(action) - 1), terrain);
+                        this.pressEnter();
                     }
                 }else {
                     if(terrain.getPokemonJoueur().get(Integer.parseInt(action)-1).getPouvoir().cible()) {
                         print.demandeCibleHumain(terrain);
                         cible = s.nextLine();
+                        if (action.equals("help")) {
+                            print.tuto();
+                            this.pressEnter();
+                        }
                         if ((cible.equals("1") || cible.equals("2") || cible.equals("3"))&&
                                 (Integer.parseInt(cible) <= terrain.getPokemonJoueur().size() && Integer.valueOf(cible) >= 0)) {
                             terrain.getPokemonJoueur().get(Integer.parseInt(action)-1).getPouvoir().onUse(terrain.getPokemonJoueur().get(Integer.parseInt(action)-1), terrain.getPokemonJoueur().get(Integer.valueOf(cible) - 1), terrain);
+                            this.pressEnter();
                         }
                     }else {
                         terrain.getPokemonJoueur().get(Integer.parseInt(action)-1).getPouvoir().onUse(terrain.getPokemonJoueur().get(Integer.parseInt(action)-1), terrain.getPokemonJoueur().get(Integer.parseInt(action)-1) , terrain);
+                        this.pressEnter();
                     }
                 }
             }

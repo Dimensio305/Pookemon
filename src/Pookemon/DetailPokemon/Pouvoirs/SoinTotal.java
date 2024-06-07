@@ -1,6 +1,7 @@
 package Pookemon.DetailPokemon.Pouvoirs;
 
 import Pookemon.Carte.Terrain;
+import Pookemon.Deroulement.Affichage;
 import Pookemon.DetailPokemon.Pokemon;
 
 public class SoinTotal extends Pouvoir {
@@ -8,6 +9,11 @@ public class SoinTotal extends Pouvoir {
 
     @Override
     public String getNom() {
+        return "\033[92mSoin Total\033[0m";
+    }
+
+    @Override
+    public String getNomComparable() {
         return "Soin Total";
     }
 
@@ -27,6 +33,7 @@ public class SoinTotal extends Pouvoir {
     @Override
     public void onUse(Pokemon lanceur, Pokemon cible, Terrain terrain){
         cible.setPv(cible.getPvMAX(), terrain);
+        new Affichage().utilisationPouvoir(this.getNomComparable(),lanceur, cible);
         this.m_nbUtil-=1;
     }
 }

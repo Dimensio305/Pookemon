@@ -1,6 +1,7 @@
 package Pookemon.DetailPokemon.Pouvoirs;
 
 import Pookemon.Carte.Terrain;
+import Pookemon.Deroulement.Affichage;
 import Pookemon.DetailPokemon.Pokemon;
 import Pookemon.DetailPokemon.Type;
 
@@ -9,6 +10,11 @@ public class Kamikaze extends Pouvoir {
 
     @Override
     public String getNom() {
+        return "\033[31mKamikaze\033[0m";
+    }
+
+    @Override
+    public String getNomComparable() {
         return "Kamikaze";
     }
 
@@ -27,6 +33,7 @@ public class Kamikaze extends Pouvoir {
 
     @Override
     public void onUse(Pokemon lanceur, Pokemon cible, Terrain terrain) {
+        new Affichage().utilisationPouvoir(this.getNomComparable(),lanceur, cible);
         lanceur.setPv(0, terrain);
         cible.setPv(0, terrain);
         this.m_nbUtil-=1;
