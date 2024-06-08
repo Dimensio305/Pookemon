@@ -53,24 +53,41 @@ package Carte{
         {static} +getPokedex() : ArrayList<Pokemon>
     }
 
-    Pokedex --> Pokemon
-
-    Deck --> Pokemon
-
-    Defausse --> Pokemon
-
-    Main --> Deck
-    Main --> Pokemon
-
-    Terrain --> Pokemon
-    Terrain --> Main
 }
 
 package Deroulement{
-    class Affichage{
+    class Affichage {
+      +StartingGame()
+      +tuto()
+      +tourJoueur(premierJoueur : String)
+      +affichageMain(main : Main)
+      +affichageTerrain(terrain : Terrain)
+      +terrainJoueur(terrain : Terrain)
+      +terrainAdverse(terrain : Terrain)
+      +affichagePokemon(pokemon : Pokemon)
+      +demandeAjout(nombre : Integer)
+      +demandeCibleAdverse(terrain : Terrain)
+      +demandeCibleHumain(terrain : Terrain)
+      +affichagePokemonCombat(combattants : List<Pokemon>)
+      +questionAction(etape : Integer)
+      +questionAction(etape : Integer, terrain : Terrain)
+      +utilisationPouvoir(pouvoir : String, utilisateur : Pokemon, cible : Pokemon)
+      +attaqueIA(attaquant : Pokemon, cible : Pokemon)
+      +finJeu(Victoire : Boolean)
     }
 
-    class Tour{
+    class Tour {
+      -m_humain : Humain
+      -m_IA : IA
+      -joueurActif : String
+      -m_terrain : Terrain
+      -m_affiche : Affichage
+
+      +Tour(humain : Humain, ia : IA, terrain : Terrain, actif : String)
+      +changementJoueur()
+      +miseEnPlace()
+      +deroulementTour()
+      +ajoutTerrain(nombre : Integer)
     }
 }
 
@@ -150,12 +167,43 @@ package DetailPokemon{
         +isDureeInfini() :  Boolean
     }
 
-    Pokemon --> Type
-    Pokemon --> Statut
-    Pokemon --> Boost
-    Pokemon --> Pouvoir
-    Pokemon --> Joueur
-    Pokemon --> Terrain
+    class Pokemon {
+        -m_nom : String
+        -m_type : Type
+        -m_pvMAX : Integer
+        -m_pv : Integer
+        -m_attaque : Integer
+        -m_possedeAttaque : Boolean
+        -m_statut : Statut
+        -m_boost : ArrayList<Boost>
+        -m_pouvoir : Pouvoir
+        -m_joueur : Joueur
+        -m_shiny : Boolean
+
+        +Pokemon(nom : String)
+        +getNom() : String
+        +getNomComparable() : String
+        +getType() : Type
+        +getPv() : Integer
+        +setPv(pv : Integer, terrain : Terrain)
+        +getPvMAX() : Integer
+        +getAttaqueInitial() : Integer
+        +getAttaque() : Integer
+        +isShiny() : Boolean
+        +setPossedeAttaque(bool : Boolean)
+        +getPouvoir() : Pouvoir
+        +setPouvoir(p : Pouvoir)
+        +isPossedeAttaque() : Boolean
+        +getStatut() : Statut
+        +setStatut(statut : Statut)
+        +getJoueur() : Joueur
+        +setJoueur(maitreAbsoluAuquelleJeDoisObeir : Joueur)
+        +getBoost() : ArrayList<Boost>
+        +ajoutBoost(b : Boost)
+        +subitDegat(dmg : Integer, type : Type, joueur : Joueur, terrain : Terrain)
+        +affiniteType(type : Type) : Integer
+        +estMort() : Boolean
+    }
 
     package Pouvoir{
         abstract class  Pouvoir{
@@ -233,15 +281,6 @@ package DetailPokemon{
             +cibleAdversaire() : Boolean {redefine}
             +onUse(lanceur : Pokemon, cible : Pokemon, terrain : Terrain)
         }
-
-        Pouvoir <|-- FerveurGuerriere
-        Pouvoir <|-- Berserk
-        Pouvoir <|-- Empoisonnement
-        Pouvoir <|-- SoinDeZone
-        Pouvoir <|-- SoinSimple
-        Pouvoir <|-- SoinTotal
-        Pouvoir <|-- Peur
-        Pouvoir <|-- Kamikaze
     }
 }
 
@@ -276,25 +315,50 @@ package Personnage{
         +actionDuTour(terrain : Terrain, adversaire : Joueur) : Boolean {redefines}
         +victoireAdversaire(terrain : Terrain) : Boolean {redefines}
     }
-
-    Humain --|> Joueur
-    Humain --> Deck
-    Humain --> Pokemon
-    Humain --> Terrain
-    Humain --> Affichage
-
-    IA --|> Joueur
-    IA --> Deck
-    IA --> Pokemon
-    IA --> Terrain
-    IA --> Affichage
 }
 
 package GestionMusique{
-    class Musique{
+    class Musique {
+        +Ecoute(chemin : String)
     }
 }
 
+Humain --> Deck : "uses"
+Humain --> Pokemon : "uses"
+Humain --> Terrain : "uses"
+Humain --> Affichage : "uses"
 
+IA --> Deck : "uses"
+IA --> Pokemon : "uses"
+IA --> Terrain : "uses"
+IA --> Affichage : "uses"
+
+Pokedex o-- Pokemon : "contains"
+
+Deck o-- Pokemon : "contains"
+
+Defausse o-- Pokemon : "contains"
+
+Main *-- Deck : "has a"
+Main o-- Pokemon : "contains"
+
+Terrain *-- Pokemon : "has many"
+Terrain --> Main : "interacts with"
+
+Pouvoir <|-- FerveurGuerriere
+Pouvoir <|-- Berserk
+Pouvoir <|-- Empoisonnement
+Pouvoir <|-- SoinDeZone
+Pouvoir <|-- SoinSimple
+Pouvoir <|-- SoinTotal
+Pouvoir <|-- Peur
+Pouvoir <|-- Kamikaze
+
+Pokemon --> Type : "has a"
+Pokemon --> Statut : "has a"
+Pokemon o-- Boost : "has many"
+Pokemon --> Pouvoir : "uses"
+Pokemon --> Joueur : "owned by"
+Pokemon --> Terrain : "interacts with"
 
 @enduml
