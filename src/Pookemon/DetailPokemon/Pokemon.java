@@ -47,7 +47,7 @@ public class Pokemon {
     }
 
     /**
-     * Renvoie le nom du Pokemon
+     * Renvoie le nom du Pokemon avec couleur si shiny
      *
      * @return La chaine de caractère du nom du Pokemon
      */
@@ -56,9 +56,15 @@ public class Pokemon {
         else{return this.m_nom;}
     }
 
+    /**
+     * Renvoie le nom comparable du Pokémon.
+     *
+     * @return Le nom comparable du Pokémon.
+     */
     public String getNomComparable(){
         return this.m_nom;
     }
+
     /**
      * Renvoie le Type du Pokemon
      *
@@ -78,11 +84,11 @@ public class Pokemon {
     }
 
     /**
-     * Renvoie la limite de PV du Pokemon
+     * Définit les PV du Pokémon.
      *
-     * @return Un entier correspondant aux PV maximum du Pokemon
+     * @param pv Les points de vie du Pokémon.
+     * @param terrain Le terrain sur lequel se déroule le combat.
      */
-
     public void setPv(int pv, Terrain terrain){
         this.m_pv = pv;
         if (this.estMort()) {
@@ -91,17 +97,28 @@ public class Pokemon {
         }
     }
 
+    /**
+     * Renvoie la limite de PV du Pokemon
+     *
+     * @return Un entier correspondant aux PV maximum du Pokemon
+     */
     public int getPvMAX() {
         return this.m_pvMAX;
     }
 
+    /**
+     * Renvoie les dégâts initiaux infligés par le Pokémon.
+     *
+     * @return Un entier correspondant aux dégâts initiaux du Pokémon.
+     */
     public int getAttaqueInitial() {
         return this.m_attaque;
     }
+
     /**
      * Renvoie les dégats qu'inflige le Pokemon
      *
-     * @return Un entier correspondant aux dégats du Pokemon
+     * @return Un entier correspondant aux dégats actuel du Pokemon
      */
     public int getAttaque() {
         int dgt = this.m_attaque;
@@ -113,50 +130,113 @@ public class Pokemon {
         return dgt;
     }
 
+    /**
+     * Vérifie si le Pokémon est de type Shiny.
+     *
+     * @return true si le Pokémon est Shiny, sinon false.
+     */
     public boolean isShiny(){
         return this.m_shiny;
     }
 
+    /**
+     * Définit si le Pokémon possède une attaque.
+     *
+     * @param bool true si le Pokémon possède une attaque, sinon false.
+     */
     public void setPossedeAttaque(boolean bool){
         this.m_possedeAttaque=bool;
     }
 
+    /**
+     * Cette méthode renvoie le pouvoir du Pokémon.
+     *
+     * @return Le pouvoir du Pokémon.
+     */
     public Pouvoir getPouvoir(){
         return this.m_pouvoir;
     }
 
+    /**
+     * Cette méthode définit le pouvoir du Pokémon.
+     *
+     * @param p Le pouvoir à définir pour le Pokémon.
+     */
     public void setPouvoir(Pouvoir p){
         this.m_pouvoir = p;
     }
 
+    /**
+     * Cette méthode vérifie si le Pokémon possède une attaque.
+     *
+     * @return true si le Pokémon possède une attaque, sinon false.
+     */
     public boolean isPossedeAttaque(){
         return this.m_possedeAttaque;
     }
 
+    /**
+     * Cette méthode renvoie le statut du Pokémon.
+     *
+     * @return Le statut du Pokémon.
+     */
     public Statut getStatut(){
         return this.m_statut;
     }
 
+    /**
+     * Cette méthode définit le statut du Pokémon.
+     *
+     * @param statut Le statut à définir pour le Pokémon.
+     */
     public void setStatut(Statut statut){
         this.m_statut = statut;
     }
 
+    /**
+     * Cette méthode renvoie le joueur propriétaire du Pokémon.
+     *
+     * @return Le joueur propriétaire du Pokémon.
+     */
     public Joueur getJoueur(){
         return this.m_joueur;
     }
 
+    /**
+     * Cette méthode définit le joueur propriétaire du Pokémon.
+     *
+     * @param maitreAbsoluAuquelJeDoisObéir Le joueur propriétaire du Pokémon.
+     */
     public void setJoueur(Joueur maitreAbsoluAuquelleJeDoisObeir){
         this.m_joueur = maitreAbsoluAuquelleJeDoisObeir;
     }
 
+    /**
+     * Cette méthode renvoie la liste des boosts du Pokémon.
+     *
+     * @return La liste des boosts du Pokémon.
+     */
     public ArrayList<Boost> getBoost() {
         return this.m_boost;
     }
 
+    /**
+     * Cette méthode ajoute un boost à la liste des boosts du Pokémon.
+     *
+     * @param b Le boost à ajouter.
+     */
     public void ajoutBoost(Boost b){
         this.m_boost.add(b);
     }
 
+    /**
+     * Cette méthode fait subir des dégâts au Pokémon.
+     *
+     * @param dmg Les dégâts à infliger.
+     * @param type Le type de dégât.
+     * @param joueur Le joueur auquel appartient le Pokémon.
+     * @param terrain Le terrain sur lequel se déroule le combat.
+     */
     public void subitDegat(int dmg, Type type, Joueur joueur, Terrain terrain){
         int affinite = this.affiniteType(type);
          affinite += dmg;
@@ -176,6 +256,12 @@ public class Pokemon {
 
     }
 
+    /**
+     * Cette méthode calcule l'affinité du Pokémon par rapport à un type donné.
+     *
+     * @param type Le type par rapport auquel calculer l'affinité.
+     * @return L'affinité du Pokémon par rapport au type donné.
+     */
     public int affiniteType(Type type){
         switch (this.m_type){
             case FEE :
@@ -312,18 +398,15 @@ public class Pokemon {
         }
     }
 
+    /**
+     * Cette méthode vérifie si le Pokémon est mort.
+     *
+     * @return true si le Pokémon est mort, sinon false.
+     */
     public boolean estMort(){
         return (this.m_pv<1);
     };
 
-
-
-
-    /**
-     * Renvoie le Pokedex entier de la variable m_pokedex
-     *
-     * @return Une liste de Pokemon dans le Pokedex
-     */
 
     public static void main(String args[]){
         String joueurActif;

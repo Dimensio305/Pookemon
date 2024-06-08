@@ -24,8 +24,10 @@ public class Tour {
      * Initialise un tour de jeu avec les éléments nécessaires : main du joueur, deck du joueur, main de l'IA,
      * deck de l'IA, terrain et joueur actif.
      *
-     * @param terrain    Le terrain de jeu.
-     * @param actif      Le joueur actif ("Joueur" ou "IA").
+     * @param humain  Le joueur humain.
+     * @param ia      L'intelligence artificielle.
+     * @param terrain Le terrain de jeu.
+     * @param actif   Le joueur actif ("Joueur" ou "IA").
      */
     public Tour(Humain humain, IA ia, Terrain terrain, String actif){
         m_humain = humain;
@@ -33,6 +35,10 @@ public class Tour {
         m_terrain = terrain;
         joueurActif = actif;
     }
+
+    /**
+     * Change le joueur actif.
+     */
     public static void changementJoueur(){
         if(joueurActif.equals("IA")){
             joueurActif="Joueur";
@@ -41,7 +47,7 @@ public class Tour {
 
 
     /**
-     * Fait jouer la première phase du tour de jeu.
+     * Effectue la mise en place du tour de jeu.
      * Si c'est au tour du joueur, effectue ses actions, sinon, effectue les actions de l'IA.
      * Affiche l'état actuel du jeu deux fois.
      */
@@ -72,7 +78,7 @@ public class Tour {
     }
 
     /**
-     * Fait jouer le tour de jeu.
+     * Effectue le déroulement du tour de jeu.
      * Les joueurs piochent des cartes si nécessaire et l'état du jeu est affiché.
      */
     public void deroulementTour(){

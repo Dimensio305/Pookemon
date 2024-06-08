@@ -11,6 +11,9 @@ import java.util.Scanner;
 
 public class Affichage {
 
+    /**
+     * Affiche un dessin ASCII pour le début du jeu.
+     */
     public void StartingGame(){
         System.out.println(String.format(
                 "                                                                                  ██████╗ ██████╗ ███████╗███████╗███████╗   \n" +
@@ -48,6 +51,9 @@ public class Affichage {
 
     }
 
+    /**
+     * Affiche un tutoriel pour expliquer les règles du jeu.
+     */
     public void tuto(){
         System.out.println("\033[51m Bienvenue dans le projet pookemon, un simulateur de combat pokemon en tour par tour ! \033[0m\n\n" +
                 "Votre objectif est de battre votre adversaire, pour ce faire vous devez réduire le nombre de Pokemon de votre adversaire à 0. Pour cela, vous disposez de Pokemon, chacun d'eux possédant des points de vie (PV)\net des dégats (DMG) ainsi qu'un type.\n" +
@@ -64,6 +70,12 @@ public class Affichage {
                 new SoinDeZone().getNom() + " : Utilisable chaque tour, soigne 10 PV a tout vos Pokemon sur le terrain.\n\t"+
                 "Vous pouez affichez cette aide a tout moment durant votre tour en tapant help\n\t");
     }
+
+    /**
+     * Affiche un message indiquant au joueur qu'il commence la partie ou qu'il jouera en second.
+     *
+     * @param premierJoueur Le joueur qui commence la partie.
+     */
     public void tourJoueur(String premierJoueur){
         if (premierJoueur.equals("Joueur")){
             System.out.println("Vous commencerez la partie ! Choisissez vos pokemon a mettre sur le terrain");
@@ -72,6 +84,12 @@ public class Affichage {
             System.out.println("Vous jouerez en second.");
         }
     }
+
+    /**
+     * Affiche les Pokémon actuellement en main du joueur.
+     *
+     * @param main La main du joueur contenant les Pokémon.
+     */
     public void affichageMain(Main main) {
         int numMain=1;
         System.out.println("En main :");
@@ -84,6 +102,11 @@ public class Affichage {
         System.out.println("\\-----------------------------------------------------------------------------------/");
     }
 
+    /**
+     * Affiche les Pokémon présents sur le terrain, à la fois du joueur et de l'adversaire.
+     *
+     * @param terrain Le terrain contenant les Pokémon.
+     */
     public void affichageTerrain(Terrain terrain) {
         System.out.println("Camp adverse : ");
         affichagePokemonCombat(terrain.getPokemonIA());
@@ -91,16 +114,31 @@ public class Affichage {
         affichagePokemonCombat(terrain.getPokemonJoueur());
     }
 
+    /**
+     * Affiche les Pokémon présents sur le terrain du joueur.
+     *
+     * @param terrain Le terrain du joueur contenant les Pokémon.
+     */
     public void terrainJoueur(Terrain terrain) {
         System.out.println("Vos pokémon en jeu : ");
         affichagePokemonCombat(terrain.getPokemonJoueur());
     }
 
+    /**
+     * Affiche les Pokémon présents sur le terrain de l'adversaire.
+     *
+     * @param terrain Le terrain de l'adversaire contenant les Pokémon.
+     */
     public void terrainAdverse(Terrain terrain) {
         System.out.println("Camp adverse : ");
         affichagePokemonCombat(terrain.getPokemonIA());
     }
 
+    /**
+     * Affiche les détails d'un Pokémon.
+     *
+     * @param pokemon Le Pokémon à afficher.
+     */
     public void affichagePokemon(Pokemon pokemon) {
         if (pokemon.isShiny()){
             System.out.print(String.format("\u001B[93m%-13s\u001B[0m: %-10s PV : %-3s/%-3s DMG : %-3s ", pokemon.getNomComparable(), pokemon.getType(), pokemon.getPv(), pokemon.getPvMAX(), pokemon.getAttaque()));
@@ -115,10 +153,20 @@ public class Affichage {
         System.out.println("|");
     }
 
+    /**
+     * Demande au joueur de choisir un Pokémon à ajouter sur le terrain.
+     *
+     * @param nombre Le nombre de Pokémon à ajouter.
+     */
     public void demandeAjout(int nombre){
         System.out.println("Quel est le numéro du Pokemon que vous souhaitez placer sur le terrain ? ("+nombre+" restants)");
     }
 
+    /**
+     * Demande au joueur de choisir un Pokémon adverse à cibler.
+     *
+     * @param terrain Le terrain contenant les Pokémon adverses.
+     */
     public void demandeCibleAdverse(Terrain terrain){
         System.out.println("Quel est le numéro du pokemon adersaire que vous souhaitez ciblez ?");
         int choix=1;
@@ -127,6 +175,12 @@ public class Affichage {
             choix++;
         }
     }
+
+    /**
+     * Demande au joueur de choisir un de ses Pokémon à cibler.
+     *
+     * @param terrain Le terrain contenant les Pokémon du joueur.
+     */
     public void demandeCibleHumain(Terrain terrain){
         System.out.println("Quel est le numéro de votre pokemon que vous souhaitez ciblez ?");
         int choix=1;
@@ -135,6 +189,7 @@ public class Affichage {
             choix++;
         }
     }
+
     /**
      * Retourne une représentation textuelle des Pokémon combattants sous forme de chaîne de caractères.
      * Chaque ligne représente un attribut des Pokémon (nom, type, PV, DMG) aligné avec les autres combattants.
@@ -142,7 +197,6 @@ public class Affichage {
      * @param combattants La liste des Pokémon combattants.
      * @return Une chaîne de caractères représentant les Pokémon combattants.
      */
-
     public void affichagePokemonCombat(List<Pokemon> combattants) {
 
         for (Pokemon p: combattants) {
@@ -237,6 +291,11 @@ public class Affichage {
         System.out.println();
     }
 
+    /**
+     * Affiche les actions disponibles pour le joueur à une étape donnée du tour.
+     *
+     * @param etape L'étape actuelle du tour.
+     */
     public void questionAction(int etape){
         switch (etape){
             case 1:
@@ -252,6 +311,12 @@ public class Affichage {
         }
     }
 
+    /**
+     * Affiche les actions disponibles pour le joueur à une étape donnée du tour.
+     *
+     * @param etape   L'étape actuelle du tour.
+     * @param terrain Le terrain contenant les Pokémon du joueur.
+     */
     public void questionAction(int etape, Terrain terrain){
         switch (etape){
             case 2:
@@ -283,6 +348,13 @@ public class Affichage {
         }
     }
 
+    /**
+     * Affiche un message indiquant l'utilisation d'un pouvoir par un Pokémon.
+     *
+     * @param pouvoir     Le nom du pouvoir utilisé.
+     * @param utilisateur Le Pokémon utilisant le pouvoir.
+     * @param cible       Le Pokémon ciblé par le pouvoir.
+     */
     public void utilisationPouvoir(String pouvoir, Pokemon utilisateur, Pokemon cible){
         switch (pouvoir){
             case "Berserk":
@@ -312,6 +384,12 @@ public class Affichage {
         }
     }
 
+    /**
+     * Affiche l'attaque d'un Pokémon adverse.
+     *
+     * @param attaquant Le Pokémon adverse qui attaque.
+     * @param cible     Le Pokémon ciblé par l'attaque.
+     */
     public void attaqueIA(Pokemon attaquant, Pokemon cible){
         System.out.println("Le " +attaquant.getNom()+" adverse attaque " + cible.getNom());
 
@@ -320,7 +398,11 @@ public class Affichage {
         }
     }
 
-
+    /**
+     * Affiche un message de fin de jeu, avec une image différente en cas de victoire ou de défaite.
+     *
+     * @param Victoire Indique si le joueur a remporté la partie (true) ou non (false).
+     */
     public void finJeu(boolean Victoire){
         if(Victoire){
             System.out.println(
