@@ -205,7 +205,7 @@ public class Pokemon {
     /**
      * Cette méthode définit le joueur propriétaire du Pokémon.
      *
-     * @param maitreAbsoluAuquelJeDoisObéir Le joueur propriétaire du Pokémon.
+     * @param maitreAbsoluAuquelleJeDoisObeir Le joueur propriétaire du Pokémon.
      */
     public void setJoueur(Joueur maitreAbsoluAuquelleJeDoisObeir){
         this.m_joueur = maitreAbsoluAuquelleJeDoisObeir;
