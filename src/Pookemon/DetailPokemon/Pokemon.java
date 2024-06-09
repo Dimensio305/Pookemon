@@ -36,7 +36,7 @@ public class Pokemon {
         m_pvMAX = new Random().nextInt(10, 21) * 10;
         m_pv = m_pvMAX;
         m_type = Type.values()[new Random().nextInt(Type.values().length)];
-        m_shiny = new Random().nextInt(1, 5)==1;
+        m_shiny = new Random().nextInt(1, 65)==1;
         m_statut = Statut.AUCUN;
         m_pouvoir = null;
         Pokedex.add(this);
