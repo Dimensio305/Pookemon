@@ -1,7 +1,6 @@
 package Pookemon.Carte;
 
 import Pookemon.DetailPokemon.Pokemon;
-import org.w3c.dom.css.ViewCSS;
 
 import java.util.ArrayList;
 

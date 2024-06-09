@@ -1,14 +1,12 @@
 package Pookemon.Deroulement;
 
-import Pookemon.Carte.*;
 import Pookemon.DetailPokemon.Boost;
 import Pookemon.DetailPokemon.Pokemon;
+import Pookemon.Carte.Terrain;
 import Pookemon.Personnage.Humain;
 import Pookemon.Personnage.IA;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Tour {

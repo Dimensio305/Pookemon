@@ -74,13 +74,4 @@ public class Main {
             deck.estTire(index);
         }
     }
-
-    /**
-     * Ajoute une carte Pokémon à la main.
-     *
-     * @param p La carte Pokémon à ajouter à la main.
-     */
-    public void addMain(Pokemon p){
-        this.m_pokemonMain.add(p);
-    }
 }

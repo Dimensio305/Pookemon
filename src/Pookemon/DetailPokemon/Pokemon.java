@@ -1,9 +1,7 @@
 package Pookemon.DetailPokemon;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
-import java.util.Scanner;
 
 import Pookemon.Deroulement.*;
 import Pookemon.Carte.*;
@@ -343,6 +341,7 @@ public class Pokemon {
                 } else if (type.equals(Type.EAU)||type.equals(Type.ELECTRIQUE)||type.equals(Type.PLANTE)||type.equals(Type.SOL)) {
                     return -10;
                 }
+
                 return 0;
             case POISON:
                 if (type.equals(Type.PSY)||type.equals(Type.SOL)){
@@ -428,7 +427,7 @@ public class Pokemon {
         }
         new Musique().Ecoute("src/Pookemon/GestionMusique/MainTheme.wav");
         Affichage print = new Affichage();
-        print.StartingGame();
+        print.startingGame();
         joueurHumain.pressEnter();
         print.tuto();
         joueurHumain.pressEnter();

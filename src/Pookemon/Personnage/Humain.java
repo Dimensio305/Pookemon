@@ -5,7 +5,6 @@ import Pookemon.Carte.Terrain;
 import Pookemon.Deroulement.Affichage;
 import Pookemon.DetailPokemon.Pokemon;
 
-import javax.swing.*;
 import java.util.Scanner;
 
 public class Humain extends Joueur {

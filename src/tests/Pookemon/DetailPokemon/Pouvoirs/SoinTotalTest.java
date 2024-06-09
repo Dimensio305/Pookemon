@@ -5,11 +5,8 @@ import Pookemon.Carte.Pokedex;
 import Pookemon.Carte.Terrain;
 import Pookemon.DetailPokemon.Pokemon;
 import Pookemon.Personnage.Humain;
-import Pookemon.Personnage.IA;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class SoinTotalTest {
 

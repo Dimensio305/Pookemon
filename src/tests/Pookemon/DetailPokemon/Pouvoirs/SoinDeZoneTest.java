@@ -8,8 +8,6 @@ import Pookemon.Personnage.Humain;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class SoinDeZoneTest {
 
     @Test

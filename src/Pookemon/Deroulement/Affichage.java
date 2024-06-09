@@ -4,17 +4,15 @@ import Pookemon.Carte.Main;
 import Pookemon.Carte.Terrain;
 import Pookemon.DetailPokemon.Pokemon;
 import Pookemon.DetailPokemon.Pouvoirs.*;
-import org.junit.jupiter.api.Disabled;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class Affichage {
 
     /**
      * Affiche un dessin ASCII pour le début du jeu.
      */
-    public void StartingGame(){
+    public void startingGame(){
         System.out.println(String.format(
                 "                                                                                  ██████╗ ██████╗ ███████╗███████╗███████╗   \n" +
                 "                                                                                  ██╔══██╗██╔══██╗██╔════╝██╔════╝██╔════╝   \n" +

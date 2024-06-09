@@ -72,7 +72,7 @@ public class SoinDeZone extends Pouvoir {
      * Cette méthode est appelée lors de l'utilisation du pouvoir Soin de Zone. Elle soigne tous les Pokémon du côté du lanceur.
      *
      * @param lanceur Le Pokémon qui utilise le pouvoir Soin de Zone.
-     * @param cible Le Pokémon sur lequel le pouvoir Soin de Zone est utilisé (non utilisé ici).
+     * @param cible Le Pokémon sur lequel le pouvoir Soin de Zone est utilisé (non utilisé ici car on cible tout les pokemons du coté de l'utilisateur).
      * @param terrain Le terrain sur lequel le combat a lieu.
      */
     @Override

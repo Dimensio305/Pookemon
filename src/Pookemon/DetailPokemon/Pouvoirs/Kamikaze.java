@@ -3,7 +3,6 @@ package Pookemon.DetailPokemon.Pouvoirs;
 import Pookemon.Carte.Terrain;
 import Pookemon.Deroulement.Affichage;
 import Pookemon.DetailPokemon.Pokemon;
-import Pookemon.DetailPokemon.Type;
 
 public class Kamikaze extends Pouvoir {
     private int m_nbUtil = 1;

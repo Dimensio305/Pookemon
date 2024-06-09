@@ -26,7 +26,6 @@ public class Deck {
             if (!m_doublon.contains(index)) {
                 m_doublon.add(index);
                 m_pile.add(Pokedex.getPokedex().get(index));
-                index = -1;
             }
         }
         index = new Random().nextInt(19+joueur);

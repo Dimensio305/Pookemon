@@ -7,7 +7,6 @@ import Pookemon.Carte.Terrain;
 import Pookemon.DetailPokemon.Pokemon;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public abstract class Joueur {
     protected Deck m_deck;
